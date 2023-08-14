@@ -1,0 +1,22 @@
+{
+  "name": "@codykilpatrick/celestia",
+  "version": "0.0.0",
+  "description": "Market prediction for the MMORPG Eve Online with AI/ML.",
+  "dependencies": {
+    "eslint": "8.39.0",
+    "prettier": "2.8.8",
+    "typescript": "5.0.4"
+  },
+  "packageManager": "yarn@3.5.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Codykilpatrick/Celestia.git"
+  },
+  "scripts": {
+    "eslint:check": "eslint --max-warnings 0 .",
+    "eslint:fix": "yarn eslint:check --fix",
+    "prettier:check": "prettier --check .",
+    "prettier:fix": "prettier --write ."
+  },
+  "type": "module"
+}
