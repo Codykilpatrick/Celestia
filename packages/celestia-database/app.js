@@ -1,8 +1,8 @@
 const { Pool } = require('pg');
-
+e
 // Connection template for remote server
 const pool = new Pool({
-  connectionString: "postgres://user:4XHleOFgo3xK@ep-purple-frog-870388.us-east-2.aws.neon.tech/celestia?sslmode=require",
+  connectionString: "",
 });
 
 async function getItemColumns() {
