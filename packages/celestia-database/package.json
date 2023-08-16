@@ -4,6 +4,9 @@
   "description": "The database package for Celestia",
   "main": "index.js",
   "repository": "https://github.com/Codykilpatrick/Celestia.git",
+  "scripts": {
+    "db:connect": "npx postgraphile"
+  },
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.3.1",
