@@ -3,8 +3,11 @@
 Celestia database package
 
 # Usage
-To connect to a neon database:
+create the neon database:
+`createdb celestia`
+
+To connect to a local database:
 `yarn db:connect`
 
-Navigate to the GraphQL interface:
+Navigate to the GraphQL database:
 `http://[::1]:5678/graphql`

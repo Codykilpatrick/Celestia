@@ -5,8 +5,8 @@ import { makePgService } from "postgraphile/adaptors/pg";
 /** @type {GraphileConfig.Preset} */
 const preset = {
   extends: [PostGraphileAmberPreset],
-  pgServices: [makePgService({ connectionString: process.env.DATABASE_URL })],
-  schemas: ["celestia_public"],
+  pgServices: [makePgService({ connectionString:"postgresql://celestia" })],
+  schemas: ["app"],
   grafserv: { watch: true },
 };
 
