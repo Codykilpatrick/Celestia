@@ -1,1 +1,1 @@
-DROP SCHEMA app;
+DROP SCHEMA celestia_public;

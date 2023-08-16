@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/Codykilpatrick/Celestia.git",
   "scripts": {
-    "db:connect": "npx postgraphile"
+    "db:connect": "npx postgraphile -c postgres:///celestia --schema celestia_public"
   },
   "license": "MIT",
   "dependencies": {

@@ -1,1 +1,1 @@
-CREATE SCHEMA app;
+CREATE SCHEMA celestia_public;
