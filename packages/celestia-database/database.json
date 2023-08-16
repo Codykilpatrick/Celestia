@@ -1,0 +1,9 @@
+{
+  "dev": {
+    "driver": "pg",
+    "host": "localhost",
+    "database": "celestia",
+    "user": "postgres",
+    "sslmode": "require" 
+  }
+}
