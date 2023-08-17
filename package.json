@@ -1,0 +1,9 @@
+{
+  "name": "Celestia",
+  "version": "1.0.0",
+  "description": "Celestia is a market prediction app for the MMORPG Eve Online. Celestia leverages Neural Networks to predict market prices.",
+  "main": "index.js",
+  "repository": "https://github.com/Codykilpatrick/Celestia.git",
+  "author": "",
+  "license": "MIT"
+}
