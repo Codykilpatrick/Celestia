@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "celestia-models"
+version = "0.1.0"
+description = "Contains all of the relevant code for running ML models to predict market data in Eve Online."
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+numpy = "^1.25.2"
+pandas = "^2.0.3"
+jupyter = "^1.0.0"
+ipykernel = "^6.25.1"
+scikit-learn = "^1.3.0"
+tensorflow = "^2.13.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
