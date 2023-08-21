@@ -1,9 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '@radix-ui/themes/styles.css';
-import { Theme, ThemePanel } from '@radix-ui/themes';
-import MyApp from './page';
+import MyApp from '../pages';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,10 +14,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
-        <Theme appearance="dark" accentColor="orange" grayColor="gray" radius="large">
+        <main className="flex min-h-screen flex-col items-center justify-between p-24">
           <MyApp />
-          {/* <ThemePanel /> */}
-        </Theme>
+        </main>
       </body>
     </html>
   );
