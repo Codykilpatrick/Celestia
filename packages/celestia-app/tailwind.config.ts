@@ -14,11 +14,34 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        "violet11": violet.violet11,
-        mauve: mauve.mauve1
+        "mauve-1": mauve.mauve1,
+        "mauve-2": mauve.mauve2,
+        "mauve-3": mauve.mauve3,
+        "mauve-4": mauve.mauve4,
+        "mauve-5": mauve.mauve5,
+        "mauve-6": mauve.mauve6,
+        "mauve-7": mauve.mauve7,
+        "mauve-8": mauve.mauve8,
+        "mauve-9": mauve.mauve9,
+        "mauve-10": mauve.mauve10,
+        "mauve-11": mauve.mauve11,
+        "mauve-12": mauve.mauve12,
+        "violet-1": violet.violet1,
+        "violet-2": violet.violet2,
+        "violet-3": violet.violet3,
+        "violet-4": violet.violet4,
+        "violet-5": violet.violet5,
+        "violet-6": violet.violet6,
+        "violet-7": violet.violet7,
+        "violet-8": violet.violet8,
+        "violet-9": violet.violet9,
+        "violet-10": violet.violet10,
+        "violet-11": violet.violet11,
+        "violet-12": violet.violet12,
       }
     },
   },
   plugins: [],
 };
+
 export default config;
