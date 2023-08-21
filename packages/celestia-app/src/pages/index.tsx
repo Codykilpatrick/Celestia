@@ -1,5 +1,11 @@
-export default function MyApp() {
+import React from 'react';
+
+const Home = () => {
   return (
-      <h1>Hello world!!</h1>
+    <div>
+      <h1 className='text-mauve'>Welcome to My Next.js App</h1>
+    </div>
   );
-}
+};
+
+export default Home;
