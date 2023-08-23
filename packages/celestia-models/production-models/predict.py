@@ -38,5 +38,15 @@ y_pred = model.predict(X.iloc[[-1]])
 
 item_name = "Punisher"
 item_id = 597
+date_predicted = X.iloc[[-1]].index.values[0]
+prediction = y_pred[0].astype(bool)
 
-print(X.iloc[[-1]].index.values[0], item_name, item_id, y_pred[0].astype(bool))
+final_object = {
+    "item_name": "Punisher",
+    "item_id": 597,
+    "date_predicted": X.iloc[[-1]].index.values[0],
+    "prediction": y_pred[0].astype(bool)
+}
+
+
+print(final_object)
