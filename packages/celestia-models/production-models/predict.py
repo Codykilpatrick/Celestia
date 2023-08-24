@@ -4,6 +4,8 @@ import pandas as pd
 model = joblib.load("./production_rf_model.joblib")
 print("Model loaded")
 
+
+# This will turn into a query to the postgres DB
 data = pd.read_csv('../data/punisher_domain.csv')
 data = data.set_index('date')
 
@@ -48,5 +50,5 @@ final_object = {
     "prediction": y_pred[0].astype(bool)
 }
 
-
+# This will turn into a write to the postgres DB
 print(final_object)
