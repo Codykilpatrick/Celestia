@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 
-model = joblib.load("./production_rf_model.joblib")
+model = joblib.load("../models/production_rf_model.joblib")
 print("Model loaded")
 
 
