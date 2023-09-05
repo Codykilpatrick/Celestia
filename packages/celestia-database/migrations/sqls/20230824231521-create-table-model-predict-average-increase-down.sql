@@ -1,0 +1,1 @@
+DROP TABLE celestia_public.model_predict_average_increase;
