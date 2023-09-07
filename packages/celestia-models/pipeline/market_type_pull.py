@@ -12,10 +12,23 @@ try:
         # Parse the JSON response
         region_types = response.json()
 
-        # Print the results
-        print(region_types)
+        #! Print the results
+        # print(region_types)
     else:
         print(f"Request failed with status code {response.status_code}")
 except Exception as e:
     print(f"An error occurred: {str(e)}")
 
+for type in region_types:
+    history_url = f"https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id={type}"
+    try:
+        response = requests.get(history_url)
+
+        if response.status_code == 200:
+            list = response.json()
+
+            print(list)
+        else:
+            print(f"Request failed with status code {response.status_code}")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
