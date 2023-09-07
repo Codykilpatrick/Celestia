@@ -3,7 +3,7 @@ import pandas as pd
 import psycopg2
 
 
-def process_and_insert_csv(csv_filename):
+def process_and_insert_csv(csv_filename, item_id):
     # Load the machine learning model
     model = joblib.load("../models/production_rf_model.joblib")
     print("Model loaded")
@@ -38,8 +38,6 @@ def process_and_insert_csv(csv_filename):
     X = data[new_predictors]
 
     y_pred = model.predict(X.iloc[[-1]])
-
-    item_id = 597
 
     final_object = {
         "type_id": item_id,
@@ -76,7 +74,7 @@ def process_and_insert_csv(csv_filename):
 
 
 # Process and insert data from 'punisher_domain.csv'
-process_and_insert_csv('../data/punisher_domain.csv')
+process_and_insert_csv('../data/punisher_domain.csv', 597)
 
 # Process and insert data from 'large_skill_injector.csv'
-process_and_insert_csv('../data/large_skill_injector_domain.csv')
+process_and_insert_csv('../data/large_skill_injector_domain.csv', 40520)
