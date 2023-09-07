@@ -1,5 +1,6 @@
 import joblib
 import pandas as pd
+import psycopg2
 
 model = joblib.load("../models/production_rf_model.joblib")
 print("Model loaded")
@@ -44,11 +45,34 @@ date_predicted = X.iloc[[-1]].index.values[0]
 prediction = y_pred[0].astype(bool)
 
 final_object = {
-    "item_name": "Punisher",
-    "item_id": 597,
+    "type_id": 597,
+    "region_id": 10000043,
+    "increase": bool(y_pred[0]),
+    "confidence": 100,
+    "horizon": 1,
     "date_predicted": X.iloc[[-1]].index.values[0],
-    "prediction": y_pred[0].astype(bool)
 }
 
-# This will turn into a write to the postgres DB
-print(final_object)
+conn = psycopg2.connect(
+    dbname="celestia",
+    user="postgres",
+    password="password",
+    host="localhost",
+    port="5432"
+)
+
+cur = conn.cursor()
+
+# Insert the final_object into the "model_predict_average_increase" table
+query = """
+INSERT INTO celestia_public.model_predict_average_increase (type_id, region_id, increase, confidence, horizon, date_predicted)
+VALUES (%(type_id)s, %(region_id)s, %(increase)s, %(confidence)s, %(horizon)s, %(date_predicted)s);
+"""
+
+cur.execute(query, final_object)
+
+# Commit the transaction and close the database connection
+conn.commit()
+conn.close()
+
+print("Data inserted into PostgreSQL.")
