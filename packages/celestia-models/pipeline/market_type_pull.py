@@ -18,12 +18,8 @@ async def fetch_history(session, type_id):
         return type_id, None  # Return None in case of an error
 
 
-async def main():
-    # The URL to pull current market item types.
-    url = "https://esi.evetech.net/latest/markets/10000043/types/?datasource=tranquility"
-    database_url = "postgresql://postgres:password@localhost/celestia"
-    conn = await asyncpg.connect(database_url)
-    region_id = 10000043
+async def fetch_data_for_region(region_id, conn):
+    url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -31,10 +27,10 @@ async def main():
                 if response.status == 200:
                     region_types = await response.json()
                 else:
-                    print(f"Request failed with status code {response.status}")
+                    print(f"Request failed with status code {response.status} for region_id {region_id}")
                     return
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        print(f"An error occurred for region_id {region_id}: {str(e)}")
         return
 
     tasks = []
@@ -67,7 +63,14 @@ async def main():
                     )
 
 
-    # Close the database connection
+async def main():
+    database_url = "postgresql://postgres:password@localhost/celestia"
+    conn = await asyncpg.connect(database_url)
+    region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
+
+    for region_id in region_ids:
+        await fetch_data_for_region(region_id, conn)
+
     await conn.close()
 
 if __name__ == "__main__":
