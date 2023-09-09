@@ -1,10 +1,11 @@
 import asyncio
 import aiohttp
 import asyncpg
+import time
 
 
-async def fetch_history(session, type_id):
-    history_url = f"https://esi.evetech.net/latest/markets/10000043/history/?datasource=tranquility&type_id={type_id}"
+async def fetch_history(session, type_id, region_id):
+    history_url = f"https://esi.evetech.net/latest/markets/{region_id}/history/?datasource=tranquility&type_id={type_id}"
     try:
         async with session.get(history_url) as response:
             if response.status == 200:
@@ -37,7 +38,7 @@ async def fetch_data_for_region(region_id, conn):
 
     async with aiohttp.ClientSession() as session:  # Create a new session
         for type_id in region_types:
-            task = asyncio.ensure_future(fetch_history(session, type_id))
+            task = asyncio.ensure_future(fetch_history(session, type_id, region_id))
             tasks.append(task)
 
         # Use an empty dictionary to store results
@@ -72,6 +73,7 @@ async def fetch_data_for_region(region_id, conn):
 
 
 async def main():
+    start_time = time.time()  
     database_url = "postgresql://postgres:password@localhost/celestia"
     conn = await asyncpg.connect(database_url)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
@@ -80,6 +82,10 @@ async def main():
         await fetch_data_for_region(region_id, conn)
 
     await conn.close()
+
+    end_time = time.time()  # Record the end time
+    elapsed_time = end_time - start_time  # Calculate the elapsed time
+    print(f"Total time taken: {elapsed_time} seconds")
 
 if __name__ == "__main__":
     asyncio.run(main())
