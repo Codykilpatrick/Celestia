@@ -15,12 +15,12 @@ async def fetch_history(session, type_id, region_id):
                 error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
                 print(error_message)
                 log_failed_request(error_message)  # Log the error to a file
-                return type_id, None  # Return None in case of an error
+                return type_id, None
     except Exception as e:
         error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
         print(error_message)
         log_failed_request(error_message)  # Log the error to a file
-        return type_id, None 
+        return type_id, None
 
 
 async def fetch_data_for_region(region_id, conn):
@@ -32,9 +32,13 @@ async def fetch_data_for_region(region_id, conn):
                 if response.status == 200:
                     region_current_types = await response.json()
                 else:
+                    error_message = f"An error occured getting types from {region_id} with code {response.status}"
+                    log_failed_request(error_message)  # Log the error to a file
                     print(f"Request failed with status code {response.status} for region_id {region_id}")
                     return
     except Exception as e:
+        error_message = f"An exception occured getting types for region: {region_id} with exception {str(e)}"
+        log_failed_request(error_message)  # Log the error to a file
         print(f"An error occurred for region_id {region_id}: {str(e)}")
         return
 
@@ -52,7 +56,6 @@ async def fetch_data_for_region(region_id, conn):
             type_id, data = await future
             results[type_id] = data
             print(f"Fetched data for type_id {type_id}")
-            print(data)
             if data is not None:
                 for row in data:
                     # Check if the row already exists based on type_id and date
