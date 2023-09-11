@@ -43,6 +43,8 @@ async def fetch_data_for_region(region_id, conn):
         return
 
     tasks = []
+    total_items = len(region_current_types)
+    processed_items = 0
 
     async with aiohttp.ClientSession() as session:  # Create a new session
         for type_id in region_current_types:
@@ -55,7 +57,12 @@ async def fetch_data_for_region(region_id, conn):
         for future in asyncio.as_completed(tasks):
             type_id, data = await future
             results[type_id] = data
+            processed_items += 1
+            progress = (processed_items / total_items) * 100
+
             print(f"Fetched data for type_id {type_id}")
+            print(f"{progress:.2f}% done")
+
             if data is not None:
                 for row in data:
                     # Check if the row already exists based on type_id and date
