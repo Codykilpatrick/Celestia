@@ -12,11 +12,15 @@ async def fetch_history(session, type_id, region_id):
                 data = await response.json()
                 return type_id, data
             else:
-                print(f"Request failed with status code {response.status} for type_id {type_id}")
+                error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
+                print(error_message)
+                log_failed_request(error_message)  # Log the error to a file
                 return type_id, None  # Return None in case of an error
     except Exception as e:
-        print(f"An error occurred for type_id {type_id}: {str(e)}")
-        return type_id, None  # Return None in case of an error
+        error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
+        print(error_message)
+        log_failed_request(error_message)  # Log the error to a file
+        return type_id, None 
 
 
 async def fetch_data_for_region(region_id, conn):
@@ -26,7 +30,7 @@ async def fetch_data_for_region(region_id, conn):
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 if response.status == 200:
-                    region_types = await response.json()
+                    region_current_types = await response.json()
                 else:
                     print(f"Request failed with status code {response.status} for region_id {region_id}")
                     return
@@ -37,7 +41,7 @@ async def fetch_data_for_region(region_id, conn):
     tasks = []
 
     async with aiohttp.ClientSession() as session:  # Create a new session
-        for type_id in region_types:
+        for type_id in region_current_types:
             task = asyncio.ensure_future(fetch_history(session, type_id, region_id))
             tasks.append(task)
 
@@ -72,8 +76,13 @@ async def fetch_data_for_region(region_id, conn):
                         )
 
 
+def log_failed_request(error_message):
+    with open("failed_requests.txt", "a") as file:
+        file.write(error_message + "\n")
+
+
 async def main():
-    start_time = time.time()  
+    start_time = time.time()
     database_url = "postgresql://postgres:password@localhost/celestia"
     conn = await asyncpg.connect(database_url)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
