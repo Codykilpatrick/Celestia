@@ -25,7 +25,7 @@ async def fetch_history(session, type_id, region_id):
 
 async def fetch_data_for_region(region_id, conn):
     url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
-    exclude_type_ids = [76518, 76519, 76532, 76531, 264]
+    exclude_type_ids = [76518, 76519, 76532, 76531, 264, 76527, 76517, 76526]
 
     try:
         async with aiohttp.ClientSession() as session:
