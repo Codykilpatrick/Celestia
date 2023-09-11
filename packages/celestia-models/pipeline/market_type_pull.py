@@ -25,6 +25,7 @@ async def fetch_history(session, type_id, region_id):
 
 async def fetch_data_for_region(region_id, conn):
     url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
+    exclude_type_ids = [76518, 76519, 76532, 76531, 264]
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -42,12 +43,13 @@ async def fetch_data_for_region(region_id, conn):
         print(f"An error occurred for region_id {region_id}: {str(e)}")
         return
 
+    filtered_type_ids = [type_id for type_id in region_current_types if type_id not in exclude_type_ids]
     tasks = []
-    total_items = len(region_current_types)
+    total_items = len(filtered_type_ids)
     processed_items = 0
 
     async with aiohttp.ClientSession() as session:  # Create a new session
-        for type_id in region_current_types:
+        for type_id in filtered_type_ids:
             task = asyncio.ensure_future(fetch_history(session, type_id, region_id))
             tasks.append(task)
 
