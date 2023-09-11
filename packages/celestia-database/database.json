@@ -3,6 +3,7 @@
     "driver": "pg",
     "host": "localhost",
     "database": "celestia",
-    "user": "postgres"
+    "user": "postgres",
+    "password": "password"
   }
 }

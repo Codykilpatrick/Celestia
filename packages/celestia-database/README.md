@@ -22,3 +22,13 @@ Create migrations with:
 
 Execute migrations with:
 `npx db-migrate up` & `npx db-migrate down`
+
+# Spin up local database
+create the local database:
+`createdb celestia`
+
+To run migrations:
+`npx db-migrate up`
+
+Seed the database:
+`yarn seed-db`
