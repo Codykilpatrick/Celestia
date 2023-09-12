@@ -25,7 +25,7 @@ async def fetch_history(session, type_id, region_id):
 
 async def fetch_data_for_region(region_id, conn):
     url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
-    exclude_type_ids = [76518, 76519, 76532, 76531, 264, 76527, 76517, 76526, 76528, 502]
+    exclude_type_ids = [76518, 76519, 76532, 76531, 264, 76527, 76517, 76526, 76528, 502, 76520, 76530, 76524, 76520, 76529, 76521]
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -54,9 +54,7 @@ async def fetch_data_for_region(region_id, conn):
             tasks.append(task)
 
         for future in asyncio.as_completed(tasks):
-            result = await future  # Await the future to get the result tuple
-            type_id, data = result[0], result[1]  # Unpack the result
-
+            type_id, data = await future
             print("TYPE_ID", type_id)
             processed_items += 1
             progress = (processed_items / total_items) * 100
@@ -65,7 +63,6 @@ async def fetch_data_for_region(region_id, conn):
 
             if data is not None:
                 for row in data:
-                    # print(f"Inserting data for type_id {type_id}")
                     await conn.execute(
                         "INSERT INTO celestia_public.market_history_pull (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
                         type_id,
