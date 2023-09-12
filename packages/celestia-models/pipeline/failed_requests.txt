@@ -28,3 +28,15 @@ Request failed with status code 404 for type_id 76524 in 10000002
 Request failed with status code 404 for type_id 76530 in 10000002
 Request failed with status code 404 for type_id 76521 in 10000030
 Request failed with status code 404 for type_id 76529 in 10000030
+Request failed with status code 404 for type_id 76520 in 10000002
+Request failed with status code 404 for type_id 76530 in 10000002
+Request failed with status code 404 for type_id 76524 in 10000002
+Request failed with status code 404 for type_id 76521 in 10000030
+Request failed with status code 404 for type_id 76529 in 10000030
+Request failed with status code 404 for type_id 76520 in 10000042
+Request failed with status code 404 for type_id 76524 in 10000002
+Request failed with status code 404 for type_id 76520 in 10000002
+Request failed with status code 404 for type_id 76530 in 10000002
+Request failed with status code 404 for type_id 76521 in 10000030
+Request failed with status code 404 for type_id 76529 in 10000030
+Request failed with status code 404 for type_id 76520 in 10000042
