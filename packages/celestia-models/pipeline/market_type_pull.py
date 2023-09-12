@@ -69,29 +69,30 @@ async def fetch_data_for_region(region_id, conn):
 
             if data is not None:
                 for row in data:
-                    # Check if the row already exists based on type_id and date
-                    exists = await conn.fetchval(
-                        "SELECT EXISTS (SELECT 1 FROM celestia_public.market_history_pull WHERE type_id = $1 AND date = $2)",
-                        type_id,
-                        row['date']
-                    )
+                    #     #! Check if the row already exists based on type_id and date
+                    #     #! BRING IN AFTER INITIAL INSERT
+                    #     exists = await conn.fetchval(
+                    #         "SELECT EXISTS (SELECT 1 FROM celestia_public.market_history_pull WHERE type_id = $1 AND date = $2)",
+                    #         type_id,
+                    #         row['date']
+                    #     )
 
-                    if not exists:
-                        print(f"Inserting data for type_id {type_id}")
-                        await conn.execute(
-                            "INSERT INTO celestia_public.market_history_pull (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                            type_id,
-                            row['date'],
-                            row['average'],
-                            row['highest'],
-                            row['lowest'],
-                            row['order_count'],
-                            row['volume'],
-                            region_id
-                        )
-                    if type_id in results:
-                        del results[type_id]
-                        print("type_ids after deletion", results.keys())
+                    #     if not exists:
+                    print(f"Inserting data for type_id {type_id}")
+                    await conn.execute(
+                        "INSERT INTO celestia_public.market_history_pull (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                        type_id,
+                        row['date'],
+                        row['average'],
+                        row['highest'],
+                        row['lowest'],
+                        row['order_count'],
+                        row['volume'],
+                        region_id
+                    )
+                if type_id in results:
+                    del results[type_id]
+                    print("type_ids after deletion", results.keys())
 
 
 def log_failed_request(error_message):
