@@ -25,7 +25,7 @@ async def fetch_history(session, type_id, region_id):
 
 async def fetch_data_for_region(region_id, conn):
     url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
-    exclude_type_ids = [76518, 76519, 76532, 76531, 264, 76527, 76517, 76526]
+    exclude_type_ids = [76518, 76519, 76532, 76531, 264, 76527, 76517, 76526, 76528, 502]
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -58,6 +58,8 @@ async def fetch_data_for_region(region_id, conn):
 
         for future in asyncio.as_completed(tasks):
             type_id, data = await future
+            print("RESULTS", len(results))
+            print("Current type_ids in results:", results.keys())
             results[type_id] = data
             processed_items += 1
             progress = (processed_items / total_items) * 100
@@ -75,6 +77,7 @@ async def fetch_data_for_region(region_id, conn):
                     )
 
                     if not exists:
+                        print(f"Inserting data for type_id {type_id}")
                         await conn.execute(
                             "INSERT INTO celestia_public.market_history_pull (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
                             type_id,
@@ -86,6 +89,9 @@ async def fetch_data_for_region(region_id, conn):
                             row['volume'],
                             region_id
                         )
+                    if type_id in results:
+                        del results[type_id]
+                        print("type_ids after deletion", results.keys())
 
 
 def log_failed_request(error_message):
