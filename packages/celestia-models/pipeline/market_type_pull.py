@@ -54,17 +54,18 @@ async def fetch_data_for_region(region_id, conn):
             tasks.append(task)
 
         for future in asyncio.as_completed(tasks):
-            type_id, data = await future
+            result = await future  # Await the future to get the result tuple
+            type_id, data = result[0], result[1]  # Unpack the result
+
             print("TYPE_ID", type_id)
             processed_items += 1
             progress = (processed_items / total_items) * 100
-
             print(f"Fetched data for type_id {type_id}")
             print(f"{progress:.2f}% done")
 
             if data is not None:
                 for row in data:
-                    print(f"Inserting data for type_id {type_id}")
+                    # print(f"Inserting data for type_id {type_id}")
                     await conn.execute(
                         "INSERT INTO celestia_public.market_history_pull (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
                         type_id,
