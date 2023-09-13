@@ -4,28 +4,35 @@ import asyncpg
 import time
 
 
-async def fetch_history(session, type_id, region_id):
-    history_url = f"https://esi.evetech.net/latest/markets/{region_id}/history/?datasource=tranquility&type_id={type_id}"
-    try:
-        async with session.get(history_url) as response:
-            if response.status == 200:
-                data = await response.json()
-                return type_id, data
-            else:
-                error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
-                print(error_message)
-                log_failed_request(error_message)  # Log the error to a file
-                return type_id, None
-    except Exception as e:
-        error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
-        print(error_message)
-        log_failed_request(error_message)  # Log the error to a file
-        return type_id, None
+async def fetch_history(session, type_id, region_id, error_limit_remain, error_limit_reset):
+    while error_limit_remain > 10:
+        history_url = f"https://esi.evetech.net/latest/markets/{region_id}/history/?datasource=tranquility&type_id={type_id}"
+        try:
+            async with session.get(history_url) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    return type_id, data
+                else:
+                    error_limit_remain = int(response.headers.get('x-esi-error-limit-remain'))
+                    error_limit_reset = int(response.headers.get('x-esi-error-limit-reset'))
+                    print("ERROR LIMIT REMAIN", error_limit_remain)
+                    print("ERROR LIMIT RESET", error_limit_reset)
+                    error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
+                    print(error_message)
+                    log_failed_request(error_message)  # Log the error to a file
+                    return type_id, None
+        except Exception as e:
+            error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
+            print(error_message)
+            log_failed_request(error_message)  # Log the error to a file
+            return type_id, None
+    await asyncio.sleep(error_limit_reset)
 
 
 async def fetch_data_for_region(region_id, conn):
     url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
-    exclude_type_ids = [76518, 76519, 76532, 76531, 264, 76527, 76517, 76526, 76528, 502, 76520, 76530, 76524, 76520, 76529, 76521]
+    error_limit_remain = 50
+    error_limit_reset = 60
 
     try:
         async with aiohttp.ClientSession() as session:
@@ -43,14 +50,13 @@ async def fetch_data_for_region(region_id, conn):
         print(f"An error occurred for region_id {region_id}: {str(e)}")
         return
 
-    filtered_type_ids = [type_id for type_id in region_current_types if type_id not in exclude_type_ids]
     tasks = []
-    total_items = len(filtered_type_ids)
+    total_items = len(region_current_types)
     processed_items = 0
 
     async with aiohttp.ClientSession() as session:  # Create a new session
-        for type_id in filtered_type_ids:
-            task = asyncio.ensure_future(fetch_history(session, type_id, region_id))
+        for type_id in region_current_types:
+            task = asyncio.ensure_future(fetch_history(session, type_id, region_id, error_limit_remain, error_limit_reset))
             tasks.append(task)
 
         for future in asyncio.as_completed(tasks):
