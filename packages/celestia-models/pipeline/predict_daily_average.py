@@ -3,16 +3,15 @@ import pandas as pd
 import psycopg2
 
 
-def process_and_insert(connection, type_id):
+def process_and_insert(connection, type_id, region_id):
     # Load the machine learning model
     model = joblib.load("../models/production_rf_model.joblib")
 
     cursor = connection.cursor()
 
-    region_id_to_search = 10000043
     query = "SELECT * FROM celestia_public.market_history_pull WHERE region_id = %s AND type_id = %s;"
 
-    cursor.execute(query, (region_id_to_search, type_id))
+    cursor.execute(query, (region_id, type_id))
 
     rows = cursor.fetchall()
 
@@ -50,7 +49,7 @@ def process_and_insert(connection, type_id):
 
     final_object = {
         "type_id": type_id,
-        "region_id": 10000043,
+        "region_id": region_id,
         "increase": bool(y_pred[0]),
         "confidence": 100,
         "horizon": 1,
@@ -73,14 +72,13 @@ def process_and_insert(connection, type_id):
 
 
 # CURRENTLY WORKING FOR ONE REGION
-def get_active_item_ids(connection):
+def get_active_item_ids(connection, region_id):
 
     cursor = connection.cursor()
 
-    region_id_to_search = 10000043
     query = "SELECT * FROM celestia_public.market_history_pull WHERE region_id = %s;"
 
-    cursor.execute(query, (region_id_to_search,))
+    cursor.execute(query, (region_id,))
 
     rows = cursor.fetchall()
 
@@ -100,21 +98,23 @@ def main():
     db_params = { 'host': 'localhost', 'database': 'celestia', 'user': 'postgres', 'password': 'password', }
 
     connection = psycopg2.connect(**db_params)
+    region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
     # Get the list of active item_ids
-    active_item_ids = get_active_item_ids(connection)
-    total_items = len(active_item_ids)
-    completed_items = 0
+    for region_id in region_ids:
+        active_item_ids = get_active_item_ids(connection, region_id)
+        total_items = len(active_item_ids)
+        completed_items = 0
 
-    # Process and insert data for each active item_id
-    for type_id in active_item_ids:
-        try:
-            process_and_insert(connection, type_id)
-            completed_items += 1
-            percent_completed = (completed_items / total_items) * 100
-            print(f"Processing: {percent_completed:.2f}% completed")
-        except Exception as e:
-            print(f"Error processing item {type_id}: {e}")
-            continue
+        # Process and insert data for each active item_id
+        for type_id in active_item_ids:
+            try:
+                process_and_insert(connection, type_id, region_id)
+                completed_items += 1
+                percent_completed = (completed_items / total_items) * 100
+                print(f"Processing: {percent_completed:.2f}% completed")
+            except Exception as e:
+                print(f"Error processing item {type_id}: {e}")
+                continue
 
     # Close connection after everything
     connection.close()
