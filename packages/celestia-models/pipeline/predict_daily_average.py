@@ -3,14 +3,23 @@ import pandas as pd
 import psycopg2
 
 
-def process_and_insert_csv(csv_filename, item_id):
+def process_and_insert(connection, type_id):
     # Load the machine learning model
     model = joblib.load("../models/production_rf_model.joblib")
-    print("Model loaded")
 
-    # This will turn into a query to the postgres DB
-    data = pd.read_csv(csv_filename)
+    cursor = connection.cursor()
+
+    region_id_to_search = 10000043
+    query = "SELECT * FROM celestia_public.market_history_pull WHERE region_id = %s AND type_id = %s;"
+
+    cursor.execute(query, (region_id_to_search, type_id))
+
+    rows = cursor.fetchall()
+
+    data = pd.DataFrame(rows, columns=['id', 'date', 'highest', 'lowest', 'average', 'order_count', 'region_id', 'type_id', 'volume'])
     data = data.set_index('date')
+
+    data = data.sort_values(by='date', ascending=True)
 
     data["tomorrow"] = data["average"].shift(-1)
     data["target"] = (data["tomorrow"] > data["average"]).astype(int)
@@ -26,7 +35,7 @@ def process_and_insert_csv(csv_filename, item_id):
         rolling_averages = data.rolling(horizon).mean()
 
         ratio_column = f"close_ratio_{horizon}"
-        data[ratio_column] = data['average'] / rolling_averages['average']
+        data[ratio_column] = data['average'].astype(float) / rolling_averages['average']
 
         trend_column = f"trend_{horizon}"
         data[trend_column] = data.shift(1).rolling(horizon).sum()["movement"]
@@ -40,7 +49,7 @@ def process_and_insert_csv(csv_filename, item_id):
     y_pred = model.predict(X.iloc[[-1]])
 
     final_object = {
-        "type_id": item_id,
+        "type_id": type_id,
         "region_id": 10000043,
         "increase": bool(y_pred[0]),
         "confidence": 100,
@@ -48,15 +57,6 @@ def process_and_insert_csv(csv_filename, item_id):
         "date_predicted": X.iloc[[-1]].index.values[0],
     }
 
-    conn = psycopg2.connect(
-        dbname="celestia",
-        user="postgres",
-        password="password",
-        host="localhost",
-        port="5432"
-    )
-
-    cur = conn.cursor()
 
     # Insert the final_object into the "model_predict_average_increase" table
     query = """
@@ -64,17 +64,61 @@ def process_and_insert_csv(csv_filename, item_id):
     VALUES (%(type_id)s, %(region_id)s, %(increase)s, %(confidence)s, %(horizon)s, %(date_predicted)s);
     """
 
-    cur.execute(query, final_object)
+    cursor.execute(query, final_object)
 
     # Commit the transaction and close the database connection
-    conn.commit()
-    conn.close()
+    connection.commit()
 
-    print(f"Data from '{csv_filename}' inserted into PostgreSQL.")
+    print(f"Data from '{type_id}' inserted into PostgreSQL.")
 
 
-# Process and insert data from 'punisher_domain.csv'
-process_and_insert_csv('../data/punisher_domain.csv', 597)
+# CURRENTLY WORKING FOR ONE REGION
+def get_active_item_ids(connection):
 
-# Process and insert data from 'large_skill_injector.csv'
-process_and_insert_csv('../data/large_skill_injector_domain.csv', 40520)
+    cursor = connection.cursor()
+
+    region_id_to_search = 10000043
+    query = "SELECT * FROM celestia_public.market_history_pull WHERE region_id = %s;"
+
+    cursor.execute(query, (region_id_to_search,))
+
+    rows = cursor.fetchall()
+
+    df = pd.DataFrame(rows, columns=['id', 'date', 'highest', 'lowest', 'average', 'order_count', 'region_id', 'type_id', 'volume'])
+
+    date_to_filter = '2023-09-12'
+
+    # Use boolean indexing to filter rows where the 'date' column matches the specified date
+    filtered_df = df[df['date'] == date_to_filter]
+
+    # Display the filtered DataFrame
+    active_items = list(filtered_df['type_id'])
+    return active_items
+
+
+def main():
+    db_params = { 'host': 'localhost', 'database': 'celestia', 'user': 'postgres', 'password': 'password', }
+
+    connection = psycopg2.connect(**db_params)
+    # Get the list of active item_ids
+    active_item_ids = get_active_item_ids(connection)
+    total_items = len(active_item_ids)
+    completed_items = 0
+
+    # Process and insert data for each active item_id
+    for type_id in active_item_ids:
+        try:
+            process_and_insert(connection, type_id)
+            completed_items += 1
+            percent_completed = (completed_items / total_items) * 100
+            print(f"Processing: {percent_completed:.2f}% completed")
+        except Exception as e:
+            print(f"Error processing item {type_id}: {e}")
+            continue
+
+    # Close connection after everything
+    connection.close()
+
+
+if __name__ == "__main__":
+    main()
