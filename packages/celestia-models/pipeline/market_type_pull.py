@@ -9,8 +9,9 @@ async def fetch_history(session, type_id, region_id):
     try:
         async with session.get(history_url) as response:
             if response.status == 500:
-                print(response)
-                exit()
+                print("Received a 500 response. Waiting and retrying...")
+                await asyncio.sleep(60)
+                return await fetch_history(session, type_id, region_id)
             if response.status == 200:
                 data = await response.json()
                 return type_id, data
@@ -89,16 +90,29 @@ async def main():
     conn = await asyncpg.connect(database_url)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
 
-    for region_id in region_ids:
-        print("1 minute timeout")
-        time.sleep(60)
-        await fetch_data_for_region(region_id, conn)
+    while True:
+        all_regions_processed = True
 
-    await conn.close()
+        for region_id in region_ids:
+            try:
+                print("Fetching data for region_id", region_id)
+                await fetch_data_for_region(region_id, conn)
+            except aiohttp.ClientResponseError as e:
+                if e.status == 500:
+                    print("Received a 500 response. Waiting and retrying...")
+                    await asyncio.sleep(60)
+                    raise
+
+            if not all_regions_processed:
+                all_regions_processed = False
+
+        if all_regions_processed:
+            break
 
     end_time = time.time()  # Record the end time
     elapsed_time = end_time - start_time  # Calculate the elapsed time
     print(f"Total time taken: {elapsed_time} seconds")
+
 
 if __name__ == "__main__":
     asyncio.run(main())
