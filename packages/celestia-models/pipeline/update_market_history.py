@@ -10,7 +10,7 @@ async def fetch_history(session, type_id, region_id):
         async with session.get(history_url) as response:
             if response.status == 500:
                 print("Received a 500 response. Waiting and retrying...")
-                await asyncio.sleep(60)  
+                await asyncio.sleep(60)
                 return await fetch_history(session, type_id, region_id)
             if response.status == 200:
                 data = await response.json()
@@ -91,7 +91,7 @@ async def main():
     conn = await asyncpg.connect(database_url)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
 
-    while True:  # Run indefinitely
+    while True:
         all_regions_processed = True
 
         for region_id in region_ids:
