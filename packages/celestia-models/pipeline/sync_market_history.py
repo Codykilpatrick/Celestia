@@ -14,15 +14,12 @@ def sync_table(connection, region_id):
     dates = pd.DataFrame(dates_in_current, columns=['id', 'date', 'highest', 'lowest', 'average', 'order_count', 'region_id', 'type_id', 'volume'])
     unique_dates = dates['date'].unique()
     new_data_trimmed = new_data[~new_data['date'].isin(unique_dates)]
-    
-    # Append new_data_trimmed to the PostgreSQL table
     insert_query = """
         INSERT INTO celestia_public.market_history_pull
         (date, highest, lowest, average, order_count, region_id, type_id, volume)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
     """
     values = [tuple(row) for row in new_data_trimmed[['date', 'highest', 'lowest', 'average', 'order_count', 'region_id', 'type_id', 'volume']].values]
-    
     try:
         cursor.executemany(insert_query, values)
         connection.commit()
@@ -32,9 +29,8 @@ def sync_table(connection, region_id):
         print(f"Error inserting data: {e}")
 
 
-
 def main():
-    db_params = { 'host': 'localhost', 'database': 'celestia', 'user': 'postgres', 'password': 'password', }
+    db_params = {'host': 'localhost', 'database': 'celestia', 'user': 'postgres', 'password': 'password', }
 
     connection = psycopg2.connect(**db_params)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
