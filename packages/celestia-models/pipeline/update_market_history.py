@@ -27,7 +27,6 @@ async def fetch_history(session, type_id, region_id):
         return type_id, None
 
 
-
 async def fetch_data_for_region(region_id, conn):
     url = f"https://esi.evetech.net/latest/markets/{region_id}/types/?datasource=tranquility"
 
