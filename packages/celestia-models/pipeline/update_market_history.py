@@ -100,7 +100,8 @@ async def main():
                 await fetch_data_for_region(region_id, conn)
             except aiohttp.ClientResponseError as e:
                 if e.status == 500:
-                    print("Received a 500 response. Waiting and retrying...")
+                    error_message = f"Received a 500 response. Waiting and retrying... for region {region_id}"
+                    log_failed_request(error_message)
                     await asyncio.sleep(60)
                     raise
 
