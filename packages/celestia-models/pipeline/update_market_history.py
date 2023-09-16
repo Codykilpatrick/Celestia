@@ -102,6 +102,7 @@ async def main():
                 if e.status == 500:
                     error_message = f"Received a 500 response. Waiting and retrying... for region {region_id}"
                     log_failed_request(error_message)
+                    await conn.execute("DELETE from celestia_public.market_history_sync WHERE region_id = $1", region_id)
                     await asyncio.sleep(60)
                     raise
 
