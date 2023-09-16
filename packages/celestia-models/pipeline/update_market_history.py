@@ -19,6 +19,7 @@ async def fetch_history(session, type_id, region_id):
                 error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
                 print(error_message)
                 log_failed_request(error_message)  # Log the error to a file
+                await asyncio.sleep(5)
                 return type_id, None
     except Exception as e:
         error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
