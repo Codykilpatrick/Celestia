@@ -39,6 +39,10 @@ def main():
         print("Processing:", region_id)
         sync_table(connection, region_id)
 
+    cursor = connection.cursor()
+    query = "DELETE FROM celestia_public.market_history_sync;"
+    cursor.execute(query)
+    connection.commit()
     connection.close()
 
 
