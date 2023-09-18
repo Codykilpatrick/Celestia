@@ -1,6 +1,7 @@
 import joblib
 import pandas as pd
 import psycopg2
+from datetime import datetime, timedelta
 
 
 def process_and_insert(connection, type_id, region_id):
@@ -84,7 +85,8 @@ def get_active_item_ids(connection, region_id):
 
     df = pd.DataFrame(rows, columns=['id', 'date', 'highest', 'lowest', 'average', 'order_count', 'region_id', 'type_id', 'volume'])
 
-    date_to_filter = '2023-09-12'
+    yesterday = datetime.now() - timedelta(1)
+    date_to_filter = yesterday.strftime('%Y-%m-%d')
 
     # Use boolean indexing to filter rows where the 'date' column matches the specified date
     filtered_df = df[df['date'] == date_to_filter]
