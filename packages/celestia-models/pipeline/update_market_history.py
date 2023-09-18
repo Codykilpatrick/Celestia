@@ -10,6 +10,14 @@ async def fetch_history(session, type_id, region_id):
         async with session.get(history_url) as response:
             if response.status == 500:
                 print("Received a 500 response. Waiting and retrying...")
+                error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
+                log_failed_request(error_message)
+                await asyncio.sleep(60)
+                return await fetch_history(session, type_id, region_id)
+            if response.status == 420:
+                print("Received a 420 response. Waiting and retrying...")
+                error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
+                log_failed_request(error_message)
                 await asyncio.sleep(60)
                 return await fetch_history(session, type_id, region_id)
             if response.status == 200:
@@ -22,7 +30,7 @@ async def fetch_history(session, type_id, region_id):
                 await asyncio.sleep(5)
                 return type_id, None
     except Exception as e:
-        error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
+        error_message = f"An exception occurred for type_id {type_id}: {str(e)} {region_id}"
         print(error_message)
         log_failed_request(error_message)  # Log the error to a file
         return type_id, None
