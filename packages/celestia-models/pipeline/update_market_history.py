@@ -19,6 +19,7 @@ async def fetch_history(session, type_id, region_id):
                 error_message = f"Request failed with status code {response.status} for type_id {type_id} in {region_id}"
                 print(error_message)
                 log_failed_request(error_message)  # Log the error to a file
+                await asyncio.sleep(5)
                 return type_id, None
     except Exception as e:
         error_message = f"An error occurred for type_id {type_id}: {str(e)} {region_id}"
@@ -67,7 +68,7 @@ async def fetch_data_for_region(region_id, conn):
             if data is not None:
                 for row in data:
                     await conn.execute(
-                        "INSERT INTO celestia_public.market_history_pull (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                        "INSERT INTO celestia_public.market_history_sync (type_id, date, average, highest, lowest, order_count, volume, region_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
                         type_id,
                         row['date'],
                         row['average'],
@@ -99,7 +100,9 @@ async def main():
                 await fetch_data_for_region(region_id, conn)
             except aiohttp.ClientResponseError as e:
                 if e.status == 500:
-                    print("Received a 500 response. Waiting and retrying...")
+                    error_message = f"Received a 500 response. Waiting and retrying... for region {region_id}"
+                    log_failed_request(error_message)
+                    await conn.execute("DELETE from celestia_public.market_history_sync WHERE region_id = $1", region_id)
                     await asyncio.sleep(60)
                     raise
 
@@ -112,7 +115,6 @@ async def main():
     end_time = time.time()  # Record the end time
     elapsed_time = end_time - start_time  # Calculate the elapsed time
     print(f"Total time taken: {elapsed_time} seconds")
-
 
 if __name__ == "__main__":
     asyncio.run(main())
