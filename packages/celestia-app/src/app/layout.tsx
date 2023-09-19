@@ -5,8 +5,10 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={inter.className}>
-      {children}
+    <div className="max-w-12xl">
+      <div className={inter.className}>
+        {children}
+      </div>
     </div>
   );
 }
