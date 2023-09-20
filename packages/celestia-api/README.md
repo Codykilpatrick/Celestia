@@ -3,4 +3,3 @@
 Celestia API package
 
 # Usage
-
