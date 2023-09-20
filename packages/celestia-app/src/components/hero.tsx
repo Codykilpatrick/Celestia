@@ -10,7 +10,7 @@ const Hero = () => {
         </div>
         <div>
         {items.map((item) => (
-          <div key={item} className="text-mauve-dark-11 py-2">{item}</div>
+          <div key={item} className="text-mauve-dark-12 py-2">{item}</div>
           ))}
           </div>
       </div>
