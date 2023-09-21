@@ -10,7 +10,7 @@ module.exports = postgraphile(
         host: HOST,
         port: PG_PORT,
     },
-    'public',
+    'celestia_public',
     {
         watchPg: true,
         graphiql: true,
