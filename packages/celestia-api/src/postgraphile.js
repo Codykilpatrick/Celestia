@@ -15,5 +15,8 @@ module.exports = postgraphile(
         watchPg: true,
         graphiql: true,
         enhanceGraphiql: true,
-    }
+        subscriptions: true,
+        dynamicJson: true,
+        exportGqlSchemaPath: `${__dirname}/schema.graphql`,
+    },
 )
