@@ -6,11 +6,10 @@ import Footer from '@/components/footer';
 
 
 const Home = ({allItems}) => {
-  console.log('all Items', allItems)
   return (
     <div className="w-full">
       <Header />
-      <Hero />
+      <Hero allItems={allItems}/>
       <Footer />
     </div>
   );
