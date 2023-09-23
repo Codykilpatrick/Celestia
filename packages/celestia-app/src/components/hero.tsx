@@ -1,9 +1,13 @@
-const Hero = (predictions) => {
-  const currentPredictions = predictions.predictions[0].allModelPredictAverageIncreases.edges
-  
+import Graph from "./graph";
+
+const Hero = ({predictions, prices}) => {
+  const currentPredictions = predictions[0].allModelPredictAverageIncreases.edges
+
   return (
     <div className="h-full mx-12">
-      <div className="bg-violet-3 h-72 mt-16 text-mauve-11 rounded-lg">GRAPH</div>
+      <div className="bg-violet-3 h-72 mt-16 text-mauve-11 rounded-lg overflow-hidden">
+        <Graph prices={prices}/>
+      </div>
       <div className="bg-violet-3 mt-16 rounded-lg">
         <div className="flex justify-center ">
           <div className="mx-4 text-mauve-12">Filter by Region</div>

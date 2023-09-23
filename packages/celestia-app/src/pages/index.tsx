@@ -5,11 +5,13 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
 
-const Home = ({predictions}) => {
+const Home = ({predictions, prices}) => {
+  console.log("prices", prices);
+  
   return (
     <div className="w-full">
       <Header />
-      <Hero predictions={predictions}/>
+      <Hero predictions={predictions} prices={prices}/>
       <Footer />
     </div>
   );
@@ -21,7 +23,7 @@ export async function getStaticProps() {
     cache: new InMemoryCache()
   });
 
-  const { data } = await client.query({
+  const { data: predictions } = await client.query({
     query: gql`
       query allPredictions {
       allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: true }) {
@@ -41,10 +43,33 @@ export async function getStaticProps() {
     }
     `
   });
+
+  const { data: prices } = await client.query({
+    query: gql`
+      query itemHistoryById {
+        allMarketHistoryPulls(
+          condition: { regionId: 10000043, typeId: 45 }
+          orderBy: DATE_ASC
+        ) {
+          edges {
+            node {
+              typeId
+              regionId
+              average
+              date
+            }
+          }
+        }
+      }
+    `
+  });
   
+
+
   return {
     props: {
-      predictions: [data]
+      predictions: [predictions],
+      prices: [prices]
     }
   }
 }
