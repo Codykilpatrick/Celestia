@@ -1,12 +1,17 @@
 import React from 'react';
 const { ApolloClient, InMemoryCache, gql } = require('@apollo/client');
+import Header from '@/components/header';
+import Hero from '@/components/hero';
+import Footer from '@/components/footer';
 
 
 const Home = ({allItems}) => {
   console.log('all Items', allItems)
   return (
     <div className="w-full">
-      Celestia
+      <Header />
+      <Hero />
+      <Footer />
     </div>
   );
 };
