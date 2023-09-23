@@ -13,7 +13,7 @@ const Hero = ({ predictions, prices }) => {
           <div className="mx-4 text-mauve-12">Filter by Region</div>
           <div className="mx-4 text-mauve-12">Search Item</div>
         </div>
-        <table className="w-full text-left text-mauve-12">
+        <table className="w-full text-left text-mauve-12 m-2">
           <thead>
             <tr>
               <th>Region ID</th>

@@ -23,7 +23,7 @@ export async function getStaticProps() {
   const { data: predictions } = await client.query({
     query: gql`
       query allPredictions {
-        allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: true }) {
+        allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: false }) {
           totalCount
           edges {
             node {
