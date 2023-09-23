@@ -1,0 +1,2363 @@
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """Reads and enables pagination through a set of `Item`."""
+  allItems(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ItemCondition
+  ): ItemsConnection
+
+  """Reads and enables pagination through a set of `Location`."""
+  allLocations(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Location`."""
+    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: LocationCondition
+  ): LocationsConnection
+
+  """Reads and enables pagination through a set of `MarketHistoryPull`."""
+  allMarketHistoryPulls(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `MarketHistoryPull`."""
+    orderBy: [MarketHistoryPullsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MarketHistoryPullCondition
+  ): MarketHistoryPullsConnection
+
+  """Reads and enables pagination through a set of `MarketHistorySync`."""
+  allMarketHistorySyncs(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `MarketHistorySync`."""
+    orderBy: [MarketHistorySyncsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MarketHistorySyncCondition
+  ): MarketHistorySyncsConnection
+
+  """Reads and enables pagination through a set of `MarketOrdersPull`."""
+  allMarketOrdersPulls(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `MarketOrdersPull`."""
+    orderBy: [MarketOrdersPullsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MarketOrdersPullCondition
+  ): MarketOrdersPullsConnection
+
+  """
+  Reads and enables pagination through a set of `ModelPredictAverageIncrease`.
+  """
+  allModelPredictAverageIncreases(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `ModelPredictAverageIncrease`."""
+    orderBy: [ModelPredictAverageIncreasesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ModelPredictAverageIncreaseCondition
+  ): ModelPredictAverageIncreasesConnection
+  itemById(id: Int!): Item
+  locationById(id: Int!): Location
+  marketHistoryPullById(id: Int!): MarketHistoryPull
+  marketHistorySyncById(id: Int!): MarketHistorySync
+  marketOrdersPullById(id: Int!): MarketOrdersPull
+  modelPredictAverageIncreaseById(id: Int!): ModelPredictAverageIncrease
+
+  """Reads a single `Item` using its globally unique `ID`."""
+  item(
+    """The globally unique `ID` to be used in selecting a single `Item`."""
+    nodeId: ID!
+  ): Item
+
+  """Reads a single `Location` using its globally unique `ID`."""
+  location(
+    """The globally unique `ID` to be used in selecting a single `Location`."""
+    nodeId: ID!
+  ): Location
+
+  """Reads a single `MarketHistoryPull` using its globally unique `ID`."""
+  marketHistoryPull(
+    """
+    The globally unique `ID` to be used in selecting a single `MarketHistoryPull`.
+    """
+    nodeId: ID!
+  ): MarketHistoryPull
+
+  """Reads a single `MarketHistorySync` using its globally unique `ID`."""
+  marketHistorySync(
+    """
+    The globally unique `ID` to be used in selecting a single `MarketHistorySync`.
+    """
+    nodeId: ID!
+  ): MarketHistorySync
+
+  """Reads a single `MarketOrdersPull` using its globally unique `ID`."""
+  marketOrdersPull(
+    """
+    The globally unique `ID` to be used in selecting a single `MarketOrdersPull`.
+    """
+    nodeId: ID!
+  ): MarketOrdersPull
+
+  """
+  Reads a single `ModelPredictAverageIncrease` using its globally unique `ID`.
+  """
+  modelPredictAverageIncrease(
+    """
+    The globally unique `ID` to be used in selecting a single `ModelPredictAverageIncrease`.
+    """
+    nodeId: ID!
+  ): ModelPredictAverageIncrease
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""A connection to a list of `Item` values."""
+type ItemsConnection {
+  """A list of `Item` objects."""
+  nodes: [Item]!
+
+  """
+  A list of edges which contains the `Item` and cursor to aid in pagination.
+  """
+  edges: [ItemsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Item` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""An item in the world of Eve Online."""
+type Item implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+
+  """The name of an item in the world of Eve Online."""
+  itemName: String!
+
+  """An item`s unique id in the world of Eve Online."""
+  typeId: Int!
+}
+
+"""A `Item` edge in the connection."""
+type ItemsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Item` at the end of the edge."""
+  node: Item
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+"""Methods to use when ordering `Item`."""
+enum ItemsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  ITEM_NAME_ASC
+  ITEM_NAME_DESC
+  TYPE_ID_ASC
+  TYPE_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `Item` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input ItemCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `itemName` field."""
+  itemName: String
+
+  """Checks for equality with the object’s `typeId` field."""
+  typeId: Int
+}
+
+"""A connection to a list of `Location` values."""
+type LocationsConnection {
+  """A list of `Location` objects."""
+  nodes: [Location]!
+
+  """
+  A list of edges which contains the `Location` and cursor to aid in pagination.
+  """
+  edges: [LocationsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Location` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A table each location in Eve Online."""
+type Location implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+
+  """The name for a single solar system."""
+  systemName: String!
+
+  """The ID for a single solar system."""
+  systemId: Int!
+
+  """The region name that this solar system is in."""
+  regionName: String!
+
+  """The ID for the region that this solar system is in."""
+  regionId: Int!
+}
+
+"""A `Location` edge in the connection."""
+type LocationsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Location` at the end of the edge."""
+  node: Location
+}
+
+"""Methods to use when ordering `Location`."""
+enum LocationsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  SYSTEM_NAME_ASC
+  SYSTEM_NAME_DESC
+  SYSTEM_ID_ASC
+  SYSTEM_ID_DESC
+  REGION_NAME_ASC
+  REGION_NAME_DESC
+  REGION_ID_ASC
+  REGION_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `Location` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input LocationCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `systemName` field."""
+  systemName: String
+
+  """Checks for equality with the object’s `systemId` field."""
+  systemId: Int
+
+  """Checks for equality with the object’s `regionName` field."""
+  regionName: String
+
+  """Checks for equality with the object’s `regionId` field."""
+  regionId: Int
+}
+
+"""A connection to a list of `MarketHistoryPull` values."""
+type MarketHistoryPullsConnection {
+  """A list of `MarketHistoryPull` objects."""
+  nodes: [MarketHistoryPull]!
+
+  """
+  A list of edges which contains the `MarketHistoryPull` and cursor to aid in pagination.
+  """
+  edges: [MarketHistoryPullsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `MarketHistoryPull` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A list of historical market statistics for a given region."""
+type MarketHistoryPull implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+
+  """The date of this historical statistic entry"""
+  date: String!
+
+  """The highest an item sold for on this date in this region."""
+  highest: BigFloat!
+
+  """The lowest an item sold for on this date in this region."""
+  lowest: BigFloat!
+
+  """The average price an item sold for on this date in this region."""
+  average: BigFloat!
+
+  """The ammount of individual orders for this item in a specific region."""
+  orderCount: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """
+  The ammount of individual items across all orders for this item in a specific region.
+  """
+  volume: BigInt
+}
+
+"""
+A floating point number that requires more precision than IEEE 754 binary 64
+"""
+scalar BigFloat
+
+"""
+A signed eight-byte integer. The upper big integer values are greater than the
+max value for a JavaScript number. Therefore all big integers will be output as
+strings and not numbers.
+"""
+scalar BigInt
+
+"""A `MarketHistoryPull` edge in the connection."""
+type MarketHistoryPullsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `MarketHistoryPull` at the end of the edge."""
+  node: MarketHistoryPull
+}
+
+"""Methods to use when ordering `MarketHistoryPull`."""
+enum MarketHistoryPullsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  DATE_ASC
+  DATE_DESC
+  HIGHEST_ASC
+  HIGHEST_DESC
+  LOWEST_ASC
+  LOWEST_DESC
+  AVERAGE_ASC
+  AVERAGE_DESC
+  ORDER_COUNT_ASC
+  ORDER_COUNT_DESC
+  REGION_ID_ASC
+  REGION_ID_DESC
+  TYPE_ID_ASC
+  TYPE_ID_DESC
+  VOLUME_ASC
+  VOLUME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `MarketHistoryPull` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input MarketHistoryPullCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `date` field."""
+  date: String
+
+  """Checks for equality with the object’s `highest` field."""
+  highest: BigFloat
+
+  """Checks for equality with the object’s `lowest` field."""
+  lowest: BigFloat
+
+  """Checks for equality with the object’s `average` field."""
+  average: BigFloat
+
+  """Checks for equality with the object’s `orderCount` field."""
+  orderCount: Int
+
+  """Checks for equality with the object’s `regionId` field."""
+  regionId: Int
+
+  """Checks for equality with the object’s `typeId` field."""
+  typeId: Int
+
+  """Checks for equality with the object’s `volume` field."""
+  volume: BigInt
+}
+
+"""A connection to a list of `MarketHistorySync` values."""
+type MarketHistorySyncsConnection {
+  """A list of `MarketHistorySync` objects."""
+  nodes: [MarketHistorySync]!
+
+  """
+  A list of edges which contains the `MarketHistorySync` and cursor to aid in pagination.
+  """
+  edges: [MarketHistorySyncsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `MarketHistorySync` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A list of historical market statistics for a given region."""
+type MarketHistorySync implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+
+  """The date of this historical statistic entry"""
+  date: String!
+
+  """The highest an item sold for on this date in this region."""
+  highest: BigFloat!
+
+  """The lowest an item sold for on this date in this region."""
+  lowest: BigFloat!
+
+  """The average price an item sold for on this date in this region."""
+  average: BigFloat!
+
+  """The ammount of individual orders for this item in a specific region."""
+  orderCount: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """
+  The ammount of individual items across all orders for this item in a specific region.
+  """
+  volume: BigInt
+}
+
+"""A `MarketHistorySync` edge in the connection."""
+type MarketHistorySyncsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `MarketHistorySync` at the end of the edge."""
+  node: MarketHistorySync
+}
+
+"""Methods to use when ordering `MarketHistorySync`."""
+enum MarketHistorySyncsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  DATE_ASC
+  DATE_DESC
+  HIGHEST_ASC
+  HIGHEST_DESC
+  LOWEST_ASC
+  LOWEST_DESC
+  AVERAGE_ASC
+  AVERAGE_DESC
+  ORDER_COUNT_ASC
+  ORDER_COUNT_DESC
+  REGION_ID_ASC
+  REGION_ID_DESC
+  TYPE_ID_ASC
+  TYPE_ID_DESC
+  VOLUME_ASC
+  VOLUME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `MarketHistorySync` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input MarketHistorySyncCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `date` field."""
+  date: String
+
+  """Checks for equality with the object’s `highest` field."""
+  highest: BigFloat
+
+  """Checks for equality with the object’s `lowest` field."""
+  lowest: BigFloat
+
+  """Checks for equality with the object’s `average` field."""
+  average: BigFloat
+
+  """Checks for equality with the object’s `orderCount` field."""
+  orderCount: Int
+
+  """Checks for equality with the object’s `regionId` field."""
+  regionId: Int
+
+  """Checks for equality with the object’s `typeId` field."""
+  typeId: Int
+
+  """Checks for equality with the object’s `volume` field."""
+  volume: BigInt
+}
+
+"""A connection to a list of `MarketOrdersPull` values."""
+type MarketOrdersPullsConnection {
+  """A list of `MarketOrdersPull` objects."""
+  nodes: [MarketOrdersPull]!
+
+  """
+  A list of edges which contains the `MarketOrdersPull` and cursor to aid in pagination.
+  """
+  edges: [MarketOrdersPullsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `MarketOrdersPull` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""A list of current market orders for a given region."""
+type MarketOrdersPull implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+
+  """The region id that this order occured in."""
+  regionId: Int!
+
+  """If this market order is a buy order `true` or a sell order `false`."""
+  isBuyOrder: Boolean!
+
+  """The date this order was created."""
+  issued: String
+
+  """The space station id that order occured in."""
+  locationId: Int!
+
+  """The minimum ammount of items required to satisfy this order."""
+  minVolume: Int
+
+  """The unique id given to this market order for this region and system."""
+  orderId: Int!
+
+  """The price required to purchase or sell one item in this order."""
+  price: BigFloat!
+
+  """
+  The range that this order is able to be fufiled at, this can either be a a number of systems away, the station, the solar system or the region.
+  """
+  range: String
+
+  """The solar system id that the order occured in."""
+  systemId: Int!
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int!
+
+  """The number of items left available to satisfy this order."""
+  volumeRemain: BigFloat
+
+  """The total number of items this order was created with."""
+  volumeTotal: BigFloat
+}
+
+"""A `MarketOrdersPull` edge in the connection."""
+type MarketOrdersPullsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `MarketOrdersPull` at the end of the edge."""
+  node: MarketOrdersPull
+}
+
+"""Methods to use when ordering `MarketOrdersPull`."""
+enum MarketOrdersPullsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  REGION_ID_ASC
+  REGION_ID_DESC
+  IS_BUY_ORDER_ASC
+  IS_BUY_ORDER_DESC
+  ISSUED_ASC
+  ISSUED_DESC
+  LOCATION_ID_ASC
+  LOCATION_ID_DESC
+  MIN_VOLUME_ASC
+  MIN_VOLUME_DESC
+  ORDER_ID_ASC
+  ORDER_ID_DESC
+  PRICE_ASC
+  PRICE_DESC
+  RANGE_ASC
+  RANGE_DESC
+  SYSTEM_ID_ASC
+  SYSTEM_ID_DESC
+  TYPE_ID_ASC
+  TYPE_ID_DESC
+  VOLUME_REMAIN_ASC
+  VOLUME_REMAIN_DESC
+  VOLUME_TOTAL_ASC
+  VOLUME_TOTAL_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `MarketOrdersPull` object types. All fields are
+tested for equality and combined with a logical ‘and.’
+"""
+input MarketOrdersPullCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `regionId` field."""
+  regionId: Int
+
+  """Checks for equality with the object’s `isBuyOrder` field."""
+  isBuyOrder: Boolean
+
+  """Checks for equality with the object’s `issued` field."""
+  issued: String
+
+  """Checks for equality with the object’s `locationId` field."""
+  locationId: Int
+
+  """Checks for equality with the object’s `minVolume` field."""
+  minVolume: Int
+
+  """Checks for equality with the object’s `orderId` field."""
+  orderId: Int
+
+  """Checks for equality with the object’s `price` field."""
+  price: BigFloat
+
+  """Checks for equality with the object’s `range` field."""
+  range: String
+
+  """Checks for equality with the object’s `systemId` field."""
+  systemId: Int
+
+  """Checks for equality with the object’s `typeId` field."""
+  typeId: Int
+
+  """Checks for equality with the object’s `volumeRemain` field."""
+  volumeRemain: BigFloat
+
+  """Checks for equality with the object’s `volumeTotal` field."""
+  volumeTotal: BigFloat
+}
+
+"""A connection to a list of `ModelPredictAverageIncrease` values."""
+type ModelPredictAverageIncreasesConnection {
+  """A list of `ModelPredictAverageIncrease` objects."""
+  nodes: [ModelPredictAverageIncrease]!
+
+  """
+  A list of edges which contains the `ModelPredictAverageIncrease` and cursor to aid in pagination.
+  """
+  edges: [ModelPredictAverageIncreasesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """
+  The count of *all* `ModelPredictAverageIncrease` you could get from the connection.
+  """
+  totalCount: Int!
+}
+
+"""
+A table for the predictions from a random forrest classifier whether a price will increase or decrease.
+"""
+type ModelPredictAverageIncrease implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: Int!
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """
+  Whether or not the price will increase or decrease based on the horizon.
+  """
+  increase: Boolean
+
+  """The percentage of confidence in the models increase prediction."""
+  confidence: Float
+
+  """How many days ahead the model is predicting on."""
+  horizon: Int
+
+  """What was the day that the predictions were ran on."""
+  datePredicted: String
+}
+
+"""A `ModelPredictAverageIncrease` edge in the connection."""
+type ModelPredictAverageIncreasesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `ModelPredictAverageIncrease` at the end of the edge."""
+  node: ModelPredictAverageIncrease
+}
+
+"""Methods to use when ordering `ModelPredictAverageIncrease`."""
+enum ModelPredictAverageIncreasesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  TYPE_ID_ASC
+  TYPE_ID_DESC
+  REGION_ID_ASC
+  REGION_ID_DESC
+  INCREASE_ASC
+  INCREASE_DESC
+  CONFIDENCE_ASC
+  CONFIDENCE_DESC
+  HORIZON_ASC
+  HORIZON_DESC
+  DATE_PREDICTED_ASC
+  DATE_PREDICTED_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A condition to be used against `ModelPredictAverageIncrease` object types. All
+fields are tested for equality and combined with a logical ‘and.’
+"""
+input ModelPredictAverageIncreaseCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: Int
+
+  """Checks for equality with the object’s `typeId` field."""
+  typeId: Int
+
+  """Checks for equality with the object’s `regionId` field."""
+  regionId: Int
+
+  """Checks for equality with the object’s `increase` field."""
+  increase: Boolean
+
+  """Checks for equality with the object’s `confidence` field."""
+  confidence: Float
+
+  """Checks for equality with the object’s `horizon` field."""
+  horizon: Int
+
+  """Checks for equality with the object’s `datePredicted` field."""
+  datePredicted: String
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Item`."""
+  createItem(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateItemInput!
+  ): CreateItemPayload
+
+  """Creates a single `Location`."""
+  createLocation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateLocationInput!
+  ): CreateLocationPayload
+
+  """Creates a single `MarketHistoryPull`."""
+  createMarketHistoryPull(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateMarketHistoryPullInput!
+  ): CreateMarketHistoryPullPayload
+
+  """Creates a single `MarketHistorySync`."""
+  createMarketHistorySync(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateMarketHistorySyncInput!
+  ): CreateMarketHistorySyncPayload
+
+  """Creates a single `MarketOrdersPull`."""
+  createMarketOrdersPull(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateMarketOrdersPullInput!
+  ): CreateMarketOrdersPullPayload
+
+  """Creates a single `ModelPredictAverageIncrease`."""
+  createModelPredictAverageIncrease(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateModelPredictAverageIncreaseInput!
+  ): CreateModelPredictAverageIncreasePayload
+
+  """Updates a single `Item` using its globally unique id and a patch."""
+  updateItem(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateItemInput!
+  ): UpdateItemPayload
+
+  """Updates a single `Item` using a unique key and a patch."""
+  updateItemById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateItemByIdInput!
+  ): UpdateItemPayload
+
+  """Updates a single `Location` using its globally unique id and a patch."""
+  updateLocation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateLocationInput!
+  ): UpdateLocationPayload
+
+  """Updates a single `Location` using a unique key and a patch."""
+  updateLocationById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateLocationByIdInput!
+  ): UpdateLocationPayload
+
+  """
+  Updates a single `MarketHistoryPull` using its globally unique id and a patch.
+  """
+  updateMarketHistoryPull(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMarketHistoryPullInput!
+  ): UpdateMarketHistoryPullPayload
+
+  """Updates a single `MarketHistoryPull` using a unique key and a patch."""
+  updateMarketHistoryPullById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMarketHistoryPullByIdInput!
+  ): UpdateMarketHistoryPullPayload
+
+  """
+  Updates a single `MarketHistorySync` using its globally unique id and a patch.
+  """
+  updateMarketHistorySync(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMarketHistorySyncInput!
+  ): UpdateMarketHistorySyncPayload
+
+  """Updates a single `MarketHistorySync` using a unique key and a patch."""
+  updateMarketHistorySyncById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMarketHistorySyncByIdInput!
+  ): UpdateMarketHistorySyncPayload
+
+  """
+  Updates a single `MarketOrdersPull` using its globally unique id and a patch.
+  """
+  updateMarketOrdersPull(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMarketOrdersPullInput!
+  ): UpdateMarketOrdersPullPayload
+
+  """Updates a single `MarketOrdersPull` using a unique key and a patch."""
+  updateMarketOrdersPullById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMarketOrdersPullByIdInput!
+  ): UpdateMarketOrdersPullPayload
+
+  """
+  Updates a single `ModelPredictAverageIncrease` using its globally unique id and a patch.
+  """
+  updateModelPredictAverageIncrease(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateModelPredictAverageIncreaseInput!
+  ): UpdateModelPredictAverageIncreasePayload
+
+  """
+  Updates a single `ModelPredictAverageIncrease` using a unique key and a patch.
+  """
+  updateModelPredictAverageIncreaseById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateModelPredictAverageIncreaseByIdInput!
+  ): UpdateModelPredictAverageIncreasePayload
+
+  """Deletes a single `Item` using its globally unique id."""
+  deleteItem(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteItemInput!
+  ): DeleteItemPayload
+
+  """Deletes a single `Item` using a unique key."""
+  deleteItemById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteItemByIdInput!
+  ): DeleteItemPayload
+
+  """Deletes a single `Location` using its globally unique id."""
+  deleteLocation(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteLocationInput!
+  ): DeleteLocationPayload
+
+  """Deletes a single `Location` using a unique key."""
+  deleteLocationById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteLocationByIdInput!
+  ): DeleteLocationPayload
+
+  """Deletes a single `MarketHistoryPull` using its globally unique id."""
+  deleteMarketHistoryPull(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMarketHistoryPullInput!
+  ): DeleteMarketHistoryPullPayload
+
+  """Deletes a single `MarketHistoryPull` using a unique key."""
+  deleteMarketHistoryPullById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMarketHistoryPullByIdInput!
+  ): DeleteMarketHistoryPullPayload
+
+  """Deletes a single `MarketHistorySync` using its globally unique id."""
+  deleteMarketHistorySync(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMarketHistorySyncInput!
+  ): DeleteMarketHistorySyncPayload
+
+  """Deletes a single `MarketHistorySync` using a unique key."""
+  deleteMarketHistorySyncById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMarketHistorySyncByIdInput!
+  ): DeleteMarketHistorySyncPayload
+
+  """Deletes a single `MarketOrdersPull` using its globally unique id."""
+  deleteMarketOrdersPull(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMarketOrdersPullInput!
+  ): DeleteMarketOrdersPullPayload
+
+  """Deletes a single `MarketOrdersPull` using a unique key."""
+  deleteMarketOrdersPullById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMarketOrdersPullByIdInput!
+  ): DeleteMarketOrdersPullPayload
+
+  """
+  Deletes a single `ModelPredictAverageIncrease` using its globally unique id.
+  """
+  deleteModelPredictAverageIncrease(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteModelPredictAverageIncreaseInput!
+  ): DeleteModelPredictAverageIncreasePayload
+
+  """Deletes a single `ModelPredictAverageIncrease` using a unique key."""
+  deleteModelPredictAverageIncreaseById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteModelPredictAverageIncreaseByIdInput!
+  ): DeleteModelPredictAverageIncreasePayload
+}
+
+"""The output of our create `Item` mutation."""
+type CreateItemPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Item` that was created by this mutation."""
+  item: Item
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Item`. May be used by Relay 1."""
+  itemEdge(
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ItemsEdge
+}
+
+"""All input for the create `Item` mutation."""
+input CreateItemInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Item` to be created by this mutation."""
+  item: ItemInput!
+}
+
+"""An input for mutations affecting `Item`"""
+input ItemInput {
+  id: Int
+
+  """The name of an item in the world of Eve Online."""
+  itemName: String!
+
+  """An item`s unique id in the world of Eve Online."""
+  typeId: Int!
+}
+
+"""The output of our create `Location` mutation."""
+type CreateLocationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Location` that was created by this mutation."""
+  location: Location
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Location`. May be used by Relay 1."""
+  locationEdge(
+    """The method to use when ordering `Location`."""
+    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): LocationsEdge
+}
+
+"""All input for the create `Location` mutation."""
+input CreateLocationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Location` to be created by this mutation."""
+  location: LocationInput!
+}
+
+"""An input for mutations affecting `Location`"""
+input LocationInput {
+  id: Int
+
+  """The name for a single solar system."""
+  systemName: String!
+
+  """The ID for a single solar system."""
+  systemId: Int!
+
+  """The region name that this solar system is in."""
+  regionName: String!
+
+  """The ID for the region that this solar system is in."""
+  regionId: Int!
+}
+
+"""The output of our create `MarketHistoryPull` mutation."""
+type CreateMarketHistoryPullPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketHistoryPull` that was created by this mutation."""
+  marketHistoryPull: MarketHistoryPull
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketHistoryPull`. May be used by Relay 1."""
+  marketHistoryPullEdge(
+    """The method to use when ordering `MarketHistoryPull`."""
+    orderBy: [MarketHistoryPullsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketHistoryPullsEdge
+}
+
+"""All input for the create `MarketHistoryPull` mutation."""
+input CreateMarketHistoryPullInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `MarketHistoryPull` to be created by this mutation."""
+  marketHistoryPull: MarketHistoryPullInput!
+}
+
+"""An input for mutations affecting `MarketHistoryPull`"""
+input MarketHistoryPullInput {
+  id: Int
+
+  """The date of this historical statistic entry"""
+  date: String!
+
+  """The highest an item sold for on this date in this region."""
+  highest: BigFloat!
+
+  """The lowest an item sold for on this date in this region."""
+  lowest: BigFloat!
+
+  """The average price an item sold for on this date in this region."""
+  average: BigFloat!
+
+  """The ammount of individual orders for this item in a specific region."""
+  orderCount: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """
+  The ammount of individual items across all orders for this item in a specific region.
+  """
+  volume: BigInt
+}
+
+"""The output of our create `MarketHistorySync` mutation."""
+type CreateMarketHistorySyncPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketHistorySync` that was created by this mutation."""
+  marketHistorySync: MarketHistorySync
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketHistorySync`. May be used by Relay 1."""
+  marketHistorySyncEdge(
+    """The method to use when ordering `MarketHistorySync`."""
+    orderBy: [MarketHistorySyncsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketHistorySyncsEdge
+}
+
+"""All input for the create `MarketHistorySync` mutation."""
+input CreateMarketHistorySyncInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `MarketHistorySync` to be created by this mutation."""
+  marketHistorySync: MarketHistorySyncInput!
+}
+
+"""An input for mutations affecting `MarketHistorySync`"""
+input MarketHistorySyncInput {
+  id: Int
+
+  """The date of this historical statistic entry"""
+  date: String!
+
+  """The highest an item sold for on this date in this region."""
+  highest: BigFloat!
+
+  """The lowest an item sold for on this date in this region."""
+  lowest: BigFloat!
+
+  """The average price an item sold for on this date in this region."""
+  average: BigFloat!
+
+  """The ammount of individual orders for this item in a specific region."""
+  orderCount: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """
+  The ammount of individual items across all orders for this item in a specific region.
+  """
+  volume: BigInt
+}
+
+"""The output of our create `MarketOrdersPull` mutation."""
+type CreateMarketOrdersPullPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketOrdersPull` that was created by this mutation."""
+  marketOrdersPull: MarketOrdersPull
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketOrdersPull`. May be used by Relay 1."""
+  marketOrdersPullEdge(
+    """The method to use when ordering `MarketOrdersPull`."""
+    orderBy: [MarketOrdersPullsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketOrdersPullsEdge
+}
+
+"""All input for the create `MarketOrdersPull` mutation."""
+input CreateMarketOrdersPullInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `MarketOrdersPull` to be created by this mutation."""
+  marketOrdersPull: MarketOrdersPullInput!
+}
+
+"""An input for mutations affecting `MarketOrdersPull`"""
+input MarketOrdersPullInput {
+  id: Int
+
+  """The region id that this order occured in."""
+  regionId: Int!
+
+  """If this market order is a buy order `true` or a sell order `false`."""
+  isBuyOrder: Boolean!
+
+  """The date this order was created."""
+  issued: String
+
+  """The space station id that order occured in."""
+  locationId: Int!
+
+  """The minimum ammount of items required to satisfy this order."""
+  minVolume: Int
+
+  """The unique id given to this market order for this region and system."""
+  orderId: Int!
+
+  """The price required to purchase or sell one item in this order."""
+  price: BigFloat!
+
+  """
+  The range that this order is able to be fufiled at, this can either be a a number of systems away, the station, the solar system or the region.
+  """
+  range: String
+
+  """The solar system id that the order occured in."""
+  systemId: Int!
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int!
+
+  """The number of items left available to satisfy this order."""
+  volumeRemain: BigFloat
+
+  """The total number of items this order was created with."""
+  volumeTotal: BigFloat
+}
+
+"""The output of our create `ModelPredictAverageIncrease` mutation."""
+type CreateModelPredictAverageIncreasePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `ModelPredictAverageIncrease` that was created by this mutation."""
+  modelPredictAverageIncrease: ModelPredictAverageIncrease
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `ModelPredictAverageIncrease`. May be used by Relay 1."""
+  modelPredictAverageIncreaseEdge(
+    """The method to use when ordering `ModelPredictAverageIncrease`."""
+    orderBy: [ModelPredictAverageIncreasesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ModelPredictAverageIncreasesEdge
+}
+
+"""All input for the create `ModelPredictAverageIncrease` mutation."""
+input CreateModelPredictAverageIncreaseInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `ModelPredictAverageIncrease` to be created by this mutation."""
+  modelPredictAverageIncrease: ModelPredictAverageIncreaseInput!
+}
+
+"""An input for mutations affecting `ModelPredictAverageIncrease`"""
+input ModelPredictAverageIncreaseInput {
+  id: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """
+  Whether or not the price will increase or decrease based on the horizon.
+  """
+  increase: Boolean
+
+  """The percentage of confidence in the models increase prediction."""
+  confidence: Float
+
+  """How many days ahead the model is predicting on."""
+  horizon: Int
+
+  """What was the day that the predictions were ran on."""
+  datePredicted: String
+}
+
+"""The output of our update `Item` mutation."""
+type UpdateItemPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Item` that was updated by this mutation."""
+  item: Item
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Item`. May be used by Relay 1."""
+  itemEdge(
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ItemsEdge
+}
+
+"""All input for the `updateItem` mutation."""
+input UpdateItemInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Item` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Item` being updated.
+  """
+  itemPatch: ItemPatch!
+}
+
+"""Represents an update to a `Item`. Fields that are set will be updated."""
+input ItemPatch {
+  id: Int
+
+  """The name of an item in the world of Eve Online."""
+  itemName: String
+
+  """An item`s unique id in the world of Eve Online."""
+  typeId: Int
+}
+
+"""All input for the `updateItemById` mutation."""
+input UpdateItemByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Item` being updated.
+  """
+  itemPatch: ItemPatch!
+  id: Int!
+}
+
+"""The output of our update `Location` mutation."""
+type UpdateLocationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Location` that was updated by this mutation."""
+  location: Location
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Location`. May be used by Relay 1."""
+  locationEdge(
+    """The method to use when ordering `Location`."""
+    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): LocationsEdge
+}
+
+"""All input for the `updateLocation` mutation."""
+input UpdateLocationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Location` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Location` being updated.
+  """
+  locationPatch: LocationPatch!
+}
+
+"""
+Represents an update to a `Location`. Fields that are set will be updated.
+"""
+input LocationPatch {
+  id: Int
+
+  """The name for a single solar system."""
+  systemName: String
+
+  """The ID for a single solar system."""
+  systemId: Int
+
+  """The region name that this solar system is in."""
+  regionName: String
+
+  """The ID for the region that this solar system is in."""
+  regionId: Int
+}
+
+"""All input for the `updateLocationById` mutation."""
+input UpdateLocationByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Location` being updated.
+  """
+  locationPatch: LocationPatch!
+  id: Int!
+}
+
+"""The output of our update `MarketHistoryPull` mutation."""
+type UpdateMarketHistoryPullPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketHistoryPull` that was updated by this mutation."""
+  marketHistoryPull: MarketHistoryPull
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketHistoryPull`. May be used by Relay 1."""
+  marketHistoryPullEdge(
+    """The method to use when ordering `MarketHistoryPull`."""
+    orderBy: [MarketHistoryPullsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketHistoryPullsEdge
+}
+
+"""All input for the `updateMarketHistoryPull` mutation."""
+input UpdateMarketHistoryPullInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `MarketHistoryPull` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `MarketHistoryPull` being updated.
+  """
+  marketHistoryPullPatch: MarketHistoryPullPatch!
+}
+
+"""
+Represents an update to a `MarketHistoryPull`. Fields that are set will be updated.
+"""
+input MarketHistoryPullPatch {
+  id: Int
+
+  """The date of this historical statistic entry"""
+  date: String
+
+  """The highest an item sold for on this date in this region."""
+  highest: BigFloat
+
+  """The lowest an item sold for on this date in this region."""
+  lowest: BigFloat
+
+  """The average price an item sold for on this date in this region."""
+  average: BigFloat
+
+  """The ammount of individual orders for this item in a specific region."""
+  orderCount: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """
+  The ammount of individual items across all orders for this item in a specific region.
+  """
+  volume: BigInt
+}
+
+"""All input for the `updateMarketHistoryPullById` mutation."""
+input UpdateMarketHistoryPullByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `MarketHistoryPull` being updated.
+  """
+  marketHistoryPullPatch: MarketHistoryPullPatch!
+  id: Int!
+}
+
+"""The output of our update `MarketHistorySync` mutation."""
+type UpdateMarketHistorySyncPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketHistorySync` that was updated by this mutation."""
+  marketHistorySync: MarketHistorySync
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketHistorySync`. May be used by Relay 1."""
+  marketHistorySyncEdge(
+    """The method to use when ordering `MarketHistorySync`."""
+    orderBy: [MarketHistorySyncsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketHistorySyncsEdge
+}
+
+"""All input for the `updateMarketHistorySync` mutation."""
+input UpdateMarketHistorySyncInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `MarketHistorySync` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `MarketHistorySync` being updated.
+  """
+  marketHistorySyncPatch: MarketHistorySyncPatch!
+}
+
+"""
+Represents an update to a `MarketHistorySync`. Fields that are set will be updated.
+"""
+input MarketHistorySyncPatch {
+  id: Int
+
+  """The date of this historical statistic entry"""
+  date: String
+
+  """The highest an item sold for on this date in this region."""
+  highest: BigFloat
+
+  """The lowest an item sold for on this date in this region."""
+  lowest: BigFloat
+
+  """The average price an item sold for on this date in this region."""
+  average: BigFloat
+
+  """The ammount of individual orders for this item in a specific region."""
+  orderCount: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """
+  The ammount of individual items across all orders for this item in a specific region.
+  """
+  volume: BigInt
+}
+
+"""All input for the `updateMarketHistorySyncById` mutation."""
+input UpdateMarketHistorySyncByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `MarketHistorySync` being updated.
+  """
+  marketHistorySyncPatch: MarketHistorySyncPatch!
+  id: Int!
+}
+
+"""The output of our update `MarketOrdersPull` mutation."""
+type UpdateMarketOrdersPullPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketOrdersPull` that was updated by this mutation."""
+  marketOrdersPull: MarketOrdersPull
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketOrdersPull`. May be used by Relay 1."""
+  marketOrdersPullEdge(
+    """The method to use when ordering `MarketOrdersPull`."""
+    orderBy: [MarketOrdersPullsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketOrdersPullsEdge
+}
+
+"""All input for the `updateMarketOrdersPull` mutation."""
+input UpdateMarketOrdersPullInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `MarketOrdersPull` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `MarketOrdersPull` being updated.
+  """
+  marketOrdersPullPatch: MarketOrdersPullPatch!
+}
+
+"""
+Represents an update to a `MarketOrdersPull`. Fields that are set will be updated.
+"""
+input MarketOrdersPullPatch {
+  id: Int
+
+  """The region id that this order occured in."""
+  regionId: Int
+
+  """If this market order is a buy order `true` or a sell order `false`."""
+  isBuyOrder: Boolean
+
+  """The date this order was created."""
+  issued: String
+
+  """The space station id that order occured in."""
+  locationId: Int
+
+  """The minimum ammount of items required to satisfy this order."""
+  minVolume: Int
+
+  """The unique id given to this market order for this region and system."""
+  orderId: Int
+
+  """The price required to purchase or sell one item in this order."""
+  price: BigFloat
+
+  """
+  The range that this order is able to be fufiled at, this can either be a a number of systems away, the station, the solar system or the region.
+  """
+  range: String
+
+  """The solar system id that the order occured in."""
+  systemId: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """The number of items left available to satisfy this order."""
+  volumeRemain: BigFloat
+
+  """The total number of items this order was created with."""
+  volumeTotal: BigFloat
+}
+
+"""All input for the `updateMarketOrdersPullById` mutation."""
+input UpdateMarketOrdersPullByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `MarketOrdersPull` being updated.
+  """
+  marketOrdersPullPatch: MarketOrdersPullPatch!
+  id: Int!
+}
+
+"""The output of our update `ModelPredictAverageIncrease` mutation."""
+type UpdateModelPredictAverageIncreasePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `ModelPredictAverageIncrease` that was updated by this mutation."""
+  modelPredictAverageIncrease: ModelPredictAverageIncrease
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `ModelPredictAverageIncrease`. May be used by Relay 1."""
+  modelPredictAverageIncreaseEdge(
+    """The method to use when ordering `ModelPredictAverageIncrease`."""
+    orderBy: [ModelPredictAverageIncreasesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ModelPredictAverageIncreasesEdge
+}
+
+"""All input for the `updateModelPredictAverageIncrease` mutation."""
+input UpdateModelPredictAverageIncreaseInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `ModelPredictAverageIncrease` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `ModelPredictAverageIncrease` being updated.
+  """
+  modelPredictAverageIncreasePatch: ModelPredictAverageIncreasePatch!
+}
+
+"""
+Represents an update to a `ModelPredictAverageIncrease`. Fields that are set will be updated.
+"""
+input ModelPredictAverageIncreasePatch {
+  id: Int
+
+  """The type id for the item that is for this data entry."""
+  typeId: Int
+
+  """The region id that is for this data entry."""
+  regionId: Int
+
+  """
+  Whether or not the price will increase or decrease based on the horizon.
+  """
+  increase: Boolean
+
+  """The percentage of confidence in the models increase prediction."""
+  confidence: Float
+
+  """How many days ahead the model is predicting on."""
+  horizon: Int
+
+  """What was the day that the predictions were ran on."""
+  datePredicted: String
+}
+
+"""All input for the `updateModelPredictAverageIncreaseById` mutation."""
+input UpdateModelPredictAverageIncreaseByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `ModelPredictAverageIncrease` being updated.
+  """
+  modelPredictAverageIncreasePatch: ModelPredictAverageIncreasePatch!
+  id: Int!
+}
+
+"""The output of our delete `Item` mutation."""
+type DeleteItemPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Item` that was deleted by this mutation."""
+  item: Item
+  deletedItemId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Item`. May be used by Relay 1."""
+  itemEdge(
+    """The method to use when ordering `Item`."""
+    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ItemsEdge
+}
+
+"""All input for the `deleteItem` mutation."""
+input DeleteItemInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Item` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteItemById` mutation."""
+input DeleteItemByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""The output of our delete `Location` mutation."""
+type DeleteLocationPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Location` that was deleted by this mutation."""
+  location: Location
+  deletedLocationId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Location`. May be used by Relay 1."""
+  locationEdge(
+    """The method to use when ordering `Location`."""
+    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): LocationsEdge
+}
+
+"""All input for the `deleteLocation` mutation."""
+input DeleteLocationInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Location` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteLocationById` mutation."""
+input DeleteLocationByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""The output of our delete `MarketHistoryPull` mutation."""
+type DeleteMarketHistoryPullPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketHistoryPull` that was deleted by this mutation."""
+  marketHistoryPull: MarketHistoryPull
+  deletedMarketHistoryPullId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketHistoryPull`. May be used by Relay 1."""
+  marketHistoryPullEdge(
+    """The method to use when ordering `MarketHistoryPull`."""
+    orderBy: [MarketHistoryPullsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketHistoryPullsEdge
+}
+
+"""All input for the `deleteMarketHistoryPull` mutation."""
+input DeleteMarketHistoryPullInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `MarketHistoryPull` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteMarketHistoryPullById` mutation."""
+input DeleteMarketHistoryPullByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""The output of our delete `MarketHistorySync` mutation."""
+type DeleteMarketHistorySyncPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketHistorySync` that was deleted by this mutation."""
+  marketHistorySync: MarketHistorySync
+  deletedMarketHistorySyncId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketHistorySync`. May be used by Relay 1."""
+  marketHistorySyncEdge(
+    """The method to use when ordering `MarketHistorySync`."""
+    orderBy: [MarketHistorySyncsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketHistorySyncsEdge
+}
+
+"""All input for the `deleteMarketHistorySync` mutation."""
+input DeleteMarketHistorySyncInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `MarketHistorySync` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteMarketHistorySyncById` mutation."""
+input DeleteMarketHistorySyncByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""The output of our delete `MarketOrdersPull` mutation."""
+type DeleteMarketOrdersPullPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `MarketOrdersPull` that was deleted by this mutation."""
+  marketOrdersPull: MarketOrdersPull
+  deletedMarketOrdersPullId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `MarketOrdersPull`. May be used by Relay 1."""
+  marketOrdersPullEdge(
+    """The method to use when ordering `MarketOrdersPull`."""
+    orderBy: [MarketOrdersPullsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): MarketOrdersPullsEdge
+}
+
+"""All input for the `deleteMarketOrdersPull` mutation."""
+input DeleteMarketOrdersPullInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `MarketOrdersPull` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteMarketOrdersPullById` mutation."""
+input DeleteMarketOrdersPullByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
+
+"""The output of our delete `ModelPredictAverageIncrease` mutation."""
+type DeleteModelPredictAverageIncreasePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `ModelPredictAverageIncrease` that was deleted by this mutation."""
+  modelPredictAverageIncrease: ModelPredictAverageIncrease
+  deletedModelPredictAverageIncreaseId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `ModelPredictAverageIncrease`. May be used by Relay 1."""
+  modelPredictAverageIncreaseEdge(
+    """The method to use when ordering `ModelPredictAverageIncrease`."""
+    orderBy: [ModelPredictAverageIncreasesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): ModelPredictAverageIncreasesEdge
+}
+
+"""All input for the `deleteModelPredictAverageIncrease` mutation."""
+input DeleteModelPredictAverageIncreaseInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `ModelPredictAverageIncrease` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""All input for the `deleteModelPredictAverageIncreaseById` mutation."""
+input DeleteModelPredictAverageIncreaseByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: Int!
+}
