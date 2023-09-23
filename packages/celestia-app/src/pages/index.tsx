@@ -5,11 +5,11 @@ import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
 
-const Home = ({allItems}) => {
+const Home = ({predictions}) => {
   return (
     <div className="w-full">
       <Header />
-      <Hero allItems={allItems}/>
+      <Hero predictions={predictions}/>
       <Footer />
     </div>
   );
@@ -23,22 +23,28 @@ export async function getStaticProps() {
 
   const { data } = await client.query({
     query: gql`
-      query allItems {
-        allItems {
-          edges {
-            node {
-              id
-              itemName
-            }
+      query allPredictions {
+      allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: true }) {
+        totalCount
+        edges {
+          node {
+            id
+            regionId
+            increase
+            horizon
+            confidence
+            datePredicted
+            typeId
           }
         }
       }
+    }
     `
   });
-
+  
   return {
     props: {
-      allItems: [data]
+      predictions: [data]
     }
   }
 }
