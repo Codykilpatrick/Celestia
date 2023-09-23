@@ -46,7 +46,7 @@ export async function getStaticProps() {
     query: gql`
       query itemHistoryById {
         allMarketHistoryPulls(
-          condition: { regionId: 10000043, typeId: 45 }
+          condition: { regionId: 10000043, typeId: 597 }
           orderBy: DATE_ASC
         ) {
           edges {
@@ -55,6 +55,8 @@ export async function getStaticProps() {
               regionId
               average
               date
+              highest
+              lowest
             }
           }
         }
