@@ -1,4 +1,4 @@
-import Layout from '../app/layout';
+import {Layout} from '../app/layout.tsx';
 import { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
