@@ -5,12 +5,11 @@ Chart.register(...registerables);
 
 const Graph = ({ prices }) => {
   const priceHistory = prices[0].allMarketHistoryPulls.edges;
-  const last30PriceHistory = priceHistory.slice(-30)
+  const last30PriceHistory = priceHistory.slice(-30);
   const dates = last30PriceHistory.map((item) => item.node.date);
   const averages = last30PriceHistory.map((item) => parseFloat(item.node.average));
   const highest = last30PriceHistory.map((item) => parseFloat(item.node.highest));
   const lowest = last30PriceHistory.map((item) => parseFloat(item.node.lowest));
-  
 
   const data = {
     labels: dates,
@@ -74,8 +73,8 @@ const Graph = ({ prices }) => {
   };
 
   return (
-    <div className='h-96 p-2'>
-      <Line options={options} data={data}/>
+    <div className="h-96 p-2">
+      <Line options={options} data={data} />
     </div>
   );
 };

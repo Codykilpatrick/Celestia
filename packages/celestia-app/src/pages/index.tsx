@@ -4,12 +4,11 @@ import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
-
-const Home = ({predictions, prices}) => {
+const Home = ({ predictions, prices }) => {
   return (
     <div className="w-full">
       <Header />
-      <Hero predictions={predictions} prices={prices}/>
+      <Hero predictions={predictions} prices={prices} />
       <Footer />
     </div>
   );
@@ -18,37 +17,34 @@ const Home = ({predictions, prices}) => {
 export async function getStaticProps() {
   const client = new ApolloClient({
     uri: 'http://localhost:8080/graphql',
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
   });
 
   const { data: predictions } = await client.query({
     query: gql`
       query allPredictions {
-      allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: true }) {
-        totalCount
-        edges {
-          node {
-            id
-            regionId
-            increase
-            horizon
-            confidence
-            datePredicted
-            typeId
+        allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: true }) {
+          totalCount
+          edges {
+            node {
+              id
+              regionId
+              increase
+              horizon
+              confidence
+              datePredicted
+              typeId
+            }
           }
         }
       }
-    }
-    `
+    `,
   });
 
   const { data: prices } = await client.query({
     query: gql`
       query itemHistoryById {
-        allMarketHistoryPulls(
-          condition: { regionId: 10000043, typeId: 597 }
-          orderBy: DATE_ASC
-        ) {
+        allMarketHistoryPulls(condition: { regionId: 10000043, typeId: 597 }, orderBy: DATE_ASC) {
           edges {
             node {
               typeId
@@ -61,17 +57,15 @@ export async function getStaticProps() {
           }
         }
       }
-    `
+    `,
   });
-  
-
 
   return {
     props: {
       predictions: [predictions],
-      prices: [prices]
-    }
-  }
+      prices: [prices],
+    },
+  };
 }
 
 export default Home;
