@@ -5,14 +5,13 @@ Chart.register(...registerables);
 
 const Graph = ({ prices }) => {
   const priceHistory = prices[0].allMarketHistoryPulls.edges;
+  const last30PriceHistory = priceHistory.slice(-30)
 
-  // Extract dates and averages from the GraphQL data
-  const dates = priceHistory.map((item) => item.node.date);
-  const averages = priceHistory.map((item) => parseFloat(item.node.average));
+  const dates = last30PriceHistory.map((item) => item.node.date);
+  const averages = last30PriceHistory.map((item) => parseFloat(item.node.average));
   
-  // Define the data for the line chart
   const data = {
-    dates,
+    labels: dates,
     datasets: [
       {
         label: 'Average Price',
@@ -24,14 +23,13 @@ const Graph = ({ prices }) => {
     ],
   };
 
-  // Customize chart options (you can adjust these as needed)
   const options = {
     scales: {
       x: {
         time: {
-          unit: 'day', // Customize the time unit as needed
+          unit: 'day',
           displayFormats: {
-            day: 'MMM DD', // Format for displaying dates
+            day: 'MMM DD',
           },
         },
         title: {
@@ -46,10 +44,12 @@ const Graph = ({ prices }) => {
         },
       },
     },
+    maintainAspectRatio: false,
+    responsive: true,
   };
 
   return (
-    <div>
+    <div className='h-96'>
       <Line options={options} data={data}/>
     </div>
   );

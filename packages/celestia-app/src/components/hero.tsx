@@ -5,7 +5,7 @@ const Hero = ({predictions, prices}) => {
 
   return (
     <div className="h-full mx-12">
-      <div className="bg-violet-3 h-72 mt-16 text-mauve-11 rounded-lg overflow-hidden">
+      <div className="bg-violet-3 mt-16 text-mauve-11 rounded-lg overflow-hidden">
         <Graph prices={prices}/>
       </div>
       <div className="bg-violet-3 mt-16 rounded-lg">

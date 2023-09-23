@@ -6,8 +6,6 @@ import Footer from '@/components/footer';
 
 
 const Home = ({predictions, prices}) => {
-  console.log("prices", prices);
-  
   return (
     <div className="w-full">
       <Header />
