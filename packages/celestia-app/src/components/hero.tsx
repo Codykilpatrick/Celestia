@@ -75,10 +75,9 @@ const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
           <div className="mx-4 text-mauve-12">Filter by Region</div>
           <div className="mx-4 text-mauve-12">Search Item</div>
         </div>
-        <div className="overflow-x-auto">
+        <div className="flex justify-center">
           {' '}
-          {/* Add this div for horizontal scrolling */}
-          <table className="w-full table-auto text-mauve-12 m-2">
+          <table className="w-full table-auto text-mauve-12 mx-4">
             <thead>
               <tr>
                 <th className="px-4 py-2">Region</th>
@@ -91,7 +90,7 @@ const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
             </thead>
             <tbody>
               {predictionsWithItemNames.map((prediction) => (
-                <tr key={prediction.id}>
+                <tr key={prediction.id} className='mx-2'>
                   <td className="border px-4 py-2">{prediction.locationName}</td>
                   <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
                   <td className="border px-4 py-2">{prediction.horizon}</td>
