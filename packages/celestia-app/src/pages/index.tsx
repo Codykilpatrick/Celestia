@@ -4,11 +4,13 @@ import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
-const Home = ({ predictions, prices }) => {
+const Home = ({ predictions, prices, itemNames, locationNames }) => {
+  console.log(locationNames);
+  
   return (
     <div className="w-full">
       <Header />
-      <Hero predictions={predictions} prices={prices} />
+      <Hero predictions={predictions} prices={prices} itemNames={itemNames} locationNames={locationNames}/>
       <Footer />
     </div>
   );
@@ -60,10 +62,43 @@ export async function getStaticProps() {
     `,
   });
 
+const { data: itemNames } = await client.query({
+  query: gql`
+    query allItems {
+      allItems {
+        edges {
+          node {
+            id
+            itemName
+          }
+        }
+      }
+    }
+  `,
+});
+
+const { data: locationNames } = await client.query({
+  query: gql`
+    query allLocations {
+      allLocations {
+        edges {
+          node {
+            id
+            regionId
+            regionName
+          }
+        }
+      }
+    }
+  `,
+});
+
   return {
     props: {
       predictions: [predictions],
       prices: [prices],
+      itemNames: [itemNames],
+      locationNames: [locationNames]
     },
   };
 }
