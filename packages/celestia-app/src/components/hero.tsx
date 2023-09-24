@@ -1,17 +1,59 @@
 import Graph from './graph';
 
-const Hero = ({ predictions, prices, itemNames, locationNames }) => {
-  const itemMap = {};
-  const locationMap = {}
+interface LocationNode {
+  regionId: string;
+  regionName: string;
+}
+
+interface PredictionNode {
+  id: string;
+  regionId: string;
+  increase: boolean;
+  horizon: string;
+  confidence: number;
+  datePredicted: string;
+  typeId: string;
+}
+
+interface HeroProps {
+  predictions: {
+    allModelPredictAverageIncreases: {
+      edges: {
+        node: PredictionNode;
+      }[];
+    };
+  }[];
+  prices: GLfloat;
+  itemNames: {
+    allItems: {
+      edges: {
+        node: {
+          id: string;
+          itemName: string;
+        };
+      }[];
+    };
+  }[];
+  locationNames: {
+    allLocations: {
+      edges: {
+        node: LocationNode;
+      }[];
+    };
+  }[];
+}
+
+const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
+  const itemMap: Record<string, string> = {};
+  const locationMap: Record<string, string> = {};
 
   function capitalizeWords(str: string) {
-    return str.replace(/\b\w/g, char => char.toUpperCase());
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
   }
-  
 
-  locationNames[0].allLocations.edges.forEach(({node}) => {
+  locationNames[0].allLocations.edges.forEach(({ node }) => {
     locationMap[node.regionId] = capitalizeWords(node.regionName);
-  })
+  });
 
   itemNames[0].allItems.edges.forEach(({ node }) => {
     itemMap[node.id] = node.itemName;
@@ -20,10 +62,8 @@ const Hero = ({ predictions, prices, itemNames, locationNames }) => {
   const predictionsWithItemNames = predictions[0].allModelPredictAverageIncreases.edges.map(({ node }) => ({
     ...node,
     itemName: itemMap[node.typeId],
-    locationName: locationMap[node.regionId]
+    locationName: locationMap[node.regionId],
   }));
-  console.log(predictionsWithItemNames);
-  
 
   return (
     <div className="h-full mx-12">
@@ -35,7 +75,9 @@ const Hero = ({ predictions, prices, itemNames, locationNames }) => {
           <div className="mx-4 text-mauve-12">Filter by Region</div>
           <div className="mx-4 text-mauve-12">Search Item</div>
         </div>
-        <div className="overflow-x-auto"> {/* Add this div for horizontal scrolling */}
+        <div className="overflow-x-auto">
+          {' '}
+          {/* Add this div for horizontal scrolling */}
           <table className="w-full table-auto text-mauve-12 m-2">
             <thead>
               <tr>

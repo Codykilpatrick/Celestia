@@ -4,13 +4,57 @@ import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 
-const Home = ({ predictions, prices, itemNames, locationNames }) => {
-  console.log(locationNames);
-  
+interface PredictionNode {
+  id: string;
+  regionId: string;
+  increase: boolean;
+  horizon: string;
+  confidence: number;
+  datePredicted: string;
+  typeId: string;
+}
+
+interface ItemNode {
+  id: string;
+  itemName: string;
+}
+
+interface LocationNode {
+  id: string;
+  regionId: string;
+  regionName: string;
+}
+
+interface HomeProps {
+  predictions: {
+    allModelPredictAverageIncreases: {
+      edges: {
+        node: PredictionNode;
+      }[];
+    };
+  }[];
+  prices: GLfloat;
+  itemNames: {
+    allItems: {
+      edges: {
+        node: ItemNode;
+      }[];
+    };
+  }[];
+  locationNames: {
+    allLocations: {
+      edges: {
+        node: LocationNode;
+      }[];
+    };
+  }[];
+}
+
+const Home = ({ predictions, prices, itemNames, locationNames }: HomeProps) => {
   return (
     <div className="w-full">
       <Header />
-      <Hero predictions={predictions} prices={prices} itemNames={itemNames} locationNames={locationNames}/>
+      <Hero predictions={predictions} prices={prices} itemNames={itemNames} locationNames={locationNames} />
       <Footer />
     </div>
   );
@@ -62,43 +106,43 @@ export async function getStaticProps() {
     `,
   });
 
-const { data: itemNames } = await client.query({
-  query: gql`
-    query allItems {
-      allItems {
-        edges {
-          node {
-            id
-            itemName
+  const { data: itemNames } = await client.query({
+    query: gql`
+      query allItems {
+        allItems {
+          edges {
+            node {
+              id
+              itemName
+            }
           }
         }
       }
-    }
-  `,
-});
+    `,
+  });
 
-const { data: locationNames } = await client.query({
-  query: gql`
-    query allLocations {
-      allLocations {
-        edges {
-          node {
-            id
-            regionId
-            regionName
+  const { data: locationNames } = await client.query({
+    query: gql`
+      query allLocations {
+        allLocations {
+          edges {
+            node {
+              id
+              regionId
+              regionName
+            }
           }
         }
       }
-    }
-  `,
-});
+    `,
+  });
 
   return {
     props: {
       predictions: [predictions],
       prices: [prices],
       itemNames: [itemNames],
-      locationNames: [locationNames]
+      locationNames: [locationNames],
     },
   };
 }
