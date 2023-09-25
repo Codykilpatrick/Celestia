@@ -24,7 +24,6 @@ interface HeroProps {
       }[];
     };
   }[];
-  prices: GLfloat;
   itemNames: {
     allItems: {
       edges: {
@@ -44,13 +43,15 @@ interface HeroProps {
   }[];
 }
 
-const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
+const Hero = ({ predictions, itemNames, locationNames }: HeroProps) => {
   const itemMap: Record<string, string> = {};
   const locationMap: Record<string, string> = {};
-  const [currentItem, setCurrentItem] = useState<number>();
+  const [currentItem, setCurrentItem] = useState<number | undefined>();
+  const [currentItemName, setCurrentItemName] = useState<string | undefined>();
 
-  const handleItemClick = (itemId: number) => {
+  const handleItemClick = (itemId: number, itemName: string) => {
     setCurrentItem(itemId)
+    setCurrentItemName(itemName)
   }
 
   function capitalizeWords(str: string) {
@@ -74,7 +75,7 @@ const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
   return (
     <div className="h-full mx-12">
       <div className="bg-violet-3 mt-16 text-mauve-11 rounded-lg overflow-hidden">
-        <Graph prices={prices} />
+        <Graph currentItem={currentItem} currentItemName={currentItemName}/>
       </div>
       <div className="bg-violet-3 mt-16 rounded-lg">
         <div className="flex justify-center ">
@@ -104,7 +105,7 @@ const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
                   <td className="border px-4 py-2">{prediction.datePredicted}</td>
                     <td className="border px-4 py-2">   <button
                       className="text-blue-500 hover:underline"
-                      onClick={() => handleItemClick(prediction.typeId)}
+                      onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
                     >
                       {prediction.itemName}
                     </button>

@@ -40,7 +40,6 @@ interface HomeProps {
       }[];
     };
   }[];
-  prices: GLfloat;
   itemNames: {
     allItems: {
       edges: {
@@ -57,11 +56,11 @@ interface HomeProps {
   }[];
 }
 
-const Home = ({predictions, prices, itemNames, locationNames }: HomeProps) => {
+const Home = ({predictions, itemNames, locationNames }: HomeProps) => {
   return (
     <div className="w-full">
       <Header />
-      <Hero predictions={predictions} prices={prices} itemNames={itemNames} locationNames={locationNames} />
+      <Hero predictions={predictions} itemNames={itemNames} locationNames={locationNames} />
       <Footer />
     </div>
   );
