@@ -1,8 +1,15 @@
 import React from 'react';
-const { ApolloClient, InMemoryCache, gql } = require('@apollo/client');
+const { gql } = require('@apollo/client');
 import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
+import client from '@/apollo/apollo-client';
+import {
+  ALL_PREDICTIONS_QUERY,
+  ITEM_HISTORY_QUERY,
+  ALL_ITEMS_QUERY,
+  ALL_LOCATIONS_QUERY,
+} from '@/apollo/graphql-queries';
 
 interface PredictionNode {
   id: string;
@@ -50,7 +57,7 @@ interface HomeProps {
   }[];
 }
 
-const Home = ({ predictions, prices, itemNames, locationNames }: HomeProps) => {
+const Home = ({predictions, prices, itemNames, locationNames }: HomeProps) => {
   return (
     <div className="w-full">
       <Header />
@@ -61,11 +68,6 @@ const Home = ({ predictions, prices, itemNames, locationNames }: HomeProps) => {
 };
 
 export async function getStaticProps() {
-  const client = new ApolloClient({
-    uri: 'http://localhost:8080/graphql',
-    cache: new InMemoryCache(),
-  });
-
   const { data: predictions } = await client.query({
     query: gql`
       query allPredictions {
@@ -86,7 +88,7 @@ export async function getStaticProps() {
       }
     `,
   });
-
+  
   const { data: prices } = await client.query({
     query: gql`
       query itemHistoryById {
