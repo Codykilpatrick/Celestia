@@ -5,6 +5,15 @@ Chart.register(...registerables);
 import { ITEM_HISTORY_QUERY } from '@/apollo/graphql-queries';
 const {useQuery} = require('@apollo/client')
 
+interface PriceItem {
+  node: {
+    date: string;
+    average: string;
+    highest: string;
+    lowest: string;
+  };
+}
+
 interface GraphProps {
   currentItem: number | undefined;
   currentItemName: string | undefined;
@@ -27,14 +36,22 @@ const Graph = ({ currentItem, currentItemName }: GraphProps) => {
   }, [currentItem, refetch]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
-  }
+    return (
+      <div className="h-96 p-2 flex justify-center">
+        <div className='flex flex-col justify-center'>Please Select an item from below...</div>
+      </div>
+    )
+    }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="h-96 p-2">
+        <div>Error: {error.message}</div>
+      </div>
+    )
   }
 
-  const priceHistory = prices?.allMarketHistoryPulls?.edges || [];
+  const priceHistory: PriceItem[] = prices?.allMarketHistoryPulls?.edges || [];
   const firstPriceItem = priceHistory[0]?.node;
 
   if (!firstPriceItem) {
