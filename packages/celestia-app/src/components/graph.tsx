@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 const { Line } = require('react-chartjs-2');
 const { Chart, registerables } = require('chart.js');
 Chart.register(...registerables);
 import { ITEM_HISTORY_QUERY } from '@/apollo/graphql-queries';
-const {useQuery} = require('@apollo/client')
+const { useQuery } = require('@apollo/client');
 
 interface PriceItem {
   node: {
@@ -21,7 +21,11 @@ interface GraphProps {
 
 const Graph = ({ currentItem, currentItemName }: GraphProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const { data: prices, error, refetch } = useQuery(ITEM_HISTORY_QUERY, {
+  const {
+    data: prices,
+    error,
+    refetch,
+  } = useQuery(ITEM_HISTORY_QUERY, {
     variables: { typeId: currentItem },
   });
 
@@ -38,17 +42,17 @@ const Graph = ({ currentItem, currentItemName }: GraphProps) => {
   if (isLoading) {
     return (
       <div className="h-96 p-2 flex justify-center">
-        <div className='flex flex-col justify-center'>Please Select an item from below...</div>
+        <div className="flex flex-col justify-center">Please Select an item from below...</div>
       </div>
-    )
-    }
+    );
+  }
 
   if (error) {
     return (
       <div className="h-96 p-2">
         <div>Error: {error.message}</div>
       </div>
-    )
+    );
   }
 
   const priceHistory: PriceItem[] = prices?.allMarketHistoryPulls?.edges || [];

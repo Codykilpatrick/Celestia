@@ -50,9 +50,9 @@ const Hero = ({ predictions, itemNames, locationNames }: HeroProps) => {
   const [currentItemName, setCurrentItemName] = useState<string | undefined>();
 
   const handleItemClick = (itemId: number, itemName: string) => {
-    setCurrentItem(itemId)
-    setCurrentItemName(itemName)
-  }
+    setCurrentItem(itemId);
+    setCurrentItemName(itemName);
+  };
 
   function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -75,7 +75,7 @@ const Hero = ({ predictions, itemNames, locationNames }: HeroProps) => {
   return (
     <div className="h-full mx-12">
       <div className="bg-violet-3 mt-16 text-mauve-11 rounded-lg overflow-hidden">
-        <Graph currentItem={currentItem} currentItemName={currentItemName}/>
+        <Graph currentItem={currentItem} currentItemName={currentItemName} />
       </div>
       <div className="bg-violet-3 mt-16 rounded-lg">
         <div className="flex justify-center ">
@@ -97,13 +97,15 @@ const Hero = ({ predictions, itemNames, locationNames }: HeroProps) => {
             </thead>
             <tbody>
               {predictionsWithItemNames.map((prediction) => (
-                <tr key={prediction.id} className='mx-2'>
+                <tr key={prediction.id} className="mx-2">
                   <td className="border px-4 py-2">{prediction.locationName}</td>
                   <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
                   <td className="border px-4 py-2">{prediction.horizon}</td>
                   <td className="border px-4 py-2">{prediction.confidence}</td>
                   <td className="border px-4 py-2">{prediction.datePredicted}</td>
-                    <td className="border px-4 py-2">   <button
+                  <td className="border px-4 py-2">
+                    {' '}
+                    <button
                       className="text-blue-500 hover:underline"
                       onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
                     >

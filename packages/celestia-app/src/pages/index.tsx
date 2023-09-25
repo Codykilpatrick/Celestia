@@ -56,7 +56,7 @@ interface HomeProps {
   }[];
 }
 
-const Home = ({predictions, itemNames, locationNames }: HomeProps) => {
+const Home = ({ predictions, itemNames, locationNames }: HomeProps) => {
   return (
     <div className="w-full">
       <Header />
@@ -87,7 +87,7 @@ export async function getStaticProps() {
       }
     `,
   });
-  
+
   const { data: prices } = await client.query({
     query: gql`
       query itemHistoryById {
