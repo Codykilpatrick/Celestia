@@ -1,4 +1,5 @@
 import Graph from './graph';
+import { useState } from 'react';
 
 interface LocationNode {
   regionId: string;
@@ -12,7 +13,7 @@ interface PredictionNode {
   horizon: string;
   confidence: number;
   datePredicted: string;
-  typeId: string;
+  typeId: number;
 }
 
 interface HeroProps {
@@ -46,6 +47,11 @@ interface HeroProps {
 const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
   const itemMap: Record<string, string> = {};
   const locationMap: Record<string, string> = {};
+  const [currentItem, setCurrentItem] = useState<number>();
+
+  const handleItemClick = (itemId: number) => {
+    setCurrentItem(itemId)
+  }
 
   function capitalizeWords(str: string) {
     return str.replace(/\b\w/g, (char) => char.toUpperCase());
@@ -96,7 +102,13 @@ const Hero = ({ predictions, prices, itemNames, locationNames }: HeroProps) => {
                   <td className="border px-4 py-2">{prediction.horizon}</td>
                   <td className="border px-4 py-2">{prediction.confidence}</td>
                   <td className="border px-4 py-2">{prediction.datePredicted}</td>
-                  <td className="border px-4 py-2">{prediction.itemName}</td>
+                    <td className="border px-4 py-2">   <button
+                      className="text-blue-500 hover:underline"
+                      onClick={() => handleItemClick(prediction.typeId)}
+                    >
+                      {prediction.itemName}
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

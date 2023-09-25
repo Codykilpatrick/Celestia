@@ -11,7 +11,7 @@ interface PredictionNode {
   horizon: string;
   confidence: number;
   datePredicted: string;
-  typeId: string;
+  typeId: number;
 }
 
 interface ItemNode {
