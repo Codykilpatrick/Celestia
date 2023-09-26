@@ -59,7 +59,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     error,
     refetch,
   } = useQuery(ALL_PREDICTIONS_QUERY, {
-    variables: { typeId: currentItem },
+    variables: { regionId: currentRegionId },
   });
 
   useEffect(() => {
@@ -100,12 +100,11 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     itemMap[node.id] = node.itemName;
   });
 
-  
-  const newPredictions = predictions?.allModelPredictAverageIncreases?.edges || []
-  const firstPrediction = newPredictions[0]?.node
+  const newPredictions = predictions?.allModelPredictAverageIncreases?.edges || [];
+  const firstPrediction = newPredictions[0]?.node;
 
   if (!firstPrediction) {
-    return <div>No predictions available for this region.</div>
+    return <div>No predictions available for this region.</div>;
   }
 
   const predictionsWithItemNames = newPredictions.map(({ node }) => ({
