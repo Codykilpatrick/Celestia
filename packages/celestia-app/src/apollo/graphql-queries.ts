@@ -1,8 +1,8 @@
 const { gql } = require('@apollo/client');
 
 export const ALL_PREDICTIONS_QUERY = gql`
-  query allPredictions {
-    allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: false }) {
+  query allPredictionsById($regionId: Int!) {
+    allModelPredictAverageIncreases(condition: { regionId: $regionId, increase: false }) {
       totalCount
       edges {
         node {
