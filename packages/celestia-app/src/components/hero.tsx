@@ -47,6 +47,9 @@ const Hero = ({ predictions, itemNames, locationNames }: HeroProps) => {
   const itemMap: Record<string, string> = {};
   const locationMap: Record<string, string> = {};
   const [currentItem, setCurrentItem] = useState<number | undefined>();
+  const [selectedOption, setSelectedOption] = useState('10000043');
+  console.log(selectedOption);
+  
   const [currentItemName, setCurrentItemName] = useState<string | undefined>();
 
   const handleItemClick = (itemId: number, itemName: string) => {
@@ -78,8 +81,25 @@ const Hero = ({ predictions, itemNames, locationNames }: HeroProps) => {
         <Graph currentItem={currentItem} currentItemName={currentItemName} />
       </div>
       <div className="bg-violet-3 mt-16 rounded-lg">
-        <div className="flex justify-center ">
-          <div className="mx-4 text-mauve-12">Filter by Region</div>
+        <div className="flex justify-center pt-4">
+          <div className="mx-4">
+            <label htmlFor="regionSelect" className="text-mauve-12">
+              Filter by Region:
+            </label>
+            <select
+              id="regionSelect"
+              value={selectedOption}
+              onChange={(e) => setSelectedOption(e.target.value)}
+              className='bg-violet-7 ml-2 rounded-lg'
+            >
+              <option value="">Select a Region</option>
+              <option value="10000043">Domain</option>
+              <option value="10000002">The Forge</option>
+              <option value="10000030">Heimatar</option>
+              <option value="10000032">Sinq Laison</option>
+              <option value="10000042">Metropolis</option>
+            </select>
+          </div>
           <div className="mx-4 text-mauve-12">Search Item</div>
         </div>
         <div className="flex justify-center">
