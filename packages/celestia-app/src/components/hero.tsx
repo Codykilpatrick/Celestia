@@ -182,19 +182,39 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <table className="w-full table-auto text-mauve-12 mx-4">
             <thead>
               <tr>
-                <th className="px-4 py-2" onClick={() => handleSort('locationName')}>
-                  <div className="flex items-center">Region {renderSortingIndicator('locationName')}</div>
+                <th className="px-4 py-2">
+                  <div className="flex items-center">
+                    <span onClick={() => handleSort('locationName')} className="hover:cursor-pointer">
+                      Region
+                    </span>
+                    {renderSortingIndicator('locationName')}
+                  </div>
                 </th>
-                <th className="px-4 py-2" onClick={() => handleSort('increase')}>
-                  <div className="flex items-center">Increase {renderSortingIndicator('increase')}</div>
+                <th className="px-4 py-2">
+                  <div className="flex items-center">
+                    <span onClick={() => handleSort('increase')} className="hover:cursor-pointer">
+                      Increase
+                    </span>
+                    {renderSortingIndicator('increase')}
+                  </div>
                 </th>
                 <th className="px-4 py-2">Horizon</th>
                 <th className="px-4 py-2">Confidence</th>
-                <th className="px-4 py-2" onClick={() => handleSort('datePredicted')}>
-                  <div className="flex items-center">Date Predicted {renderSortingIndicator('datePredicted')}</div>
+                <th className="px-4 py-2">
+                  <div className="flex items-center">
+                    <span onClick={() => handleSort('datePredicted')} className="hover:cursor-pointer">
+                      Date Predicted
+                    </span>
+                    {renderSortingIndicator('datePredicted')}
+                  </div>
                 </th>
-                <th className="px-4 py-2" onClick={() => handleSort('itemName')}>
-                  <div className="flex items-center">Item Name {renderSortingIndicator('itemName')}</div>
+                <th className="px-4 py-2">
+                  <div className="flex items-center">
+                    <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer">
+                      Item Name
+                    </span>
+                    {renderSortingIndicator('itemName')}
+                  </div>
                 </th>
               </tr>
             </thead>
