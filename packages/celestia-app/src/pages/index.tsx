@@ -4,12 +4,6 @@ import Header from '@/components/header';
 import Hero from '@/components/hero';
 import Footer from '@/components/footer';
 import client from '@/apollo/apollo-client';
-import {
-  ALL_PREDICTIONS_QUERY,
-  ITEM_HISTORY_QUERY,
-  ALL_ITEMS_QUERY,
-  ALL_LOCATIONS_QUERY,
-} from '@/apollo/graphql-queries';
 
 interface PredictionNode {
   id: string;
@@ -56,38 +50,17 @@ interface HomeProps {
   }[];
 }
 
-const Home = ({ predictions, itemNames, locationNames }: HomeProps) => {
+const Home = ({ itemNames, locationNames }: HomeProps) => {
   return (
     <div className="w-full">
       <Header />
-      <Hero predictions={predictions} itemNames={itemNames} locationNames={locationNames} />
+      <Hero itemNames={itemNames} locationNames={locationNames} />
       <Footer />
     </div>
   );
 };
 
 export async function getStaticProps() {
-  const { data: predictions } = await client.query({
-    query: gql`
-      query allPredictions {
-        allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: false }) {
-          totalCount
-          edges {
-            node {
-              id
-              regionId
-              increase
-              horizon
-              confidence
-              datePredicted
-              typeId
-            }
-          }
-        }
-      }
-    `,
-  });
-
   const { data: prices } = await client.query({
     query: gql`
       query itemHistoryById {
@@ -140,7 +113,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      predictions: [predictions],
       prices: [prices],
       itemNames: [itemNames],
       locationNames: [locationNames],

@@ -1,8 +1,8 @@
 const { gql } = require('@apollo/client');
 
 export const ALL_PREDICTIONS_QUERY = gql`
-  query allPredictions {
-    allModelPredictAverageIncreases(condition: { regionId: 10000043, increase: false }) {
+  query allPredictionsById($regionId: Int!) {
+    allModelPredictAverageIncreases(condition: { regionId: $regionId, increase: false }) {
       totalCount
       edges {
         node {
@@ -20,8 +20,8 @@ export const ALL_PREDICTIONS_QUERY = gql`
 `;
 
 export const ITEM_HISTORY_QUERY = gql`
-  query itemHistoryById($typeId: Int!) {
-    allMarketHistoryPulls(condition: { regionId: 10000043, typeId: $typeId }, orderBy: DATE_ASC) {
+  query itemHistoryById($typeId: Int!, $regionId: Int!) {
+    allMarketHistoryPulls(condition: { regionId: $regionId, typeId: $typeId }, orderBy: DATE_ASC) {
       edges {
         node {
           typeId

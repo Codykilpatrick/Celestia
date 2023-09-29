@@ -17,16 +17,17 @@ interface PriceItem {
 interface GraphProps {
   currentItem: number | undefined;
   currentItemName: string | undefined;
+  currentRegionId: number | undefined;
 }
 
-const Graph = ({ currentItem, currentItemName }: GraphProps) => {
+const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const {
     data: prices,
     error,
     refetch,
   } = useQuery(ITEM_HISTORY_QUERY, {
-    variables: { typeId: currentItem },
+    variables: { typeId: currentItem, regionId: currentRegionId },
   });
 
   useEffect(() => {
