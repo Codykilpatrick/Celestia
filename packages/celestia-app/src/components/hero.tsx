@@ -153,11 +153,11 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   });
 
-  const changeRegion = (event: React.ChangeEvent<HTMLSelectElement>) =>{
-    setSortBy('')
-    setSortOrder('asc')
-    setCurrentRegionId(parseInt(event.target.value))
-  }
+  const changeRegion = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy('');
+    setSortOrder('asc');
+    setCurrentRegionId(parseInt(event.target.value));
+  };
 
   const handleSearch = (searchQuery: string) => {
     const filtered = predictionsWithItemNames.filter((prediction: Prediction) =>
@@ -191,9 +191,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             </select>
           </div>
           <div className="mx-4 text-mauve-12">
-            <label htmlFor="searchItem">
-              Search Item:
-            </label>
+            <label htmlFor="searchItem">Search Item:</label>
             <input
               className="bg-violet-7 rounded-lg ml-2 text-mauve-12"
               type="text"
@@ -256,7 +254,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                       <td className="border px-4 py-2">{prediction.horizon}</td>
                       <td className="border px-4 py-2">{prediction.confidence}</td>
                       <td className="border px-4 py-2">{prediction.datePredicted}</td>
-                      <td className="border px-4 py-2">
+                      <td className="border px-4 py-2 sm:text-center lg:text-start">
                         {' '}
                         <button
                           className="text-blue-500 hover:underline"
