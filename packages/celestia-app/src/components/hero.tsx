@@ -2,6 +2,7 @@ import Graph from './graph';
 import { useState, useEffect } from 'react';
 import { ALL_PREDICTIONS_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
+import { ArrowUpIcon, ArrowDownIcon } from '@radix-ui/react-icons';
 
 interface LocationNode {
   regionId: string;
@@ -173,19 +174,31 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <table className="w-full table-auto text-mauve-12 mx-4">
             <thead>
               <tr>
-                <th className="px-4 py-2">Region</th>
+                <th className="px-4 py-2" onClick={() => handleSort('locationName')}>
+                  <div className="flex items-center">
+                    Region {sortBy === 'locationName' && sortOrder === 'asc' && <ArrowUpIcon />}
+                    {sortBy === 'locationName' && sortOrder === 'desc' && <ArrowDownIcon />}
+                  </div>
+                </th>
                 <th className="px-4 py-2" onClick={() => handleSort('increase')}>
-                  Increase
+                  <div className="flex items-center">
+                    Increase {sortBy === 'increase' && sortOrder === 'asc' && <ArrowUpIcon />}
+                    {sortBy === 'increase' && sortOrder === 'desc' && <ArrowDownIcon />}
+                  </div>
                 </th>
-                <th className="px-4 py-2" onClick={() => handleSort('horizon')}>
-                  Horizon
-                </th>
+                <th className="px-4 py-2">Horizon</th>
                 <th className="px-4 py-2">Confidence</th>
                 <th className="px-4 py-2" onClick={() => handleSort('datePredicted')}>
-                  Date predicted
+                  <div className="flex items-center">
+                    Date Predicted {sortBy === 'datePredicted' && sortOrder === 'asc' && <ArrowUpIcon />}
+                    {sortBy === 'datePredicted' && sortOrder === 'desc' && <ArrowDownIcon />}
+                  </div>
                 </th>
                 <th className="px-4 py-2" onClick={() => handleSort('itemName')}>
-                  Item name
+                  <div className="flex items-center">
+                    Item Name {sortBy === 'itemName' && sortOrder === 'asc' && <ArrowUpIcon />}
+                    {sortBy === 'itemName' && sortOrder === 'desc' && <ArrowDownIcon />}
+                  </div>
                 </th>
               </tr>
             </thead>
