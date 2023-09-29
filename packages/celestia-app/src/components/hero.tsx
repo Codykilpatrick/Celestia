@@ -59,6 +59,13 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   };
 
+  const renderSortingIndicator = (column: string) => {
+    if (column === sortBy) {
+      return sortOrder === 'asc' ? <ArrowUpIcon /> : <ArrowDownIcon />;
+    }
+    return null;
+  };
+
   const [currentItemName, setCurrentItemName] = useState<string | undefined>();
 
   const handleItemClick = (itemId: number, itemName: string) => {
@@ -175,30 +182,18 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <thead>
               <tr>
                 <th className="px-4 py-2" onClick={() => handleSort('locationName')}>
-                  <div className="flex items-center">
-                    Region {sortBy === 'locationName' && sortOrder === 'asc' && <ArrowUpIcon />}
-                    {sortBy === 'locationName' && sortOrder === 'desc' && <ArrowDownIcon />}
-                  </div>
+                  <div className="flex items-center">Region {renderSortingIndicator('locationName')}</div>
                 </th>
                 <th className="px-4 py-2" onClick={() => handleSort('increase')}>
-                  <div className="flex items-center">
-                    Increase {sortBy === 'increase' && sortOrder === 'asc' && <ArrowUpIcon />}
-                    {sortBy === 'increase' && sortOrder === 'desc' && <ArrowDownIcon />}
-                  </div>
+                  <div className="flex items-center">Increase {renderSortingIndicator('increase')}</div>
                 </th>
                 <th className="px-4 py-2">Horizon</th>
                 <th className="px-4 py-2">Confidence</th>
                 <th className="px-4 py-2" onClick={() => handleSort('datePredicted')}>
-                  <div className="flex items-center">
-                    Date Predicted {sortBy === 'datePredicted' && sortOrder === 'asc' && <ArrowUpIcon />}
-                    {sortBy === 'datePredicted' && sortOrder === 'desc' && <ArrowDownIcon />}
-                  </div>
+                  <div className="flex items-center">Date Predicted {renderSortingIndicator('datePredicted')}</div>
                 </th>
                 <th className="px-4 py-2" onClick={() => handleSort('itemName')}>
-                  <div className="flex items-center">
-                    Item Name {sortBy === 'itemName' && sortOrder === 'asc' && <ArrowUpIcon />}
-                    {sortBy === 'itemName' && sortOrder === 'desc' && <ArrowDownIcon />}
-                  </div>
+                  <div className="flex items-center">Item Name {renderSortingIndicator('itemName')}</div>
                 </th>
               </tr>
             </thead>
