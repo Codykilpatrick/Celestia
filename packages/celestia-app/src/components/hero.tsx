@@ -2,7 +2,7 @@ import Graph from './graph';
 import { useState, useEffect } from 'react';
 import { ALL_PREDICTIONS_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
-import { ArrowUpIcon, ArrowDownIcon } from '@radix-ui/react-icons';
+import { ArrowUpIcon, ArrowDownIcon, CaretSortIcon } from '@radix-ui/react-icons';
 
 interface LocationNode {
   regionId: string;
@@ -62,8 +62,9 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   const renderSortingIndicator = (column: string) => {
     if (column === sortBy) {
       return sortOrder === 'asc' ? <ArrowUpIcon /> : <ArrowDownIcon />;
+    } else {
+      return <CaretSortIcon />;
     }
-    return null;
   };
 
   const [currentItemName, setCurrentItemName] = useState<string | undefined>();
