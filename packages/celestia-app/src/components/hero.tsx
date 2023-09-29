@@ -153,6 +153,12 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   });
 
+  const changeRegion = (e) =>{
+    setSortBy('')
+    setSortOrder('asc')
+    setCurrentRegionId(parseInt(e.target.value))
+  }
+
   const handleSearch = (searchQuery: string) => {
     const filtered = predictionsWithItemNames.filter((prediction: Prediction) =>
       prediction.itemName.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -174,7 +180,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <select
               id="regionSelect"
               value={currentRegionId}
-              onChange={(e) => setCurrentRegionId(parseInt(e.target.value))}
+              onChange={(e) => changeRegion(e)}
               className="bg-violet-7 ml-2 rounded-lg"
             >
               <option value={10000043}>Domain</option>
