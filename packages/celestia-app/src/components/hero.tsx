@@ -129,7 +129,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     return <div>No predictions available for this region.</div>;
   }
 
-  const predictionsWithItemNames = newPredictions.map(({ node }) => ({
+  const predictionsWithItemNames = newPredictions.map(({ node }: { node: Prediction }) => ({
     ...node,
     itemName: itemMap[node.typeId],
     locationName: locationMap[node.regionId],
@@ -153,10 +153,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   });
 
-  const changeRegion = (e) =>{
+  const changeRegion = (event: React.ChangeEvent<HTMLSelectElement>) =>{
     setSortBy('')
     setSortOrder('asc')
-    setCurrentRegionId(parseInt(e.target.value))
+    setCurrentRegionId(parseInt(event.target.value))
   }
 
   const handleSearch = (searchQuery: string) => {
@@ -180,7 +180,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <select
               id="regionSelect"
               value={currentRegionId}
-              onChange={(e) => changeRegion(e)}
+              onChange={(event) => changeRegion(event)}
               className="bg-violet-7 ml-2 rounded-lg"
             >
               <option value={10000043}>Domain</option>
