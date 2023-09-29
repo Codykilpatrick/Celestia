@@ -154,7 +154,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   });
 
   const handleSearch = (searchQuery: string) => {
-    const filtered = predictionsWithItemNames.filter((prediction) =>
+    const filtered = predictionsWithItemNames.filter((prediction: Prediction) =>
       prediction.itemName.toLowerCase().includes(searchQuery.toLowerCase()),
     );
     setFilteredPredictions(filtered);
@@ -185,9 +185,12 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             </select>
           </div>
           <div className="mx-4 text-mauve-12">
-            Search Item:
+            <label htmlFor="searchItem">
+              Search Item:
+            </label>
             <input
               type="text"
+              id="searchItem"
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
