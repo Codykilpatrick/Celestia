@@ -46,6 +46,17 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   const [currentItem, setCurrentItem] = useState<number | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [currentRegionId, setCurrentRegionId] = useState<number>(10000043);
+  const [sortBy, setSortBy] = useState<string>('');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+
+  const handleSort = (column: string) => {
+    if (column === sortBy) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(column);
+      setSortOrder('asc');
+    }
+  };
 
   const [currentItemName, setCurrentItemName] = useState<string | undefined>();
 
@@ -113,6 +124,24 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     locationName: locationMap[node.regionId],
   }));
 
+  const sortedPredictions = [...predictionsWithItemNames].sort((a, b) => {
+    if (sortBy === 'locationName') {
+      return sortOrder === 'asc'
+        ? a.locationName.localeCompare(b.locationName)
+        : b.locationName.localeCompare(a.locationName);
+    } else if (sortBy === 'increase') {
+      return sortOrder === 'asc' ? a.increase - b.increase : b.increase - a.increase;
+    } else if (sortBy === 'itemName') {
+      return sortOrder === 'asc' ? a.itemName.localeCompare(b.itemName) : b.itemName.localeCompare(a.itemName);
+    } else if (sortBy === 'datePredicted') {
+      return sortOrder === 'asc'
+        ? a.datePredicted.localeCompare(b.datePredicted)
+        : b.datePredicted.localeCompare(a.datePredicted);
+    } else {
+      return 0;
+    }
+  });
+
   return (
     <div className="h-full mx-12">
       <div className="bg-violet-3 mt-16 text-mauve-11 rounded-lg overflow-hidden">
@@ -145,15 +174,23 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <thead>
               <tr>
                 <th className="px-4 py-2">Region</th>
-                <th className="px-4 py-2">Increase</th>
-                <th className="px-4 py-2">Horizon</th>
+                <th className="px-4 py-2" onClick={() => handleSort('increase')}>
+                  Increase
+                </th>
+                <th className="px-4 py-2" onClick={() => handleSort('horizon')}>
+                  Horizon
+                </th>
                 <th className="px-4 py-2">Confidence</th>
-                <th className="px-4 py-2">Date predicted</th>
-                <th className="px-4 py-2">Item name</th>
+                <th className="px-4 py-2" onClick={() => handleSort('datePredicted')}>
+                  Date predicted
+                </th>
+                <th className="px-4 py-2" onClick={() => handleSort('itemName')}>
+                  Item name
+                </th>
               </tr>
             </thead>
             <tbody>
-              {predictionsWithItemNames.map((prediction: Prediction) => (
+              {sortedPredictions.map((prediction: Prediction) => (
                 <tr key={prediction.id} className="mx-2">
                   <td className="border px-4 py-2">{prediction.locationName}</td>
                   <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
