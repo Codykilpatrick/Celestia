@@ -189,6 +189,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               Search Item:
             </label>
             <input
+              className="bg-violet-7 rounded-lg ml-2 text-mauve-12"
               type="text"
               id="searchItem"
               value={searchTerm}
