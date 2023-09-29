@@ -49,6 +49,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   const [currentRegionId, setCurrentRegionId] = useState<number>(10000043);
   const [sortBy, setSortBy] = useState<string>('');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredPredictions, setFilteredPredictions] = useState<Prediction[]>([]);
 
   const handleSort = (column: string) => {
     if (column === sortBy) {
@@ -151,6 +153,13 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   });
 
+  const handleSearch = (searchQuery: string) => {
+    const filtered = predictionsWithItemNames.filter((prediction) =>
+      prediction.itemName.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+    setFilteredPredictions(filtered);
+  };
+
   return (
     <div className="h-full mx-12">
       <div className="bg-violet-3 mt-16 text-mauve-11 rounded-lg overflow-hidden">
@@ -175,7 +184,17 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               <option value={10000042}>Metropolis</option>
             </select>
           </div>
-          <div className="mx-4 text-mauve-12">Search Item</div>
+          <div className="mx-4 text-mauve-12">
+            Search Item:
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                handleSearch(e.target.value);
+              }}
+            />
+          </div>
         </div>
         <div className="flex justify-center">
           {' '}
@@ -219,24 +238,43 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               </tr>
             </thead>
             <tbody>
-              {sortedPredictions.map((prediction: Prediction) => (
-                <tr key={prediction.id} className="mx-2">
-                  <td className="border px-4 py-2">{prediction.locationName}</td>
-                  <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
-                  <td className="border px-4 py-2">{prediction.horizon}</td>
-                  <td className="border px-4 py-2">{prediction.confidence}</td>
-                  <td className="border px-4 py-2">{prediction.datePredicted}</td>
-                  <td className="border px-4 py-2">
-                    {' '}
-                    <button
-                      className="text-blue-500 hover:underline"
-                      onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
-                    >
-                      {prediction.itemName}
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {searchTerm
+                ? filteredPredictions.map((prediction: Prediction) => (
+                    <tr key={prediction.id} className="mx-2">
+                      <td className="border px-4 py-2">{prediction.locationName}</td>
+                      <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border px-4 py-2">{prediction.horizon}</td>
+                      <td className="border px-4 py-2">{prediction.confidence}</td>
+                      <td className="border px-4 py-2">{prediction.datePredicted}</td>
+                      <td className="border px-4 py-2">
+                        {' '}
+                        <button
+                          className="text-blue-500 hover:underline"
+                          onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
+                        >
+                          {prediction.itemName}
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                : sortedPredictions.map((prediction: Prediction) => (
+                    <tr key={prediction.id} className="mx-2">
+                      <td className="border px-4 py-2">{prediction.locationName}</td>
+                      <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border px-4 py-2">{prediction.horizon}</td>
+                      <td className="border px-4 py-2">{prediction.confidence}</td>
+                      <td className="border px-4 py-2">{prediction.datePredicted}</td>
+                      <td className="border px-4 py-2">
+                        {' '}
+                        <button
+                          className="text-blue-500 hover:underline"
+                          onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
+                        >
+                          {prediction.itemName}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
         </div>
