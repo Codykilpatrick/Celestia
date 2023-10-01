@@ -12,7 +12,7 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient': 'linear-gradient(to bottom, #17151f, #1c172b)',
+        gradient: 'linear-gradient(to bottom, #17151f, #1c172b)',
       },
       colors: {
         'mauve-1': mauveDark.mauve1,
