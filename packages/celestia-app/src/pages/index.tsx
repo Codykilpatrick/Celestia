@@ -52,7 +52,7 @@ interface HomeProps {
 
 const Home = ({ itemNames, locationNames }: HomeProps) => {
   return (
-    <div className="w-full">
+    <div className="w-full bg-gradient">
       <Header />
       <Hero itemNames={itemNames} locationNames={locationNames} />
       <Footer />
