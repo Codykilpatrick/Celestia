@@ -4,6 +4,7 @@ const { Chart, registerables } = require('chart.js');
 Chart.register(...registerables);
 import { ITEM_HISTORY_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
+import { violetDark, mauveDark } from '@radix-ui/colors';
 
 interface PriceItem {
   node: {
@@ -108,13 +109,27 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
         title: {
           display: true,
           text: 'Date',
+          color: mauveDark.mauve11
         },
+        grid: {
+          color: mauveDark.mauve9
+        },
+        ticks: {
+          color: mauveDark.mauve11
+        }
       },
       y: {
         title: {
           display: true,
           text: 'Average Price',
+          color: mauveDark.mauve11
         },
+        grid: {
+          color: mauveDark.mauve9
+        },
+        ticks: {
+          color: mauveDark.mauve11
+        }
       },
     },
     plugins: {
@@ -124,6 +139,7 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
         font: {
           size: 16,
         },
+        color: mauveDark.mauve11
       },
     },
     maintainAspectRatio: false,
