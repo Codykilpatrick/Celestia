@@ -181,7 +181,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               id="regionSelect"
               value={currentRegionId}
               onChange={(event) => changeRegion(event)}
-              className="bg-violet-7 ml-2 rounded-lg"
+              className="bg-violet-9 hover:bg-violet-10 ml-2 rounded-lg"
             >
               <option value={10000043}>Domain</option>
               <option value={10000002}>The Forge</option>
@@ -193,7 +193,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <div className="mx-4 text-mauve-12">
             <label htmlFor="searchItem">Search Item:</label>
             <input
-              className="bg-violet-7 rounded-lg ml-2 text-mauve-12"
+              className="bg-violet-9 hover:bg-violet-10 rounded-lg ml-2 text-mauve-12"
               type="text"
               id="searchItem"
               value={searchTerm}
@@ -206,12 +206,12 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         </div>
         <div className="flex justify-center">
           {' '}
-          <table className="w-full table-auto text-mauve-12 mx-4">
+          <table className="w-full table-auto text-mauve-11 mx-4">
             <thead>
               <tr>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('locationName')} className="hover:cursor-pointer">
+                    <span onClick={() => handleSort('locationName')} className="hover:cursor-pointer hover:text-mauve-12">
                       Region
                     </span>
                     {renderSortingIndicator('locationName')}
@@ -219,7 +219,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 </th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('increase')} className="hover:cursor-pointer">
+                    <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-mauve-12">
                       Increase
                     </span>
                     {renderSortingIndicator('increase')}
@@ -229,7 +229,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 <th className="px-4 py-2">Confidence</th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('datePredicted')} className="hover:cursor-pointer">
+                    <span onClick={() => handleSort('datePredicted')} className="hover:cursor-pointer hover:text-mauve-12">
                       Date Predicted
                     </span>
                     {renderSortingIndicator('datePredicted')}
@@ -237,7 +237,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 </th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer">
+                    <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer hover:text-mauve-12">
                       Item Name
                     </span>
                     {renderSortingIndicator('itemName')}
@@ -266,7 +266,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     </tr>
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className="mx-2">
+                    <tr key={prediction.id} className="mx-2 text-mauve-11">
                       <td className="border px-4 py-2">{prediction.locationName}</td>
                       <td className="border px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
                       <td className="border px-4 py-2">{prediction.horizon}</td>
@@ -275,7 +275,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                       <td className="border px-4 py-2 sm:text-center lg:text-start">
                         {' '}
                         <button
-                          className="text-blue-500 hover:underline"
+                          className="hover:text-mauve-12 hover:underline"
                           onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
                         >
                           {prediction.itemName}
