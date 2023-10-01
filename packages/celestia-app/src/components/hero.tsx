@@ -251,16 +251,16 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='border border-violet-8'>
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className="mx-2 text-mauve-11 grid grid-cols-6">
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.locationName}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.horizon}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.confidence}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.datePredicted}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2 sm:text-center lg:text-start overflow-hidden">
+                    <tr key={prediction.id} className=" text-mauve-11 grid grid-cols-6">
+                      <td className="border border-violet-8 p-2">{prediction.locationName}</td>
+                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
+                      <td className="border border-violet-8 p-2 sm:text-center lg:text-start overflow-hidden">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
@@ -272,13 +272,13 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     </tr>
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className="mx-2 text-mauve-11 grid grid-cols-6">
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.locationName}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.horizon}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.confidence}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2">{prediction.datePredicted}</td>
-                      <td className="border-2 border-violet-8 px-4 py-2 sm:text-center lg:text-start overflow-hidden">
+                    <tr key={prediction.id} className=" text-mauve-11 grid grid-cols-6">
+                      <td className="border border-violet-8 p-2">{prediction.locationName}</td>
+                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
+                      <td className="border border-violet-8 p-2 sm:text-center lg:text-start overflow-hidden">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
