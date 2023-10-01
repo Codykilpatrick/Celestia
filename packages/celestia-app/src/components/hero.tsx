@@ -181,7 +181,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               id="regionSelect"
               value={currentRegionId}
               onChange={(event) => changeRegion(event)}
-              className="bg-violet-9 hover:bg-violet-10 ml-2 rounded-lg"
+              className="bg-violet-5 hover:bg-violet-6 ml-2 rounded-lg border-violet-8 border-2"
             >
               <option value={10000043}>Domain</option>
               <option value={10000002}>The Forge</option>
@@ -193,7 +193,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <div className="mx-4 text-mauve-12">
             <label htmlFor="searchItem">Search Item:</label>
             <input
-              className="bg-violet-9 hover:bg-violet-10 rounded-lg ml-2 text-mauve-12"
+              className="bg-violet-5 hover:bg-violet-6 rounded-lg ml-2 text-mauve-12 border-violet-8 border-2"
               type="text"
               id="searchItem"
               value={searchTerm}
