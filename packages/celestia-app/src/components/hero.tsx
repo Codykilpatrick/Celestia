@@ -260,7 +260,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                       <td className="border border-violet-8 p-2">{prediction.horizon}</td>
                       <td className="border border-violet-8 p-2">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 sm:text-center lg:text-start overflow-hidden">
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
@@ -278,7 +278,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                       <td className="border border-violet-8 p-2">{prediction.horizon}</td>
                       <td className="border border-violet-8 p-2">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 sm:text-center lg:text-start overflow-hidden">
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
