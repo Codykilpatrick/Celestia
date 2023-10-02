@@ -254,13 +254,13 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <tbody className="border border-violet-8">
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className=" text-mauve-11 grid grid-cols-6">
+                    <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
                       <td className="border border-violet-8 p-2">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
                       <td className="border border-violet-8 p-2">{prediction.horizon}</td>
                       <td className="border border-violet-8 p-2">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden">
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
