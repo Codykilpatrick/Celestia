@@ -51,6 +51,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredPredictions, setFilteredPredictions] = useState<Prediction[]>([]);
+  const itemsPerPage = 50;
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handleSort = (column: string) => {
     if (column === sortBy) {
@@ -135,7 +137,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     locationName: locationMap[node.regionId],
   }));
 
-  const sortedPredictions = [...predictionsWithItemNames].sort((a, b) => {
+
+  let sortedPredictions = [...predictionsWithItemNames].sort((a, b) => {
     if (sortBy === 'locationName') {
       return sortOrder === 'asc'
         ? a.locationName.localeCompare(b.locationName)
@@ -153,6 +156,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   });
 
+  sortedPredictions = sortedPredictions.slice(itemsPerPage * currentPage - 1, currentPage * itemsPerPage + itemsPerPage)
+
   const changeRegion = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy('');
     setSortOrder('asc');
@@ -163,7 +168,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     const filtered = predictionsWithItemNames.filter((prediction: Prediction) =>
       prediction.itemName?.toLowerCase().includes(searchQuery.toLowerCase()),
     );
-    setFilteredPredictions(filtered);
+    setFilteredPredictions(filtered.slice(0,10));
   };
 
   return (
@@ -203,6 +208,14 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               }}
             />
           </div>
+        </div>
+        <div className='flex w-full justify-center'>
+          <button className='px-2' onClick={() => setCurrentPage(currentPage - 1)}>
+            Previous
+          </button>
+          <button className='px-2' onClick={() => setCurrentPage(currentPage + 1)}>
+            Next
+          </button>
         </div>
         <div className="flex justify-center">
           {' '}
