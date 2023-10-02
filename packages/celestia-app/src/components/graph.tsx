@@ -61,7 +61,11 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
   const firstPriceItem = priceHistory[0]?.node;
 
   if (!firstPriceItem) {
-    return <div>No price data available for this item.</div>;
+    return (
+      <div className="h-96 p-2 flex justify-center">
+        <div className="flex flex-col justify-center">No price data available for this item.</div>
+      </div>
+    );
   }
 
   const last30PriceHistory = priceHistory.slice(-30);

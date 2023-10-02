@@ -128,7 +128,11 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   const firstPrediction = newPredictions[0]?.node;
 
   if (!firstPrediction) {
-    return <div>No predictions available for this region.</div>;
+    return (
+      <div className="h-96 p-2 flex justify-center">
+        <div className="flex flex-col justify-center">No predictions available for this region.</div>
+      </div>
+    );
   }
 
   const predictionsWithItemNames = newPredictions.map(({ node }: { node: Prediction }) => ({
