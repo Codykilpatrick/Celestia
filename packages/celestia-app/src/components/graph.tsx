@@ -4,7 +4,7 @@ const { Chart, registerables } = require('chart.js');
 Chart.register(...registerables);
 import { ITEM_HISTORY_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
-import { violetDark, mauveDark } from '@radix-ui/colors';
+import { mauveDark } from '@radix-ui/colors';
 
 interface PriceItem {
   node: {

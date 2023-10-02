@@ -137,7 +137,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     locationName: locationMap[node.regionId],
   }));
 
-  const totalPages = Math.floor(predictionsWithItemNames.length / itemsPerPage)
+  const totalPages = Math.floor(predictionsWithItemNames.length / itemsPerPage);
 
   let sortedPredictions = [...predictionsWithItemNames].sort((a, b) => {
     if (sortBy === 'locationName') {
@@ -157,7 +157,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     }
   });
 
-  sortedPredictions = sortedPredictions.slice(itemsPerPage * currentPage - 1, currentPage * itemsPerPage + itemsPerPage)
+  sortedPredictions = sortedPredictions.slice(
+    itemsPerPage * currentPage - 1,
+    currentPage * itemsPerPage + itemsPerPage,
+  );
 
   const changeRegion = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSortBy('');
@@ -166,10 +169,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   };
 
   const handleSearch = (searchQuery: string) => {
-    const filtered = predictionsWithItemNames.filter((prediction: Prediction) =>
-      prediction.itemName?.toLowerCase().includes(searchQuery.toLowerCase()),
+    const filtered = predictionsWithItemNames.filter(
+      (prediction: Prediction) => prediction.itemName?.toLowerCase().includes(searchQuery.toLowerCase()),
     );
-    setFilteredPredictions(filtered.slice(0,10));
+    setFilteredPredictions(filtered.slice(0, 10));
   };
 
   return (
@@ -210,14 +213,22 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             />
           </div>
         </div>
-        <div className='flex w-full justify-center my-2'>
-          <button className='px-2 disabled:text-mauve-10' onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage == 1}>
+        <div className="flex w-full justify-center my-2">
+          <button
+            className="px-2 disabled:text-mauve-10"
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage == 1}
+          >
             Previous
           </button>
           <div>
             {currentPage} of {totalPages}
           </div>
-          <button className='px-2 disabled:text-mauve-10' onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage == totalPages}>
+          <button
+            className="px-2 disabled:text-mauve-10"
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage == totalPages}
+          >
             Next
           </button>
         </div>
