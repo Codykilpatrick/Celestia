@@ -240,7 +240,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         </div>
         <div className="flex justify-center">
           {' '}
-          <table className="w-full table-auto text-mauve-11 mx-4">
+          <table className="w-full table-auto text-mauve-11 mx-4 mb-4">
             <thead>
               <tr className="grid grid-flow-col auto-cols-max grid-cols-9">
                 <th className="px-4 py-2">
