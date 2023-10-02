@@ -210,14 +210,14 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             />
           </div>
         </div>
-        <div className='flex w-full justify-center'>
-          <button className='px-2' onClick={() => setCurrentPage(currentPage - 1)}>
+        <div className='flex w-full justify-center my-2'>
+          <button className='px-2 disabled:text-mauve-10' onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage == 1}>
             Previous
           </button>
           <div>
-            Page: {currentPage} of {totalPages}
+            {currentPage} of {totalPages}
           </div>
-          <button className='px-2' onClick={() => setCurrentPage(currentPage + 1)}>
+          <button className='px-2 disabled:text-mauve-10' onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage == totalPages}>
             Next
           </button>
         </div>
