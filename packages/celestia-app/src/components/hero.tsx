@@ -161,7 +161,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
 
   const handleSearch = (searchQuery: string) => {
     const filtered = predictionsWithItemNames.filter((prediction: Prediction) =>
-      prediction.itemName.toLowerCase().includes(searchQuery.toLowerCase()),
+      prediction.itemName?.toLowerCase().includes(searchQuery.toLowerCase()),
     );
     setFilteredPredictions(filtered);
   };
