@@ -137,6 +137,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
     locationName: locationMap[node.regionId],
   }));
 
+  const totalPages = Math.floor(predictionsWithItemNames.length / itemsPerPage)
 
   let sortedPredictions = [...predictionsWithItemNames].sort((a, b) => {
     if (sortBy === 'locationName') {
@@ -213,6 +214,9 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <button className='px-2' onClick={() => setCurrentPage(currentPage - 1)}>
             Previous
           </button>
+          <div>
+            Page: {currentPage} of {totalPages}
+          </div>
           <button className='px-2' onClick={() => setCurrentPage(currentPage + 1)}>
             Next
           </button>
