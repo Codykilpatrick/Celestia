@@ -2,7 +2,7 @@ import Graph from './graph';
 import { useState, useEffect } from 'react';
 import { ALL_PREDICTIONS_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
-import { ArrowUpIcon, ArrowDownIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { ArrowUpIcon, ArrowDownIcon, CaretSortIcon, ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 
 interface LocationNode {
   regionId: string;
@@ -219,21 +219,23 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         </div>
         <div className="flex w-full justify-center my-2">
           <button
-            className="px-2 disabled:text-mauve-10"
+            className="px-2 disabled:text-mauve-10 flex flex-row items-center"
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage == 1}
           >
-            Previous
+            <ArrowLeftIcon />
+            <span className="mx-1">Previous</span>
           </button>
           <div>
             {currentPage} of {totalPages}
           </div>
           <button
-            className="px-2 disabled:text-mauve-10"
+            className="px-2 disabled:text-mauve-10 flex flex-row items-center"
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage == totalPages}
           >
-            Next
+            <span className="mx-1">Next</span>
+            <ArrowRightIcon />
           </button>
         </div>
         <div className="flex justify-center">
