@@ -4,6 +4,7 @@ const { Chart, registerables } = require('chart.js');
 Chart.register(...registerables);
 import { ITEM_HISTORY_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
+import { mauveDark } from '@radix-ui/colors';
 
 interface PriceItem {
   node: {
@@ -60,7 +61,11 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
   const firstPriceItem = priceHistory[0]?.node;
 
   if (!firstPriceItem) {
-    return <div>No price data available for this item.</div>;
+    return (
+      <div className="h-96 p-2 flex justify-center">
+        <div className="flex flex-col justify-center">No price data available for this item.</div>
+      </div>
+    );
   }
 
   const last30PriceHistory = priceHistory.slice(-30);
@@ -108,12 +113,26 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
         title: {
           display: true,
           text: 'Date',
+          color: mauveDark.mauve11,
+        },
+        grid: {
+          color: mauveDark.mauve9,
+        },
+        ticks: {
+          color: mauveDark.mauve11,
         },
       },
       y: {
         title: {
           display: true,
           text: 'Average Price',
+          color: mauveDark.mauve11,
+        },
+        grid: {
+          color: mauveDark.mauve9,
+        },
+        ticks: {
+          color: mauveDark.mauve11,
         },
       },
     },
@@ -124,6 +143,7 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
         font: {
           size: 16,
         },
+        color: mauveDark.mauve11,
       },
     },
     maintainAspectRatio: false,
