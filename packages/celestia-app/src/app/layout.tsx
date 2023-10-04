@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='bg-gradient'>
+    <div className="bg-gradient">
       <Header />
       <div className={inter.className}>{children}</div>
       <Footer />
