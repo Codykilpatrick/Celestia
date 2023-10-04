@@ -2,7 +2,7 @@ const Blog = () => {
   return (
     <div className="h-full mx-12 bg-violet-4 mt-16 rounded-lg overflow-hidden">
       <div className="py-8 px-12">
-        <h1 className="text-center">Release Day!</h1>
+        <h1 className="text-center text-5xl font-semibold">Release Day!</h1>
         <h2 className="text-xl font-bold">Intro:</h2>
         <p className="my-4">
           Hello all and welcome to Celestia, the Eve Online Market prediction application. This might be a little long
