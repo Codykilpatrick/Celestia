@@ -3,7 +3,7 @@ const Blog = () => {
     <div className="h-full mx-12 bg-violet-4 mt-16 rounded-lg overflow-hidden">
       <div className="p-8">
       <h1 className="text-center">Release Day!</h1>
-      <h2>Intro</h2>
+      <h2 className="text-xl font-bold">Intro:</h2>
       <p className="my-4">
         Hello all and welcome to Celestia, the Eve Online Market prediction application. This might be a little long but
         bear with me through it, or don’t read it at all it doesn’t matter to me.
@@ -37,7 +37,7 @@ const Blog = () => {
         time, but hopefully through the development of Celestia we will get better with more and more capabilities 🚀.
       </p>
 
-      <h2>Tech stack</h2>
+      <h2 className="text-xl font-bold">Tech stack:</h2>
       <p className="my-4">For the other Developers out there or just curious minds about what all goes into Celestia here it is.</p>
       <p className="my-4">
         For the front I am using Next.js with Typescript and React and for styling, I am using TailwindCSS and RadixUI.
@@ -104,7 +104,7 @@ const Blog = () => {
         are endless paths to choose from and the feedback that you provide will help me make those decisions.
       </p>
 
-      <h2 className="my-4">Closing</h2>
+      <h2 className="my-4 text-xl font-bold">Closing:</h2>
       <p className="my-4">
         I have invested a significant amount of time and energy into the project and I don’t plan on stopping anytime
         soon. I would appreciate any feedback on any single piece of the application. The more feedback I can gather
