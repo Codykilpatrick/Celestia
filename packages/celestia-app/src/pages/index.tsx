@@ -1,8 +1,6 @@
 import React from 'react';
 const { gql } = require('@apollo/client');
-import Header from '@/components/header';
 import Hero from '@/components/hero';
-import Footer from '@/components/footer';
 import client from '@/apollo/apollo-client';
 
 interface PredictionNode {
@@ -52,10 +50,8 @@ interface HomeProps {
 
 const Home = ({ itemNames, locationNames }: HomeProps) => {
   return (
-    <div className="w-full bg-gradient hover:cursor-default">
-      <Header />
+    <div className="w-full hover:cursor-default">
       <Hero itemNames={itemNames} locationNames={locationNames} />
-      <Footer />
     </div>
   );
 };
