@@ -44,38 +44,38 @@ const Blog = () => {
         </p>
         <p className="my-4">
           The GitHub repository is located here:{' '}
-          <a href="https://github.com/Codykilpatrick/Celestia" className="hover:text-blue-500">https://github.com/Codykilpatrick/Celestia</a>
+          <a href="https://github.com/Codykilpatrick/Celestia" className="hover:text-blue-500">
+            https://github.com/Codykilpatrick/Celestia
+          </a>
         </p>
         <div>
           <ul>
-          <li>
-            - For the front I am using Next.js with Typescript and React and for styling, I am using TailwindCSS and
-            RadixUI.
-          </li>
-          <li>- For connecting to the API I am using Graphql with Apollo.</li>
-          <li>- For the API I am using Postgraphile and serving it up with Express.</li>
-          <li>
-            - For the Database, I am using PostgreSQL hosted locally for development work and remotely on Neon for the
-            website itself.
-          </li>
-          <li>
-            - For the Data Pipeline, I am using Python to make calls to the Eve API triggered by GitHub Actions to seed
-            the database.
-          </li>
-          <li>- For the models, I am using SciKit-Learn and TensorFlow in Python.</li>
+            <li>
+              - For the front I am using Next.js with Typescript and React and for styling, I am using TailwindCSS and
+              RadixUI.
+            </li>
+            <li>- For connecting to the API I am using Graphql with Apollo.</li>
+            <li>- For the API I am using Postgraphile and serving it up with Express.</li>
+            <li>
+              - For the Database, I am using PostgreSQL hosted locally for development work and remotely on Neon for the
+              website itself.
+            </li>
+            <li>
+              - For the Data Pipeline, I am using Python to make calls to the Eve API triggered by GitHub Actions to
+              seed the database.
+            </li>
+            <li>- For the models, I am using SciKit-Learn and TensorFlow in Python.</li>
           </ul>
         </div>
         <div>
-          <p className="my-4 text-lg font-semibold">
-          The current workflow looks like this:
-          </p>
+          <p className="my-4 text-lg font-semibold">The current workflow looks like this:</p>
           <ol className="my-4">
             <li>
               - Github actions will trigger the data pipeline to scrape all historic market averages from the eve ESI.
             </li>
             <li>
-              - That Data is inserted into the Neon database after comparing it to the data that already exists so that we
-              don’t have duplicate data.
+              - That Data is inserted into the Neon database after comparing it to the data that already exists so that
+              we don’t have duplicate data.
             </li>
             <li>- Another GH action will trigger the model to make predictions on our new daily data.</li>
             <li>- Those new predictions get inserted into the database.</li>
