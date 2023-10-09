@@ -14,7 +14,7 @@ interface PredictionNode {
 }
 
 interface ItemNode {
-  id: string;
+  typeId: string;
   itemName: string;
 }
 
@@ -63,8 +63,8 @@ export async function getStaticProps() {
         allItems {
           edges {
             node {
-              id
               itemName
+              typeId
             }
           }
         }

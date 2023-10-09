@@ -26,7 +26,7 @@ interface HeroProps {
     allItems: {
       edges: {
         node: {
-          id: string;
+          typeId: string;
           itemName: string;
         };
       }[];
@@ -121,7 +121,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
   });
 
   itemNames[0].allItems.edges.forEach(({ node }) => {
-    itemMap[node.id] = node.itemName;
+    itemMap[node.typeId] = node.itemName;
   });
 
   const newPredictions = predictions?.allModelPredictAverageIncreases?.edges || [];
