@@ -1,14 +1,15 @@
 const { postgraphile } = require('postgraphile')
 
-const { DATABASE, PG_USER, PASSWORD, HOST, PG_PORT } = process.env
+const { DATABASE, PG_USER, PASSWORD, HOST, PG_PORT, NEON_USER, NEON_PASSWORD, NEON_HOST, NEON_PORT } = process.env
 
 module.exports = postgraphile(
     {
         database: DATABASE,
-        user: PG_USER,
-        password: PASSWORD,
-        host: HOST,
-        port: PG_PORT,
+        user: NEON_USER,
+        password: NEON_PASSWORD,
+        host: NEON_HOST,
+        port: NEON_PORT,
+        ssl: require,
     },
     'celestia_public',
     {
@@ -18,5 +19,6 @@ module.exports = postgraphile(
         subscriptions: true,
         dynamicJson: true,
         exportGqlSchemaPath: `${__dirname}/schema.graphql`,
+        retryOnInitFail: false
     },
 )
