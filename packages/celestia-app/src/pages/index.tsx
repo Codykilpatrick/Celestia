@@ -57,8 +57,6 @@ const Home = ({ itemNames, locationNames }: HomeProps) => {
 };
 
 export async function getStaticProps() {
-
-
   const { data: itemNames } = await client.query({
     query: gql`
       query allItems {

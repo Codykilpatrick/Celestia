@@ -11,7 +11,8 @@ const Feedback = () => {
           over to GitHub and create an issue there!
         </p>
         <p className="py-2">
-          If the project takes off and the interest is there I can create a discord server as well. In the mean time feel free to message me on discord @_duckeh.
+          If the project takes off and the interest is there I can create a discord server as well. In the mean time
+          feel free to message me on discord @_duckeh.
         </p>
         <p className="py-2">I look forward to hearing from you!</p>
       </div>
