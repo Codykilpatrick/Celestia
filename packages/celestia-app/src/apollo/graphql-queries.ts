@@ -41,8 +41,8 @@ export const ALL_ITEMS_QUERY = gql`
     allItems {
       edges {
         node {
-          id
           itemName
+          typeId
         }
       }
     }

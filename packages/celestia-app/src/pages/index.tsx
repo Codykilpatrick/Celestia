@@ -14,7 +14,7 @@ interface PredictionNode {
 }
 
 interface ItemNode {
-  id: string;
+  typeId: string;
   itemName: string;
 }
 
@@ -57,33 +57,14 @@ const Home = ({ itemNames, locationNames }: HomeProps) => {
 };
 
 export async function getStaticProps() {
-  const { data: prices } = await client.query({
-    query: gql`
-      query itemHistoryById {
-        allMarketHistoryPulls(condition: { regionId: 10000043, typeId: 597 }, orderBy: DATE_ASC) {
-          edges {
-            node {
-              typeId
-              regionId
-              average
-              date
-              highest
-              lowest
-            }
-          }
-        }
-      }
-    `,
-  });
-
   const { data: itemNames } = await client.query({
     query: gql`
       query allItems {
         allItems {
           edges {
             node {
-              id
               itemName
+              typeId
             }
           }
         }
@@ -109,7 +90,6 @@ export async function getStaticProps() {
 
   return {
     props: {
-      prices: [prices],
       itemNames: [itemNames],
       locationNames: [locationNames],
     },
