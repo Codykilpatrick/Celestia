@@ -38,7 +38,7 @@ type Query implements Node {
     after: Cursor
 
     """The method to use when ordering `Item`."""
-    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
+    orderBy: [ItemsOrderBy!] = [NATURAL]
 
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -67,7 +67,7 @@ type Query implements Node {
     after: Cursor
 
     """The method to use when ordering `Location`."""
-    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
+    orderBy: [LocationsOrderBy!] = [NATURAL]
 
     """
     A condition to be used in determining which values should be returned by the collection.
@@ -192,24 +192,10 @@ type Query implements Node {
     """
     condition: ModelPredictAverageIncreaseCondition
   ): ModelPredictAverageIncreasesConnection
-  itemById(id: Int!): Item
-  locationById(id: Int!): Location
   marketHistoryPullById(id: Int!): MarketHistoryPull
   marketHistorySyncById(id: Int!): MarketHistorySync
   marketOrdersPullById(id: Int!): MarketOrdersPull
   modelPredictAverageIncreaseById(id: Int!): ModelPredictAverageIncrease
-
-  """Reads a single `Item` using its globally unique `ID`."""
-  item(
-    """The globally unique `ID` to be used in selecting a single `Item`."""
-    nodeId: ID!
-  ): Item
-
-  """Reads a single `Location` using its globally unique `ID`."""
-  location(
-    """The globally unique `ID` to be used in selecting a single `Location`."""
-    nodeId: ID!
-  ): Location
 
   """Reads a single `MarketHistoryPull` using its globally unique `ID`."""
   marketHistoryPull(
@@ -272,11 +258,7 @@ type ItemsConnection {
 }
 
 """An item in the world of Eve Online."""
-type Item implements Node {
-  """
-  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
-  """
-  nodeId: ID!
+type Item {
   id: Int!
 
   """The name of an item in the world of Eve Online."""
@@ -322,8 +304,6 @@ enum ItemsOrderBy {
   ITEM_NAME_DESC
   TYPE_ID_ASC
   TYPE_ID_DESC
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
 }
 
 """
@@ -358,11 +338,7 @@ type LocationsConnection {
 }
 
 """A table each location in Eve Online."""
-type Location implements Node {
-  """
-  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
-  """
-  nodeId: ID!
+type Location {
   id: Int!
 
   """The name for a single solar system."""
@@ -400,8 +376,6 @@ enum LocationsOrderBy {
   REGION_NAME_DESC
   REGION_ID_ASC
   REGION_ID_DESC
-  PRIMARY_KEY_ASC
-  PRIMARY_KEY_DESC
 }
 
 """
@@ -991,38 +965,6 @@ type Mutation {
     input: CreateModelPredictAverageIncreaseInput!
   ): CreateModelPredictAverageIncreasePayload
 
-  """Updates a single `Item` using its globally unique id and a patch."""
-  updateItem(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateItemInput!
-  ): UpdateItemPayload
-
-  """Updates a single `Item` using a unique key and a patch."""
-  updateItemById(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateItemByIdInput!
-  ): UpdateItemPayload
-
-  """Updates a single `Location` using its globally unique id and a patch."""
-  updateLocation(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateLocationInput!
-  ): UpdateLocationPayload
-
-  """Updates a single `Location` using a unique key and a patch."""
-  updateLocationById(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: UpdateLocationByIdInput!
-  ): UpdateLocationPayload
-
   """
   Updates a single `MarketHistoryPull` using its globally unique id and a patch.
   """
@@ -1096,38 +1038,6 @@ type Mutation {
     """
     input: UpdateModelPredictAverageIncreaseByIdInput!
   ): UpdateModelPredictAverageIncreasePayload
-
-  """Deletes a single `Item` using its globally unique id."""
-  deleteItem(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteItemInput!
-  ): DeleteItemPayload
-
-  """Deletes a single `Item` using a unique key."""
-  deleteItemById(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteItemByIdInput!
-  ): DeleteItemPayload
-
-  """Deletes a single `Location` using its globally unique id."""
-  deleteLocation(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteLocationInput!
-  ): DeleteLocationPayload
-
-  """Deletes a single `Location` using a unique key."""
-  deleteLocationById(
-    """
-    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
-    """
-    input: DeleteLocationByIdInput!
-  ): DeleteLocationPayload
 
   """Deletes a single `MarketHistoryPull` using its globally unique id."""
   deleteMarketHistoryPull(
@@ -1215,7 +1125,7 @@ type CreateItemPayload {
   """An edge for our `Item`. May be used by Relay 1."""
   itemEdge(
     """The method to use when ordering `Item`."""
-    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
+    orderBy: [ItemsOrderBy!] = [NATURAL]
   ): ItemsEdge
 }
 
@@ -1261,7 +1171,7 @@ type CreateLocationPayload {
   """An edge for our `Location`. May be used by Relay 1."""
   locationEdge(
     """The method to use when ordering `Location`."""
-    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
+    orderBy: [LocationsOrderBy!] = [NATURAL]
   ): LocationsEdge
 }
 
@@ -1562,150 +1472,6 @@ input ModelPredictAverageIncreaseInput {
 
   """What was the day that the predictions were ran on."""
   datePredicted: String
-}
-
-"""The output of our update `Item` mutation."""
-type UpdateItemPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Item` that was updated by this mutation."""
-  item: Item
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """An edge for our `Item`. May be used by Relay 1."""
-  itemEdge(
-    """The method to use when ordering `Item`."""
-    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ItemsEdge
-}
-
-"""All input for the `updateItem` mutation."""
-input UpdateItemInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Item` to be updated.
-  """
-  nodeId: ID!
-
-  """
-  An object where the defined keys will be set on the `Item` being updated.
-  """
-  itemPatch: ItemPatch!
-}
-
-"""Represents an update to a `Item`. Fields that are set will be updated."""
-input ItemPatch {
-  id: Int
-
-  """The name of an item in the world of Eve Online."""
-  itemName: String
-
-  """An item`s unique id in the world of Eve Online."""
-  typeId: Int
-}
-
-"""All input for the `updateItemById` mutation."""
-input UpdateItemByIdInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  An object where the defined keys will be set on the `Item` being updated.
-  """
-  itemPatch: ItemPatch!
-  id: Int!
-}
-
-"""The output of our update `Location` mutation."""
-type UpdateLocationPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Location` that was updated by this mutation."""
-  location: Location
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """An edge for our `Location`. May be used by Relay 1."""
-  locationEdge(
-    """The method to use when ordering `Location`."""
-    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): LocationsEdge
-}
-
-"""All input for the `updateLocation` mutation."""
-input UpdateLocationInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Location` to be updated.
-  """
-  nodeId: ID!
-
-  """
-  An object where the defined keys will be set on the `Location` being updated.
-  """
-  locationPatch: LocationPatch!
-}
-
-"""
-Represents an update to a `Location`. Fields that are set will be updated.
-"""
-input LocationPatch {
-  id: Int
-
-  """The name for a single solar system."""
-  systemName: String
-
-  """The ID for a single solar system."""
-  systemId: Int
-
-  """The region name that this solar system is in."""
-  regionName: String
-
-  """The ID for the region that this solar system is in."""
-  regionId: Int
-}
-
-"""All input for the `updateLocationById` mutation."""
-input UpdateLocationByIdInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  An object where the defined keys will be set on the `Location` being updated.
-  """
-  locationPatch: LocationPatch!
-  id: Int!
 }
 
 """The output of our update `MarketHistoryPull` mutation."""
@@ -2071,102 +1837,6 @@ input UpdateModelPredictAverageIncreaseByIdInput {
   An object where the defined keys will be set on the `ModelPredictAverageIncrease` being updated.
   """
   modelPredictAverageIncreasePatch: ModelPredictAverageIncreasePatch!
-  id: Int!
-}
-
-"""The output of our delete `Item` mutation."""
-type DeleteItemPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Item` that was deleted by this mutation."""
-  item: Item
-  deletedItemId: ID
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """An edge for our `Item`. May be used by Relay 1."""
-  itemEdge(
-    """The method to use when ordering `Item`."""
-    orderBy: [ItemsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): ItemsEdge
-}
-
-"""All input for the `deleteItem` mutation."""
-input DeleteItemInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Item` to be deleted.
-  """
-  nodeId: ID!
-}
-
-"""All input for the `deleteItemById` mutation."""
-input DeleteItemByIdInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-  id: Int!
-}
-
-"""The output of our delete `Location` mutation."""
-type DeleteLocationPayload {
-  """
-  The exact same `clientMutationId` that was provided in the mutation input,
-  unchanged and unused. May be used by a client to track mutations.
-  """
-  clientMutationId: String
-
-  """The `Location` that was deleted by this mutation."""
-  location: Location
-  deletedLocationId: ID
-
-  """
-  Our root query field type. Allows us to run any query from our mutation payload.
-  """
-  query: Query
-
-  """An edge for our `Location`. May be used by Relay 1."""
-  locationEdge(
-    """The method to use when ordering `Location`."""
-    orderBy: [LocationsOrderBy!] = [PRIMARY_KEY_ASC]
-  ): LocationsEdge
-}
-
-"""All input for the `deleteLocation` mutation."""
-input DeleteLocationInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
-
-  """
-  The globally unique `ID` which will identify a single `Location` to be deleted.
-  """
-  nodeId: ID!
-}
-
-"""All input for the `deleteLocationById` mutation."""
-input DeleteLocationByIdInput {
-  """
-  An arbitrary string value with no semantic meaning. Will be included in the
-  payload verbatim. May be used to track mutations by the client.
-  """
-  clientMutationId: String
   id: Int!
 }
 
