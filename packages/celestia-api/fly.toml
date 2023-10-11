@@ -1,0 +1,28 @@
+# fly.toml file generated for celestia-api on 2023-10-11T08:51:25-04:00
+
+app = "celestia-api"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+processes = []
+
+[env]
+  PORT = "8080"
+
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443

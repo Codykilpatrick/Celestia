@@ -1,7 +1,7 @@
 const { ApolloClient, InMemoryCache } = require('@apollo/client');
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8080/graphql',
+  uri: 'https://celestia-api.fly.dev/graphql',
   cache: new InMemoryCache(),
 });
 
