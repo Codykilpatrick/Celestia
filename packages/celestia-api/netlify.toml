@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "src"           
+
+[context.production.environment]
+  DATABASE = "NEON_CONNECTION_STRING"
+
+[context.branch-deploy.environment]
+  DATABASE = "NEON_CONNECTION_STRING"
