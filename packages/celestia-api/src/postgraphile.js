@@ -1,6 +1,6 @@
 const { postgraphile } = require('postgraphile')
 
-const { DATABASE, PG_USER, PASSWORD, HOST, PG_PORT, NEON_USER, NEON_PASSWORD, NEON_HOST, NEON_PORT } = process.env
+const { DATABASE, NEON_USER, NEON_PASSWORD, NEON_HOST, NEON_PORT } = process.env
 
 module.exports = postgraphile(
     {
