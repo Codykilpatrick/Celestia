@@ -188,7 +188,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         <div className="flex justify-center pt-4">
           <div className="mx-4">
             <label htmlFor="regionSelect" className="text-mauve-12">
-              Filter by Region:
+              Region:
             </label>
             <select
               id="regionSelect"
@@ -243,7 +243,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <table className="w-full table-auto text-mauve-11 mx-4 mb-4">
             <thead>
               <tr className="grid grid-flow-col auto-cols-max grid-cols-9">
-                <th className="px-4 py-2">
+                <th className="px-4 py-2 col-span-2">
                   <div className="flex items-center">
                     <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-mauve-12">
                       Increase
@@ -251,7 +251,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="px-4 py-2">
+                <th className="px-4 py-2 col-span-2">
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('datePredicted')}
@@ -262,7 +262,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('datePredicted')}
                   </div>
                 </th>
-                <th className="px-4 py-2 col-span-4">
+                <th className="px-4 py-2 col-span-5">
                   <div className="flex items-center">
                     <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer hover:text-mauve-12">
                       Item Name
@@ -276,9 +276,9 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
-                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
+                      <td className="border border-violet-8 p-2 col-span-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-violet-8 p-2 col-span-2">{prediction.datePredicted}</td>
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-5">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
@@ -291,9 +291,9 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
-                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
+                      <td className="border border-violet-8 p-2 col-span-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-violet-8 p-2 col-span-2">{prediction.datePredicted}</td>
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-5">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
