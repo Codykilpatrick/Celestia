@@ -206,7 +206,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <div className="mx-4 text-mauve-12">
             <label htmlFor="searchItem">Search Item:</label>
             <input
-              className="bg-violet-5 hover:bg-violet-6 rounded-lg ml-2 text-mauve-12 border-violet-8 border-2"
+              className="bg-violet-5 hover:bg-violet-6 rounded-lg ml-2 text-mauve-12 border-violet-8 border-2 w-32 md:w-max"
               type="text"
               id="searchItem"
               value={searchTerm}
