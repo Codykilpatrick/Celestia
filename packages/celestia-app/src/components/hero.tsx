@@ -254,7 +254,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('locationName')}
                   </div>
                 </th>
-                <th className="px-4 py-2">
+                <th className="px-4 py-2 sm:col-span-2 md:col-span-1">
                   <div className="flex items-center">
                     <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-mauve-12">
                       Increase
@@ -262,9 +262,9 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="px-4 py-2">Horizon</th>
-                <th className="px-4 py-2">Confidence</th>
-                <th className="px-4 py-2">
+                <th className="px-4 py-2 sm:hidden md:block">Horizon</th>
+                <th className="px-4 py-2 sm:hidden md:block">Confidence</th>
+                <th className="px-4 py-2 sm:col-span-2 md:col-span-1">
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('datePredicted')}
@@ -275,7 +275,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('datePredicted')}
                   </div>
                 </th>
-                <th className="px-4 py-2 col-span-4">
+                <th className="px-4 py-2 sm:col-span-5 md:col-span-4">
                   <div className="flex items-center">
                     <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer hover:text-mauve-12">
                       Item Name
@@ -290,11 +290,11 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 ? filteredPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
                       <td className="border border-violet-8 p-2 sm:hidden md:block">{prediction.locationName}</td>
-                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2 sm:col-span-2 md:col-span-1">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-violet-8 p-2 sm:hidden md:block">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2 sm:hidden md:block">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden sm:col-span-5 md:col-span-4">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
@@ -308,11 +308,11 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 : sortedPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
                       <td className="border border-violet-8 p-2 sm:hidden md:block">{prediction.locationName}</td>
-                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
-                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
+                      <td className="border border-violet-8 p-2 sm:col-span-2 md:col-span-1">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-violet-8 p-2 sm:hidden md:block">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2 sm:hidden md:block">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2 sm:col-span-2 md:col-span-1">{prediction.datePredicted}</td>
+                      <td className="border border-violet-8 p-2 text-center overflow-hidden sm:col-span-5 md:col-span-4">
                         {' '}
                         <button
                           className="hover:text-mauve-12 hover:underline"
