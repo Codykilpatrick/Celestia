@@ -68,7 +68,7 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
     );
   }
 
-  const last30PriceHistory = priceHistory.slice(-30);
+  const last30PriceHistory = priceHistory.slice(-14);
   const dates = last30PriceHistory.map((item) => item.node.date);
   const averages = last30PriceHistory.map((item) => parseFloat(item.node.average));
   const highest = last30PriceHistory.map((item) => parseFloat(item.node.highest));
@@ -125,7 +125,6 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
       y: {
         title: {
           display: true,
-          text: 'Average Price',
           color: mauveDark.mauve11,
         },
         grid: {
