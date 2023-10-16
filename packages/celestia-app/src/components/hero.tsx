@@ -245,25 +245,12 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               <tr className="grid grid-flow-col auto-cols-max grid-cols-9">
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span
-                      onClick={() => handleSort('locationName')}
-                      className="hover:cursor-pointer hover:text-mauve-12"
-                    >
-                      Region
-                    </span>
-                    {renderSortingIndicator('locationName')}
-                  </div>
-                </th>
-                <th className="px-4 py-2">
-                  <div className="flex items-center">
                     <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-mauve-12">
                       Increase
                     </span>
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="px-4 py-2">Horizon</th>
-                <th className="px-4 py-2">Confidence</th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
                     <span
@@ -289,10 +276,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
-                      <td className="border border-violet-8 p-2">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
                       <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
@@ -307,10 +291,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
-                      <td className="border border-violet-8 p-2">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
                       <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
