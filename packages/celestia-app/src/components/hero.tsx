@@ -242,8 +242,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           {' '}
           <table className="w-full table-auto text-mauve-11 mx-4 mb-4">
             <thead>
-              <tr className="grid grid-flow-col auto-cols-max grid-cols-3 sm:grid-cols-9">
-                <th className="px-4 py-2 hidden sm:block">
+              <tr className="grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9">
+                <th className="px-4 py-2 hidden md:block">
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('locationName')}
@@ -262,8 +262,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="px-4 py-2 hidden sm:block">Horizon</th>
-                <th className="px-4 py-2 hidden sm:block">Confidence</th>
+                <th className="px-4 py-2 hidden md:block">Horizon</th>
+                <th className="px-4 py-2 hidden md:block">Confidence</th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
                     <span
@@ -288,11 +288,11 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <tbody className="border border-violet-8">
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 sm:grid-cols-9">
-                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.locationName}</td>
+                    <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9">
+                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
                       <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
@@ -306,16 +306,16 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     </tr>
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 sm:grid-cols-9">
-                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.locationName}</td>
+                    <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9">
+                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
                       <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
                         <button
-                          className="hover:text-mauve-12 hover:underline"
+                          className="hover:text-mauve-12 hover:underline text-sm sm:text-base"
                           onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
                         >
                           {prediction.itemName}
