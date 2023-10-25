@@ -242,7 +242,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           {' '}
           <table className="w-full table-auto text-mauve-11 mx-4 mb-4">
             <thead>
-              <tr className="grid grid-flow-col auto-cols-max grid-cols-9">
+              <tr className="grid grid-flow-col auto-cols-max grid-cols-3 sm:grid-cols-9">
                 <th className="px-4 py-2 hidden sm:block">
                   <div className="flex items-center">
                     <span
@@ -288,7 +288,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <tbody className="border border-violet-8">
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
+                    <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 sm:grid-cols-9">
                       <td className="border border-violet-8 p-2 hidden sm:block">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
                       <td className="border border-violet-8 p-2 hidden sm:block">{prediction.horizon}</td>
@@ -306,7 +306,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     </tr>
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
-                    <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
+                    <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 sm:grid-cols-9">
                       <td className="border border-violet-8 p-2 hidden sm:block">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
                       <td className="border border-violet-8 p-2 hidden sm:block">{prediction.horizon}</td>
