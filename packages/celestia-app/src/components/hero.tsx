@@ -186,7 +186,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
       </div>
       <div className="bg-violet-4 mt-16 rounded-lg">
         <div className="flex justify-center items-center pt-4 flex-col sm:flex-row">
-          <div className="mx-4 my-4 sm:my-0">
+          <div className="mx-4 my-4 sm:my-0 flex flex-col sm:flex-row">
             <label htmlFor="regionSelect" className="text-mauve-12">
               Filter by Region:
             </label>
@@ -203,7 +203,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               <option value={10000042}>Metropolis</option>
             </select>
           </div>
-          <div className="mx-4 text-mauve-12 my-4 sm:my-0">
+          <div className="mx-4 text-mauve-12 my-4 sm:my-0 flex flex-col sm:flex-row">
             <label htmlFor="searchItem">Search Item:</label>
             <input
               className="bg-violet-5 hover:bg-violet-6 rounded-lg ml-2 text-mauve-12 border-violet-8 border-2"
