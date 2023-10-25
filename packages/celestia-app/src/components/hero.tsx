@@ -185,8 +185,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         <Graph currentItem={currentItem} currentItemName={currentItemName} currentRegionId={currentRegionId} />
       </div>
       <div className="bg-violet-4 mt-16 rounded-lg">
-        <div className="flex justify-center pt-4">
-          <div className="mx-4">
+        <div className="flex justify-center items-center pt-4 flex-col sm:flex-row">
+          <div className="mx-4 my-4 sm:my-0">
             <label htmlFor="regionSelect" className="text-mauve-12">
               Filter by Region:
             </label>
@@ -203,7 +203,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               <option value={10000042}>Metropolis</option>
             </select>
           </div>
-          <div className="mx-4 text-mauve-12">
+          <div className="mx-4 text-mauve-12 my-4 sm:my-0">
             <label htmlFor="searchItem">Search Item:</label>
             <input
               className="bg-violet-5 hover:bg-violet-6 rounded-lg ml-2 text-mauve-12 border-violet-8 border-2"
@@ -243,7 +243,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <table className="w-full table-auto text-mauve-11 mx-4 mb-4">
             <thead>
               <tr className="grid grid-flow-col auto-cols-max grid-cols-9">
-                <th className="px-4 py-2">
+                <th className="px-4 py-2 hidden sm:block">
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('locationName')}
@@ -262,8 +262,8 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="px-4 py-2">Horizon</th>
-                <th className="px-4 py-2">Confidence</th>
+                <th className="px-4 py-2 hidden sm:block">Horizon</th>
+                <th className="px-4 py-2 hidden sm:block">Confidence</th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
                     <span
@@ -289,10 +289,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
-                      <td className="border border-violet-8 p-2">{prediction.locationName}</td>
+                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
                       <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
@@ -307,10 +307,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                   ))
                 : sortedPredictions.map((prediction: Prediction) => (
                     <tr key={prediction.id} className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-9">
-                      <td className="border border-violet-8 p-2">{prediction.locationName}</td>
+                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.locationName}</td>
                       <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2">{prediction.confidence}</td>
+                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.horizon}</td>
+                      <td className="border border-violet-8 p-2 hidden sm:block">{prediction.confidence}</td>
                       <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
                       <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
