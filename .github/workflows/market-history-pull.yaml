@@ -1,0 +1,27 @@
+name: Daily Market History Pull
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.11
+          cache: poetry
+      - name: Install project dependencies
+        run: |
+          poetry install
+        working-directory: packages/celestia-models
+      - name: Run Python script
+        run: |
+          poetry run python update_historic_table.py
+        working-directory: packages/celestia-models
