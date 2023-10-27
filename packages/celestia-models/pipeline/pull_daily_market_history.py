@@ -2,6 +2,10 @@ import asyncio
 import aiohttp
 import asyncpg
 import time
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 async def fetch_history(session, type_id, region_id):
@@ -95,8 +99,8 @@ def log_failed_request(error_message):
 
 async def main():
     start_time = time.time()
-    database_url = "postgresql://postgres:password@localhost/celestia"
-    conn = await asyncpg.connect(database_url)
+    db_connection_string = os.getenv('NEON_CONNECTION_STRING')
+    conn = await asyncpg.connect(db_connection_string)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
 
     while True:
