@@ -22,6 +22,13 @@ jobs:
           poetry install
         working-directory: packages/celestia-models
       - name: Run Python script
+        env:
+          NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
+          DATABASE: ${{ secrets.DATABASE }}
+          NEON_USER: ${{ secrets.NEON_USER }}
+          NEON_PASSWORD: ${{ secrets.NEON_PASSWORD }}
+          NEON_HOST: ${{ secrets.NEON_HOST }}
+          NEON_PORT: ${{ secrets.NEON_PORT }}
         run: |
           poetry run python update_historic_table.py
         working-directory: packages/celestia-models
