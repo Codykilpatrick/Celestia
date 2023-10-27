@@ -34,4 +34,4 @@ jobs:
           NEON_PORT: ${{ secrets.NEON_PORT }}
         run: |
           poetry run python update_historic_table.py
-        working-directory: packages/celestia-models
+        working-directory: packages/celestia-models/pipeline
