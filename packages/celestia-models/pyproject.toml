@@ -2,7 +2,7 @@
 name = "celestia-models"
 version = "0.1.0"
 description = "Contains all of the relevant code for running ML models to predict market data in Eve Online."
-authors = ["Your Name <you@example.com>"]
+authors = ["Cody Kilpatrick <Codykilpatrick1996@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 
