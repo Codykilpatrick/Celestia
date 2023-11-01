@@ -3,9 +3,17 @@ import bz2
 import csv
 import psycopg2
 import logging
+import datetime
+
+# Get yesterday's date
+yesterday = datetime.date.today() - datetime.timedelta(days=1)
+
+# Format the date as a string in the format 'YYYY-MM-DD'
+date_string = yesterday.strftime('%Y-%m-%d')
 
 # URL of the .bz2 file
-url = "https://data.everef.net/market-history/2023/market-history-2023-10-31.csv.bz2"
+url = f"https://data.everef.net/market-history/2023/market-history-{date_string}.csv.bz2"
+
 
 # Download the .bz2 file
 response = requests.get(url)
@@ -15,7 +23,6 @@ data = bz2.decompress(response.content)
 
 # Convert the decompressed data to a list of dictionaries
 reader = csv.DictReader(data.decode('utf-8').splitlines())
-print(reader)
 
 # Connect to the PostgreSQL database
 conn = psycopg2.connect(database="celestia", user="postgres", password="password", host="127.0.0.1", port="5432")
