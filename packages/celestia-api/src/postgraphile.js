@@ -13,7 +13,7 @@ module.exports = postgraphile(
     },
     'celestia_public',
     {
-        watchPg: true,
+        watchPg: false,
         graphiql: true,
         enhanceGraphiql: true,
         subscriptions: true,
