@@ -4,6 +4,10 @@ import csv
 import psycopg2
 import logging
 import datetime
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # Get yesterday's date
 yesterday = datetime.date.today() - datetime.timedelta(days=1)
@@ -25,7 +29,14 @@ data = bz2.decompress(response.content)
 reader = csv.DictReader(data.decode('utf-8').splitlines())
 
 # Connect to the PostgreSQL database
-conn = psycopg2.connect(database="celestia", user="postgres", password="password", host="127.0.0.1", port="5432")
+db_host = os.getenv('NEON_HOST')
+db_user = os.getenv('NEON_USER')
+db_password = os.getenv('NEON_PASSWORD')
+db_name = os.getenv('DATABASE')
+db_params = {'host': db_host, 'database': db_name, 'user': db_user, 'password': db_password, }
+
+
+conn = psycopg2.connect(**db_params)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
