@@ -30,6 +30,6 @@ jobs:
           NEON_PASSWORD: ${{ secrets.NEON_PASSWORD }}
           NEON_HOST: ${{ secrets.NEON_HOST }}
           NEON_PORT: ${{ secrets.NEON_PORT }}
-          working-directory: packages/celestia-data-pipeline/pipeline
         run: |
           poetry run python pull_daily_market_history.py
+        working-directory: packages/celestia-data-pipeline/pipeline
