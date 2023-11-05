@@ -2,6 +2,11 @@ import joblib
 import pandas as pd
 import psycopg2
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 
 def process_and_insert(connection, type_id, region_id):
@@ -72,7 +77,6 @@ def process_and_insert(connection, type_id, region_id):
     print(f"Data from '{type_id}' inserted into PostgreSQL.")
 
 
-# CURRENTLY WORKING FOR ONE REGION
 def get_active_item_ids(connection, region_id):
 
     cursor = connection.cursor()
@@ -97,7 +101,11 @@ def get_active_item_ids(connection, region_id):
 
 
 def main():
-    db_params = { 'host': 'localhost', 'database': 'celestia', 'user': 'postgres', 'password': 'password', }
+    db_host = os.getenv('NEON_HOST')
+    db_user = os.getenv('NEON_USER')
+    db_password = os.getenv('NEON_PASSWORD')
+    db_name = os.getenv('DATABASE')
+    db_params = {'host': db_host, 'database': db_name, 'user': db_user, 'password': db_password, }
 
     connection = psycopg2.connect(**db_params)
     region_ids = [10000043, 10000002, 10000030, 10000032, 10000042]
