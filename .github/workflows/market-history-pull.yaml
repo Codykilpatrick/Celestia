@@ -31,5 +31,5 @@ jobs:
           NEON_HOST: ${{ secrets.NEON_HOST }}
           NEON_PORT: ${{ secrets.NEON_PORT }}
         run: |
-          poetry run python pull_daily_market_history.py
+          poetry run python scrape_daily_history.py
         working-directory: packages/celestia-data-pipeline/pipeline
