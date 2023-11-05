@@ -2,9 +2,6 @@ name: Daily Market History Pull
 on:
   schedule:
     - cron: "0 0 * * *"
-  pull_request:
-    branches:
-      - main
 jobs:
   run-script:
     runs-on: ubuntu-latest
