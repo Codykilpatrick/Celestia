@@ -1,0 +1,33 @@
+name: Daily Market History Pull
+on:
+  schedule:
+    - cron: "0 18 * * *"
+    
+jobs:
+  Pull-History:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.11
+          cache: poetry
+      - name: Install project dependencies
+        run: |
+          poetry install
+        working-directory: packages/celestia-data-pipeline
+      - name: Run Pull History
+        env:
+          NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
+          DATABASE: ${{ secrets.DATABASE }}
+          NEON_USER: ${{ secrets.NEON_USER }}
+          NEON_PASSWORD: ${{ secrets.NEON_PASSWORD }}
+          NEON_HOST: ${{ secrets.NEON_HOST }}
+          NEON_PORT: ${{ secrets.NEON_PORT }}
+        run: |
+          poetry run python scrape_daily_history.py
+        working-directory: packages/celestia-data-pipeline/pipeline
