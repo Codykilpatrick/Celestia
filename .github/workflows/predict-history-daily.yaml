@@ -2,9 +2,7 @@ name: Daily Predict Average Increase
 on:
   schedule:
     - cron: "0 18 * * *"
-  pull_request:
-    branches:
-      - main
+    
 jobs:
   Predict-average-increase:
     runs-on: ubuntu-latest
