@@ -3,7 +3,7 @@ on:
   schedule:
     - cron: "0 18 * * *"
 jobs:
-  run-script:
+  Pull-History:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,7 +19,7 @@ jobs:
         run: |
           poetry install
         working-directory: packages/celestia-data-pipeline
-      - name: Run Python script
+      - name: Run Pull History
         env:
           NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
           DATABASE: ${{ secrets.DATABASE }}

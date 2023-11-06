@@ -1,4 +1,4 @@
-name: Daily Market History Pull
+name: Daily Predict Average Increase
 on:
   schedule:
     - cron: "0 18 * * *"
@@ -6,7 +6,7 @@ on:
     branches:
       - main
 jobs:
-  run-script:
+  Predict-average-increase:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
         run: |
           poetry install
         working-directory: packages/celestia-models
-      - name: Run Python script
+      - name: Run Predict Average Increase
         env:
           NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
           DATABASE: ${{ secrets.DATABASE }}
@@ -32,4 +32,4 @@ jobs:
           NEON_PORT: ${{ secrets.NEON_PORT }}
         run: |
           poetry run python predict_daily_average.py
-        working-directory: packages/models/pipeline
+        working-directory: packages/celestia-models/pipeline
