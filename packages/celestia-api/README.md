@@ -2,11 +2,12 @@
 
 Celestia API package
 
-# Usage
+## Usage
+
 `npm install`
-`npm start`
+`npm run dev`
 
 Navigate to:
-http://localhost:8080/graphiql
+<http://localhost:8080/graphiql>
 
 To play with the browser graphql interface
