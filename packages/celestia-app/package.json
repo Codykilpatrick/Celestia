@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "NODE_ENV=development next dev",
+    "dev:build": "NODE_ENV=development next build",
+    "yarn:prod": "NODE_ENV=production next dev",
+    "prod:build": "NODE_ENV=production next build",
+    "dev:start": "NODE_ENV=development next start",
+    "prod:start": "NODE_ENV=production next start",
     "lint": "next lint",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write ."
