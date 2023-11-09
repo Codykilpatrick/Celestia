@@ -1,6 +1,6 @@
 const Feedback = () => {
   return (
-    <div className="h-full mx-12 bg-violet-4 mt-16 rounded-lg overflow-hidden">
+    <div className="h-full mx-12 bg-plum-3 mt-16 rounded-lg overflow-hidden text-gray-12">
       <div className="m-4">
         <p className="py-2">
           Your feedback is important to making this a useful tool. Whether it is a issue with the website itself, an
@@ -17,10 +17,10 @@ const Feedback = () => {
         <p className="py-2">I look forward to hearing from you!</p>
       </div>
       <div className="m-4 flex justify-evenly">
-        <a href="mailto:eveCelestia2@gmail.com" className="px-4 hover:text-blue-500">
+        <a href="mailto:eveCelestia2@gmail.com" className="px-4 text-gray-12 hover:text-blue-500">
           Email
         </a>
-        <a href="https://github.com/Codykilpatrick/Celestia/issues" className="px-4 hover:text-blue-500">
+        <a href="https://github.com/Codykilpatrick/Celestia/issues" className="px-4 text-gray-12 hover:text-blue-500">
           Github
         </a>
       </div>
