@@ -246,25 +246,96 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               <tr className="grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9">
                 <th className="sm:px-0 px-4 py-2 hidden md:block">
                   <div className="flex items-center">
-                    <span
-                      onClick={() => handleSort('locationName')}
-                      className="hover:cursor-pointer hover:text-gray-12"
-                    >
-                      Region
-                    </span>
+                    <Tooltip.Provider>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span
+                            onClick={() => handleSort('locationName')}
+                            className="hover:cursor-pointer hover:text-gray-12"
+                          >
+                            Region
+                          </span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
+                            sideOffset={5}
+                          >
+                            The region this prediction is for.
+                            <Tooltip.Arrow className="fill-white" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
                     {renderSortingIndicator('locationName')}
                   </div>
                 </th>
                 <th className="sm:px-0 px-4 py-2">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-gray-12">
-                      Increase
-                    </span>
+                    <Tooltip.Provider>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span
+                            onClick={() => handleSort('increase')}
+                            className="hover:cursor-pointer hover:text-gray-12"
+                          >
+                            Increase
+                          </span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
+                            sideOffset={5}
+                          >
+                            Whether or not the average price of the item is predicted to increase or decrease.
+                            <Tooltip.Arrow className="fill-white" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="sm:px-0 px-4 py-2 hidden md:block">Horizon</th>
-                <th className=" py-2 hidden md:block">Confidence</th>
+                <th className="sm:px-0 px-4 py-2 hidden md:block">
+                  <div className="flex items-center">
+                    <Tooltip.Provider>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span className="hover:text-gray-12">Horizon</span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
+                            sideOffset={5}
+                          >
+                            How many days from the Date column the prediction is for.
+                            <Tooltip.Arrow className="fill-white" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
+                  </div>
+                </th>
+                <th className=" py-2 hidden md:block">
+                  <div className="flex items-center">
+                    <Tooltip.Provider>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span className="hover:text-gray-12">Confidence</span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
+                            sideOffset={5}
+                          >
+                            How likely (probability) the predictions of the machine learning algorithm are correct.
+                            <Tooltip.Arrow className="fill-white" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
+                  </div>
+                </th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
                     <Tooltip.Provider>
@@ -293,9 +364,27 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 </th>
                 <th className="px-4 py-2 col-span-4">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer hover:text-gray-12">
-                      Item Name
-                    </span>
+                    <Tooltip.Provider>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span
+                            onClick={() => handleSort('itemName')}
+                            className="hover:cursor-pointer hover:text-gray-12"
+                          >
+                            Item Name
+                          </span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
+                            sideOffset={5}
+                          >
+                            The item this prediction is for.
+                            <Tooltip.Arrow className="fill-white" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
                     {renderSortingIndicator('itemName')}
                   </div>
                 </th>
