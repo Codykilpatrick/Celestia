@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import { violetDark, mauveDark, grayDark } from '@radix-ui/colors';
+import { violetDark, mauveDark, grayDark, plumDark } from '@radix-ui/colors';
 
 const config: Config = {
   content: [
@@ -39,6 +39,18 @@ const config: Config = {
         'violet-10': violetDark.violet10,
         'violet-11': violetDark.violet11,
         'violet-12': violetDark.violet12,
+        'plum-1': plumDark.plum1,
+        'plum-2': plumDark.plum2,
+        'plum-3': plumDark.plum3,
+        'plum-4': plumDark.plum4,
+        'plum-5': plumDark.plum5,
+        'plum-6': plumDark.plum6,
+        'plum-7': plumDark.plum7,
+        'plum-8': plumDark.plum8,
+        'plum-9': plumDark.plum9,
+        'plum-10': plumDark.plum10,
+        'plum-11': plumDark.plum11,
+        'plum-12': plumDark.plum12,
         'gray-1': grayDark.gray1,
         'gray-2': grayDark.gray2,
         'gray-3': grayDark.gray3,

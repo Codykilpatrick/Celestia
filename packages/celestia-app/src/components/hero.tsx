@@ -181,20 +181,20 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
 
   return (
     <div className="h-full mx-12">
-      <div className="bg-gray-3 mt-16 rounded-lg overflow-hidden">
+      <div className="bg-plum-3 mt-8 rounded-lg overflow-hidden">
         <Graph currentItem={currentItem} currentItemName={currentItemName} currentRegionId={currentRegionId} />
       </div>
-      <div className="bg-violet-4 mt-16 rounded-lg">
+      <div className="bg-plum-3 mt-8 rounded-lg">
         <div className="flex justify-center items-center pt-4 flex-col sm:flex-row">
           <div className="mx-4 my-4 sm:my-0 flex flex-col sm:flex-row">
-            <label htmlFor="regionSelect" className="text-mauve-12">
+            <label htmlFor="regionSelect" className="text-gray-11">
               Filter by Region:
             </label>
             <select
               id="regionSelect"
               value={currentRegionId}
               onChange={(event) => changeRegion(event)}
-              className="bg-violet-5 hover:bg-violet-6 ml-2 rounded-lg border-violet-8 border-2"
+              className="bg-plum-5 hover:bg-plum-6 ml-2 rounded-lg border-plum-8 border-2"
             >
               <option value={10000043}>Domain</option>
               <option value={10000002}>The Forge</option>
@@ -203,10 +203,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
               <option value={10000042}>Metropolis</option>
             </select>
           </div>
-          <div className="mx-4 text-mauve-12 my-4 sm:my-0 flex flex-col sm:flex-row">
+          <div className="mx-4 text-gray-11 my-4 sm:my-0 flex flex-col sm:flex-row">
             <label htmlFor="searchItem">Search Item:</label>
             <input
-              className="bg-violet-5 hover:bg-violet-6 rounded-lg ml-2 text-mauve-12 border-violet-8 border-2"
+              className="bg-plum-5 hover:bg-plum-6 rounded-lg ml-2 text-gray-12 border-plum-8 border-2"
               type="text"
               id="searchItem"
               value={searchTerm}
@@ -219,18 +219,18 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         </div>
         <div className="flex w-full justify-center my-2">
           <button
-            className="px-2 disabled:text-mauve-10 flex flex-row items-center"
+            className="px-2 disabled:text-gray-9 flex flex-row items-center text-gray-11"
             onClick={() => setCurrentPage(currentPage - 1)}
             disabled={currentPage == 1}
           >
             <ArrowLeftIcon />
             <span className="mx-1">Previous</span>
           </button>
-          <div>
+          <div className='text-gray-11'>
             {currentPage} of {totalPages}
           </div>
           <button
-            className="px-2 disabled:text-mauve-10 flex flex-row items-center"
+            className="px-2 disabled:text-gray-9 flex flex-row items-center text-gray-11"
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={currentPage == totalPages}
           >
@@ -240,14 +240,14 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
         </div>
         <div className="flex justify-center">
           {' '}
-          <table className="w-full table-auto text-mauve-11 mx-4 mb-4">
+          <table className="w-full table-auto text-gray-11 mx-4 mb-4">
             <thead>
               <tr className="grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9">
                 <th className="px-4 py-2 hidden md:block">
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('locationName')}
-                      className="hover:cursor-pointer hover:text-mauve-12"
+                      className="hover:cursor-pointer hover:text-gray-12"
                     >
                       Region
                     </span>
@@ -256,7 +256,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 </th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-mauve-12">
+                    <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-gray-12">
                       Increase
                     </span>
                     {renderSortingIndicator('increase')}
@@ -268,16 +268,16 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('datePredicted')}
-                      className="hover:cursor-pointer hover:text-mauve-12"
+                      className="hover:cursor-pointer hover:text-gray-12"
                     >
-                      Date Predicted
+                      Prediction Date
                     </span>
                     {renderSortingIndicator('datePredicted')}
                   </div>
                 </th>
                 <th className="px-4 py-2 col-span-4">
                   <div className="flex items-center">
-                    <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer hover:text-mauve-12">
+                    <span onClick={() => handleSort('itemName')} className="hover:cursor-pointer hover:text-gray-12">
                       Item Name
                     </span>
                     {renderSortingIndicator('itemName')}
@@ -285,22 +285,22 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 </th>
               </tr>
             </thead>
-            <tbody className="border border-violet-8">
+            <tbody className="border border-plum-8">
               {searchTerm
                 ? filteredPredictions.map((prediction: Prediction) => (
                     <tr
                       key={prediction.id}
-                      className="text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9"
+                      className="text-gray-11 grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9"
                     >
-                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.locationName}</td>
-                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.confidence}</td>
-                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
+                      <td className="border border-plum-8 p-2 hidden md:block">{prediction.locationName}</td>
+                      <td className="border border-plum-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-plum-8 p-2 hidden md:block">{prediction.horizon}</td>
+                      <td className="border border-plum-8 p-2 hidden md:block">{prediction.confidence}</td>
+                      <td className="border border-plum-8 p-2">{prediction.datePredicted}</td>
+                      <td className="border border-plum-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
                         <button
-                          className="hover:text-mauve-12 hover:underline"
+                          className="hover:text-gray-12 hover:underline"
                           onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
                         >
                           {prediction.itemName}
@@ -311,17 +311,17 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                 : sortedPredictions.map((prediction: Prediction) => (
                     <tr
                       key={prediction.id}
-                      className=" text-mauve-11 grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9"
+                      className=" text-gray-11 grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9"
                     >
-                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.locationName}</td>
-                      <td className="border border-violet-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
-                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.horizon}</td>
-                      <td className="border border-violet-8 p-2 hidden md:block">{prediction.confidence}</td>
-                      <td className="border border-violet-8 p-2">{prediction.datePredicted}</td>
-                      <td className="border border-violet-8 p-2 text-center overflow-hidden col-span-4">
+                      <td className="border border-plum-8 p-2 hidden md:block">{prediction.locationName}</td>
+                      <td className="border border-plum-8 p-2">{prediction.increase ? 'True' : 'False'}</td>
+                      <td className="border border-plum-8 p-2 hidden md:block">{prediction.horizon}</td>
+                      <td className="border border-plum-8 p-2 hidden md:block">{prediction.confidence}</td>
+                      <td className="border border-plum-8 p-2">{prediction.datePredicted}</td>
+                      <td className="border border-plum-8 p-2 text-center overflow-hidden col-span-4">
                         {' '}
                         <button
-                          className="hover:text-mauve-12 hover:underline text-sm sm:text-base"
+                          className="hover:text-gray-12 hover:underline text-sm sm:text-base"
                           onClick={() => handleItemClick(prediction.typeId, prediction.itemName)}
                         >
                           {prediction.itemName}
