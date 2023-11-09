@@ -14,7 +14,7 @@ const Header = () => {
           <Link href="/feedback">Feedback</Link>
         </li>
       </ul>
-      </div>
+    </div>
   );
 };
 

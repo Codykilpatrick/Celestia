@@ -2,6 +2,7 @@ import Graph from './graph';
 import { useState, useEffect } from 'react';
 import { ALL_PREDICTIONS_QUERY } from '@/apollo/graphql-queries';
 const { useQuery } = require('@apollo/client');
+import * as Tooltip from '@radix-ui/react-tooltip';
 import { ArrowUpIcon, ArrowDownIcon, CaretSortIcon, ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 
 interface LocationNode {
@@ -226,7 +227,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
             <ArrowLeftIcon />
             <span className="mx-1">Previous</span>
           </button>
-          <div className='text-gray-11'>
+          <div className="text-gray-11">
             {currentPage} of {totalPages}
           </div>
           <button
@@ -243,7 +244,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
           <table className="w-full table-auto text-gray-11 mx-4 mb-4">
             <thead>
               <tr className="grid grid-flow-col auto-cols-max grid-cols-3 md:grid-cols-9">
-                <th className="px-4 py-2 hidden md:block">
+                <th className="sm:px-0 px-4 py-2 hidden md:block">
                   <div className="flex items-center">
                     <span
                       onClick={() => handleSort('locationName')}
@@ -254,7 +255,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('locationName')}
                   </div>
                 </th>
-                <th className="px-4 py-2">
+                <th className="sm:px-0 px-4 py-2">
                   <div className="flex items-center">
                     <span onClick={() => handleSort('increase')} className="hover:cursor-pointer hover:text-gray-12">
                       Increase
@@ -262,16 +263,31 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                     {renderSortingIndicator('increase')}
                   </div>
                 </th>
-                <th className="px-4 py-2 hidden md:block">Horizon</th>
-                <th className="px-4 py-2 hidden md:block">Confidence</th>
+                <th className="sm:px-0 px-4 py-2 hidden md:block">Horizon</th>
+                <th className=" py-2 hidden md:block">Confidence</th>
                 <th className="px-4 py-2">
                   <div className="flex items-center">
-                    <span
-                      onClick={() => handleSort('datePredicted')}
-                      className="hover:cursor-pointer hover:text-gray-12"
-                    >
-                      Prediction Date
-                    </span>
+                    <Tooltip.Provider>
+                      <Tooltip.Root>
+                        <Tooltip.Trigger asChild>
+                          <span
+                            onClick={() => handleSort('datePredicted')}
+                            className="hover:cursor-pointer hover:text-gray-12"
+                          >
+                            Date
+                          </span>
+                        </Tooltip.Trigger>
+                        <Tooltip.Portal>
+                          <Tooltip.Content
+                            className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
+                            sideOffset={5}
+                          >
+                            The date this prediction was generated.
+                            <Tooltip.Arrow className="fill-white" />
+                          </Tooltip.Content>
+                        </Tooltip.Portal>
+                      </Tooltip.Root>
+                    </Tooltip.Provider>
                     {renderSortingIndicator('datePredicted')}
                   </div>
                 </th>
