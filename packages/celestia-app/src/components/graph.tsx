@@ -143,7 +143,7 @@ const Graph = ({ currentItem, currentItemName, currentRegionId }: GraphProps) =>
         font: {
           size: 16,
         },
-        color: grayDark.gray11,
+        color: grayDark.gray12,
       },
     },
     maintainAspectRatio: false,
