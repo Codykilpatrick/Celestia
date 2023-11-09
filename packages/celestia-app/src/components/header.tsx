@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <div className="bg-black h-16  flex-col flex justify-center">
+    <div className="bg-plum-5 h-16  flex-col flex justify-center">
       <ul className="flex justify-between mx-4">
         <li className="text-gray-11 px-2 hover:text-gray-12">
           <Link href="/">Home</Link>
