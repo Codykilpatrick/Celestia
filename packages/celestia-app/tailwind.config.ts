@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import { violetDark, mauveDark, grayDark, plumDark } from '@radix-ui/colors';
+import { grayDark, plumDark } from '@radix-ui/colors';
 
 const config: Config = {
   content: [
@@ -15,30 +15,6 @@ const config: Config = {
         gradient: 'linear-gradient(to bottom, #17151f, #1c172b)',
       },
       colors: {
-        'mauve-1': mauveDark.mauve1,
-        'mauve-2': mauveDark.mauve2,
-        'mauve-3': mauveDark.mauve3,
-        'mauve-4': mauveDark.mauve4,
-        'mauve-5': mauveDark.mauve5,
-        'mauve-6': mauveDark.mauve6,
-        'mauve-7': mauveDark.mauve7,
-        'mauve-8': mauveDark.mauve8,
-        'mauve-9': mauveDark.mauve9,
-        'mauve-10': mauveDark.mauve10,
-        'mauve-11': mauveDark.mauve11,
-        'mauve-12': mauveDark.mauve12,
-        'violet-1': violetDark.violet1,
-        'violet-2': violetDark.violet2,
-        'violet-3': violetDark.violet3,
-        'violet-4': violetDark.violet4,
-        'violet-5': violetDark.violet5,
-        'violet-6': violetDark.violet6,
-        'violet-7': violetDark.violet7,
-        'violet-8': violetDark.violet8,
-        'violet-9': violetDark.violet9,
-        'violet-10': violetDark.violet10,
-        'violet-11': violetDark.violet11,
-        'violet-12': violetDark.violet12,
         'plum-1': plumDark.plum1,
         'plum-2': plumDark.plum2,
         'plum-3': plumDark.plum3,
