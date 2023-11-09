@@ -181,7 +181,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
 
   return (
     <div className="h-full mx-12">
-      <div className="bg-violet-4 mt-16 rounded-lg overflow-hidden">
+      <div className="bg-gray-3 mt-16 rounded-lg overflow-hidden">
         <Graph currentItem={currentItem} currentItemName={currentItemName} currentRegionId={currentRegionId} />
       </div>
       <div className="bg-violet-4 mt-16 rounded-lg">
