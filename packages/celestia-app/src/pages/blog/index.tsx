@@ -1,9 +1,8 @@
 const Blog = () => {
   return (
-    <div className="h-full mx-12 bg-violet-4 mt-16 rounded-lg overflow-hidden">
+    <div className="h-full mx-12 bg-plum-4 mt-16 rounded-lg overflow-hidden text-gray-11">
       <div className="py-8 px-12">
-        <h1 className="text-center text-5xl font-semibold">Release Day!</h1>
-        <h2 className="text-xl font-bold">Intro:</h2>
+        <h1 className="text-center text-5xl font-semibold text-gray-12">Release Day!</h1>
         <p className="my-4">
           Hello all and welcome to Celestia, the Eve Online Market prediction application. This might be a little long
           but bear with me through it, or don’t read it at all it doesn’t matter to me.
@@ -38,7 +37,7 @@ const Blog = () => {
           capabilities 🚀.
         </p>
 
-        <h2 className="text-xl font-bold">Tech stack:</h2>
+        <h2 className="text-xl font-bold text-gray-12">Tech stack:</h2>
         <p className="my-4">
           For the other Developers out there or just curious minds about what all goes into Celestia here it is.
         </p>
@@ -86,7 +85,7 @@ const Blog = () => {
           There is some nuance in there as well but that is the rough outline of how everything works.
         </p>
 
-        <h2 className="my-4 text-xl font-bold">The Artificial Intelligence Machine Learning:</h2>
+        <h2 className="my-4 text-xl font-bold text-gray-12">The Artificial Intelligence Machine Learning:</h2>
         <p className="my-4">
           This is the fun part that everyone gets excited about, the actual models that predict the data.
         </p>
@@ -119,7 +118,7 @@ const Blog = () => {
           decisions.
         </p>
 
-        <h2 className="my-4 text-xl font-bold">Closing:</h2>
+        <h2 className="my-4 text-xl font-bold text-gray-12">Closing:</h2>
         <p className="my-4">
           I have invested a significant amount of time and energy into the project and I don’t plan on stopping anytime
           soon. I would appreciate any feedback on any single piece of the application. The more feedback I can gather
