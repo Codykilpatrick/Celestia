@@ -1,7 +1,7 @@
 name: Daily Predict Average Increase
 on:
   schedule:
-    - cron: "30 18 * * *"
+    - cron: "30 6 * * *"
     
 jobs:
   Predict-average-increase:

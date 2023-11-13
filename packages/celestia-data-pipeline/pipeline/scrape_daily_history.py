@@ -6,14 +6,23 @@ import logging
 import datetime
 from dotenv import load_dotenv
 import os
+from datetime import datetime, timedelta, timezone
 
 load_dotenv()
 
-# Get yesterday's date
-yesterday = datetime.date.today() - datetime.timedelta(days=1)
+
+# Get the current date and time in UTC
+now_utc = datetime.now(timezone.utc)
+
+# Get yesterday's date in UTC
+yesterday_utc = now_utc - timedelta(days=1)
+
+# If you only want the date (not the time), you can do this:
+yesterday_utc_date = yesterday_utc.date()
 
 # Format the date as a string in the format 'YYYY-MM-DD'
-date_string = yesterday.strftime('%Y-%m-%d')
+date_string = yesterday_utc_date.strftime('%Y-%m-%d')
+print(date_string)
 
 # URL of the .bz2 file
 url = f"https://data.everef.net/market-history/2023/market-history-{date_string}.csv.bz2"
