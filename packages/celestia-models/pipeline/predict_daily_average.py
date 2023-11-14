@@ -1,12 +1,15 @@
 import joblib
 import pandas as pd
 import psycopg2
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 import os
+import logging
 
 load_dotenv()
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 
 
 def process_and_insert(connection, type_id, region_id):
@@ -74,8 +77,6 @@ def process_and_insert(connection, type_id, region_id):
     # Commit the transaction and close the database connection
     connection.commit()
 
-    print(f"Data from '{type_id}' inserted into PostgreSQL.")
-
 
 def get_active_item_ids(connection, region_id):
 
@@ -89,8 +90,14 @@ def get_active_item_ids(connection, region_id):
 
     df = pd.DataFrame(rows, columns=['id', 'date', 'highest', 'lowest', 'average', 'order_count', 'region_id', 'type_id', 'volume'])
 
-    yesterday = datetime.now() - timedelta(1)
-    date_to_filter = yesterday.strftime('%Y-%m-%d')
+    # Get the current date and time in UTC
+    now_utc = datetime.now(timezone.utc)
+
+    # Get yesterday's date in UTC
+    yesterday_utc = now_utc - timedelta(days=2)
+
+    yesterday_utc_date = yesterday_utc.date()
+    date_to_filter = yesterday_utc_date.strftime('%Y-%m-%d')
 
     # Use boolean indexing to filter rows where the 'date' column matches the specified date
     filtered_df = df[df['date'] == date_to_filter]
@@ -127,6 +134,7 @@ def main():
                 continue
 
     # Close connection after everything
+    logging.info(f"Predicted on {completed_items} number of items.")
     connection.close()
 
 

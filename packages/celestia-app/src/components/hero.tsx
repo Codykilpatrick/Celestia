@@ -353,7 +353,7 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
                             className="bg-plum-5 rounded-md text-gray-12 p-2 border-plum-7 border-2"
                             sideOffset={5}
                           >
-                            The date this prediction was generated.
+                            The date this prediction was generated in UTC.
                             <Tooltip.Arrow className="fill-white" />
                           </Tooltip.Content>
                         </Tooltip.Portal>
