@@ -1,8 +1,8 @@
 name: Daily Predict Average Increase
 on:
-  repository_dispatch:
-    types: [market-history-pulled]
-  workflow_dispatch:
+ schedule:
+    - cron: "0 7 * * *"
+
     
 jobs:
   Predict-average-increase:
