@@ -10,23 +10,25 @@ from datetime import datetime, timedelta, timezone
 
 load_dotenv()
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
 
 # Get the current date and time in UTC
 now_utc = datetime.now(timezone.utc)
 
 # Get yesterday's date in UTC
-yesterday_utc = now_utc - timedelta(days=1)
+yesterday_utc = now_utc - timedelta(days=2)
 
 # If you only want the date (not the time), you can do this:
 yesterday_utc_date = yesterday_utc.date()
 
 # Format the date as a string in the format 'YYYY-MM-DD'
 date_string = yesterday_utc_date.strftime('%Y-%m-%d')
-print(date_string)
+
+logging.info(f"Pulling data for: {date_string}.")
 
 # URL of the .bz2 file
 url = f"https://data.everef.net/market-history/2023/market-history-{date_string}.csv.bz2"
-
 
 # Download the .bz2 file
 response = requests.get(url)
@@ -44,11 +46,7 @@ db_password = os.getenv('NEON_PASSWORD')
 db_name = os.getenv('DATABASE')
 db_params = {'host': db_host, 'database': db_name, 'user': db_user, 'password': db_password, }
 
-
 conn = psycopg2.connect(**db_params)
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
 
 # Create a cursor object
 cur = conn.cursor()
