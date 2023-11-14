@@ -2,6 +2,7 @@ name: Daily Predict Average Increase
 on:
   repository_dispatch:
     types: [market-history-pulled]
+  workflow_dispatch:
     
 jobs:
   Predict-average-increase:
