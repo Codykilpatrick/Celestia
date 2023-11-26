@@ -182,10 +182,10 @@ const Hero = ({ itemNames, locationNames }: HeroProps) => {
 
   return (
     <div className="h-full mx-12">
-      <div className="bg-plum-3 mt-8 rounded-lg overflow-hidden">
+      <div className="bg-plum-3 mt-8 rounded-lg overflow-hidden shadow-lg shadow-black">
         <Graph currentItem={currentItem} currentItemName={currentItemName} currentRegionId={currentRegionId} />
       </div>
-      <div className="bg-plum-3 mt-8 rounded-lg">
+      <div className="bg-plum-3 mt-8 rounded-lg shadow-lg shadow-black">
         <div className="flex justify-center items-center pt-4 flex-col sm:flex-row">
           <div className="mx-4 my-4 sm:my-0 flex flex-col sm:flex-row">
             <label htmlFor="regionSelect" className="text-gray-11">

@@ -1,6 +1,6 @@
 const Feedback = () => {
   return (
-    <div className="h-full mx-12 bg-plum-3 mt-16 rounded-lg overflow-hidden text-gray-12">
+    <div className="h-full mx-12 bg-plum-3 mt-16 rounded-lg overflow-hidden text-gray-12 shadow-lg shadow-black">
       <div className="m-4">
         <p className="py-2">
           Your feedback is important to making this a useful tool. Whether it is a issue with the website itself, an
