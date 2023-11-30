@@ -1,6 +1,6 @@
 const Blog = () => {
   return (
-    <div className="h-full mx-12 bg-plum-4 mt-16 rounded-lg overflow-hidden text-gray-11">
+    <div className="h-full mx-12 bg-plum-4 mt-16 rounded-lg overflow-hidden text-gray-11 shadow-lg shadow-black">
       <div className="py-8 px-12">
         <h1 className="text-center text-5xl font-semibold text-gray-12">Release Day!</h1>
         <p className="my-4">
