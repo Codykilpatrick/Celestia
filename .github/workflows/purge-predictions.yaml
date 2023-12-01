@@ -1,0 +1,35 @@
+name: Daily Purge Predict Average Increase
+on:
+ schedule:
+    - cron: "0 8 * * *"
+ workflow_dispatch:
+
+    
+jobs:
+  Predict-average-increase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
+      - name: Setup Python
+        uses: actions/setup-python@v4.7.1
+        with:
+          python-version: 3.11
+          cache: poetry
+      - name: Install project dependencies
+        run: |
+          poetry install
+        working-directory: packages/celestia-models
+      - name: Run Purge Predict Average Increase
+        env:
+          NEON_CONNECTION_STRING: ${{ secrets.NEON_CONNECTION_STRING }}
+          DATABASE: ${{ secrets.DATABASE }}
+          NEON_USER: ${{ secrets.NEON_USER }}
+          NEON_PASSWORD: ${{ secrets.NEON_PASSWORD }}
+          NEON_HOST: ${{ secrets.NEON_HOST }}
+          NEON_PORT: ${{ secrets.NEON_PORT }}
+        run: |
+          poetry run python clean_model_predictions.py
+        working-directory: packages/celestia-models/pipeline
