@@ -32,4 +32,4 @@ jobs:
           NEON_PORT: ${{ secrets.NEON_PORT }}
         run: |
           poetry run python clean_model_predictions.py
-        working-directory: packages/celestia-models/pipeline
+        working-directory: packages/celestia-data-pipeline/pipeline
