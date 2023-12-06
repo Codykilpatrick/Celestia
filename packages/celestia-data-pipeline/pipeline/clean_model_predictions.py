@@ -11,7 +11,7 @@ now_utc = datetime.now(timezone.utc)
 
 # Get yesterday's date in UTC
 
-purge_day = now_utc - timedelta(days=4)
+purge_day = now_utc - timedelta(days=2)
 purge_day = purge_day.strftime("%Y-%m-%d")
 
 # Connect to the PostgreSQL database
