@@ -8,6 +8,12 @@
 	"features": {
 		"ghcr.io/itsmechlark/features/postgresql:1": {
 			"version": "16"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "3.11.2"
+		},
+		"ghcr.io/devcontainers-contrib/features/poetry:2": {
+			"version": "1.6.1"
 		}
 	},
 
