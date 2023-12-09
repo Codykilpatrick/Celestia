@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "https://github.com/Codykilpatrick/Celestia.git",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start:postgres": "createdb celestia && cd packages/celestia-database && npx db-migrate up",
+    "install:app": "cd packages/celestia-app && yarn install"
+  }
 }
