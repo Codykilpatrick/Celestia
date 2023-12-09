@@ -9,6 +9,7 @@
   "scripts": {
     "install:database": "cd packages/celestia-database && yarn install",
     "start:database": "createdb celestia && cd packages/celestia-database && npx db-migrate up && yarn seed-db",
+    "pull:database": "cd packages/celestia-database && yarn db:sync",
     "install:app": "cd packages/celestia-app && yarn install",
     "install:api": "cd packages/celestia-api && npm install",
     "install:data-pipeline": "cd packages/celestia-data-pipeline && poetry install",
