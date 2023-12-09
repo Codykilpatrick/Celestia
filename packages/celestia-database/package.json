@@ -6,7 +6,8 @@
   "repository": "https://github.com/Codykilpatrick/Celestia.git",
   "scripts": {
     "db:connect": "npx postgraphile -c postgres:///celestia --schema celestia_public",
-    "seed-db": "chmod +x seed_db.sh && ./seed_db.sh"
+    "seed-db": "chmod +x seed_db.sh && ./seed_db.sh",
+    "db:sync": "node dbSync.js"
   },
   "license": "MIT",
   "dependencies": {
