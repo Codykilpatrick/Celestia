@@ -2,8 +2,8 @@ require('dotenv').config()
 
 const { exec } = require('child_process');
 
-const dumpCommand = `pg_dump -Fc -v -d postgres://${process.env.NEON_USER}:${process.env.NEON_PASSWORD}@${process.env.NEON_HOST}/${process.env.DATABASE}`;
-const restoreCommand = `pg_restore -v -d postgresql://${process.env.PG_USER}:${process.env.PASSWORD}@${process.env.HOST}/${process.env.DATABASE}`;
+const dumpCommand = `pg_dump -Fc -v -d postgres://${process.env.NEON_USER}:${process.env.NEON_PASSWORD}@${process.env.NEON_HOST}/celestia`;
+const restoreCommand = `pg_restore -v -d postgresql://postgres:password@127.0.0.1/celestia`;
 
 exec(`${dumpCommand} | ${restoreCommand}`, (error, stdout, stderr) => {
   if (error) {
