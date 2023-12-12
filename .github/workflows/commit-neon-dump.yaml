@@ -16,6 +16,7 @@ jobs:
       - name: Dump database
         uses: tj-actions/pg-dump@v3
         with:
+          postgresql_version: "15" 
           database_url: postgres://${{ secrets.NEON_USER }}:${{ secrets.NEON_PASSWORD }}@${{ secrets.NEON_HOST }}/${{ secrets.DATABASE }}
           path: ./packages/celestia-database/db_dumps/celestia_dump.sql
           options: "-Fc -v"
