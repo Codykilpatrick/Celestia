@@ -10,13 +10,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get -qq -y install postgresql-client-15.4
       - name: Dump database
         run: |
-          pg_dump -Fc -v -d postgres://${{ secrets.NEON_USER }}:${{ secrets.NEON_PASSWORD }}@${{ secrets.NEON_HOST }}/${{ secrets.DATABASE }} -f ./packages/celestia-database/celestia_dump.sql
+          pg_dump -Fc -v -d postgres://${{ secrets.NEON_USER }}:${{ secrets.NEON_PASSWORD }}@${{ secrets.NEON_HOST }}/${{ secrets.DATABASE }} -f ./packages/celestia-database/db_dumps/celestia_dump.sql
       - name: Git Add/Commit database dump
         uses: EndBug/add-and-commit@v9.1.3
         with:
-          add: "./packages/celestia-database/celestia_dump.sql --force"
+          add: "./packages/celestia-database/db_dumps/celestia_dump.sql --force"
           commit: -S
           committer_email: codykilpatrick1996@gmail.com
           committer_name: org-spear-ai
