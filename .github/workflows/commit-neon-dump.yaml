@@ -28,4 +28,4 @@ jobs:
           committer_name: Codykilpatrick
           message: "Commit current database dump [skip ci]"
           pull: --rebase --autostash
-          push: origin ${{ github.head_ref }} --set-upstream
+          push: origin ${{ github.head_ref }} --set-upstream --force
