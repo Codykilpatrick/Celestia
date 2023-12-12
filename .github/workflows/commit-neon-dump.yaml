@@ -7,13 +7,14 @@ on:
 jobs:
   commit_neon_dump:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get -qq update
-          sudo apt-get -qq -y install postgresql-client-15
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.0.0
       - name: Dump database
         run: |
           pg_dump -Fc -v -d postgres://${{ secrets.NEON_USER }}:${{ secrets.NEON_PASSWORD }}@${{ secrets.NEON_HOST }}/${{ secrets.DATABASE }} -f ./packages/celestia-database/db_dumps/celestia_dump.sql
