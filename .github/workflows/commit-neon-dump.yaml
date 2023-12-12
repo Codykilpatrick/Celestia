@@ -13,7 +13,7 @@ jobs:
       - name: Install PostgreSQL client
         run: |
           sudo apt-get -qq update
-          sudo apt-get -qq -y install postgresql-client-15.4
+          sudo apt-get -qq -y install postgresql-client-15
       - name: Dump database
         run: |
           pg_dump -Fc -v -d postgres://${{ secrets.NEON_USER }}:${{ secrets.NEON_PASSWORD }}@${{ secrets.NEON_HOST }}/${{ secrets.DATABASE }} -f ./packages/celestia-database/db_dumps/celestia_dump.sql
@@ -23,7 +23,7 @@ jobs:
           add: "./packages/celestia-database/db_dumps/celestia_dump.sql --force"
           commit: -S
           committer_email: codykilpatrick1996@gmail.com
-          committer_name: org-spear-ai
+          committer_name: Codykilpatrick
           message: "Commit current database dump [skip ci]"
           pull: --rebase --autostash
           push: origin ${{ github.head_ref }} --set-upstream
