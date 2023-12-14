@@ -1,11 +1,14 @@
 # Celestia App
 
-Celestia UI package
+Celestia App package. A Next.Js application for viewing the predictions.
+
+## Site link
+https://evecelestia.com/
 
 ## Usage
 
 With the Database seeded and the API running.
-`yarn install` && `yarn dev`
+`yarn install` && `yarn dev`.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
