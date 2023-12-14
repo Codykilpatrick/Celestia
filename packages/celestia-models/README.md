@@ -1,6 +1,6 @@
 # Celestia Models
 
-Celestia Models package
+Celestia Models package, responsible for the testing and creating of current AI/ML models.
 
 # Usage
 Run `poetry install` to install the dependencies.
