@@ -1,34 +1,23 @@
-# Celestia App
+# Celestia Database
 
-Celestia database package
+Celestia database package. Responsible for managing migrations and testing locally before mirroring in cloud environment.
 
 ## Usage
 
-# Local development
-create the local database:
+Ceate the local database:
 `createdb celestia`
 
 To run migrations:
 `npx db-migrate up`
 
-To connect to a local database:
-`yarn db:connect`
+Seed the database with static files:
+`yarn seed-db`
 
-Navigate to the GraphQL database:
-`http://[::1]:5678/graphql`
+Populate the database with most recent cloud dump:
+`yarn db:sync`
 
 Create migrations with:
 `npx db-migrate create`
 
 Execute migrations with:
 `npx db-migrate up` & `npx db-migrate down`
-
-# Spin up local database
-create the local database:
-`createdb celestia`
-
-To run migrations:
-`npx db-migrate up`
-
-Seed the database:
-`yarn seed-db`
