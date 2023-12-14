@@ -14,6 +14,9 @@
 Celestia is a market prediction app for the MMORPG Eve Online. 
 Celestia leverages AI and Machine Learning to predict market prices.
 
+You can view the live application here: https://evecelestia.com/
+You can view the live API here: https://celestia-api.fly.dev/graphiql
+
 ## Getting Started
 Celestia is an open-source project that is open to all developers. If you would like to help please submit an issue or Pull Request!
 
