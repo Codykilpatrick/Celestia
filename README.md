@@ -11,7 +11,7 @@
 
 # Celestia
 
-Celestia is a market prediction app for the MMORPG Eve Online. 
+Celestia is a market prediction app for the MMORPG Eve Online.
 Celestia leverages AI and Machine Learning to predict market prices.
 
 You can view the live application here: https://evecelestia.com/
@@ -25,7 +25,7 @@ Current mono-repo package structure:
 - celestia-api: A node package with a postgraphile API. Once deployed is hosted on fly.io.
 - celestia-app: A Next.js application using React, Radix-ui, TailwindCSS, and Apollo GraphQL.
 - celestia-data-pipeline: A Python package used for all of the database interactions.
-- celestia-models: A Python/Jupyter package used for the testing and production of AI/ML models. 
+- celestia-models: A Python/Jupyter package used for the testing and production of AI/ML models.
 
 ### With codespaces
 On GitHub click the green code button on the repository. After that switch to the `Codespaces` tab and click "Create Codespace on main". You do not need to configure any additional settings since the `devcontainer.json` file has predefined everything you will need. After this you can create code in the browser IDE like normal, keep in mind that normal GitHub users get 120 hours of codespace time a month after that you have to pay for more. Here is the documentation for codespaces if you want to learn more:
@@ -39,8 +39,7 @@ After cloneing the repository you can open the code normally with your editor an
 ### Local development
 Prerequisites: PostgreSQL
 
-After cloneing the repository in the root run `yarn install:all` this will install all dependencies you need through each package.
+After cloneing the repository, you should be prompted to open the code as a workspace. This gives access to things like autoformating on file save. After that in the project root run `yarn install:all` this will install all dependencies you need through each package.
 
 ### Next steps:
 View each package READEME.md for instructions on development.
-
