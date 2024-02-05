@@ -9,6 +9,10 @@
   </p>
 </div>
 
+# Current status
+
+Unforunately this project is going to be down until further notice. It needs some serious fixes that I don't have the time to do right now.
+
 # Celestia
 
 Celestia is a market prediction app for the MMORPG Eve Online.
