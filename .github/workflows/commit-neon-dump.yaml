@@ -1,7 +1,7 @@
 name: Commit Neon Dump
 on:
-  schedule:
-    - cron: "0 10 * * *"
+  # schedule:
+  #   - cron: "0 10 * * *"
   workflow_dispatch: {}
 jobs:
   commit_neon_dump:
